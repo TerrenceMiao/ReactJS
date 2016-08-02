@@ -1,3 +1,6 @@
 # Don’t commit the following directories
 .idea/
 node_modules/
+
+# Don't commit the following files
+bundle.js
