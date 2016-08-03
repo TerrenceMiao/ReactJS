@@ -102,6 +102,8 @@ function getMatchingLanguages(value) {
 
 function getMatchingPostalAddresses(value, clazz) {
 
+    console.log("** Query: " + value);
+
     var headers = new Headers();
     headers.append('Content-Type', 'x-www-form-urlencoded');
     headers.append('Accept', 'application/json, text/plain, */*');
@@ -122,7 +124,7 @@ function getMatchingPostalAddresses(value, clazz) {
             return response.json();
         })
         .then(function (data) {
-            console.log(JSON.stringify(data));
+            console.log("** Result: " + JSON.stringify(data));
 
             const suggestions = data.hits.hits;
 
