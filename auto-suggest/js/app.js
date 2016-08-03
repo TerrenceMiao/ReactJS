@@ -4,6 +4,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Autosuggest = require('react-autosuggest');
 
+var streetTypes = require('../data/streetTypes.json');
+
 //
 // React example
 //
@@ -103,6 +105,8 @@ function getMatchingLanguages(value) {
 function getMatchingPostalAddresses(value, clazz) {
 
     console.log("** Query: " + value);
+
+    // console.log("** ALL Street Types: " + JSON.stringify(streetTypes));
 
     var headers = new Headers();
     headers.append('Content-Type', 'x-www-form-urlencoded');
