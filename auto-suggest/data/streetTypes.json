@@ -1,0 +1,445 @@
+{
+  "streetTypes": [
+    {
+      "streetType": "Accs"
+    },
+    {
+      "streetType": "Ally"
+    },
+    {
+      "streetType": "Ambl"
+    },
+    {
+      "streetType": "App"
+    },
+    {
+      "streetType": "Arc"
+    },
+    {
+      "streetType": "Ave"
+    },
+    {
+      "streetType": "Bch"
+    },
+    {
+      "streetType": "Bdge"
+    },
+    {
+      "streetType": "Bdwy"
+    },
+    {
+      "streetType": "Bend"
+    },
+    {
+      "streetType": "Brae"
+    },
+    {
+      "streetType": "Brce"
+    },
+    {
+      "streetType": "Brk"
+    },
+    {
+      "streetType": "Brow"
+    },
+    {
+      "streetType": "Bvd"
+    },
+    {
+      "streetType": "Bypa"
+    },
+    {
+      "streetType": "Caus"
+    },
+    {
+      "streetType": "Cct"
+    },
+    {
+      "streetType": "Ch"
+    },
+    {
+      "streetType": "Cir"
+    },
+    {
+      "streetType": "Cl"
+    },
+    {
+      "streetType": "Clt"
+    },
+    {
+      "streetType": "Cmmn"
+    },
+    {
+      "streetType": "Cnr"
+    },
+    {
+      "streetType": "Cnwy"
+    },
+    {
+      "streetType": "Con"
+    },
+    {
+      "streetType": "Cove"
+    },
+    {
+      "streetType": "Cps"
+    },
+    {
+      "streetType": "Crcs"
+    },
+    {
+      "streetType": "Cres"
+    },
+    {
+      "streetType": "Crsg"
+    },
+    {
+      "streetType": "Crss"
+    },
+    {
+      "streetType": "Crst"
+    },
+    {
+      "streetType": "Cso"
+    },
+    {
+      "streetType": "Ct"
+    },
+    {
+      "streetType": "Ctr"
+    },
+    {
+      "streetType": "Cttg"
+    },
+    {
+      "streetType": "Ctyd"
+    },
+    {
+      "streetType": "Dale"
+    },
+    {
+      "streetType": "Dell"
+    },
+    {
+      "streetType": "Devn"
+    },
+    {
+      "streetType": "Dr"
+    },
+    {
+      "streetType": "Drwy"
+    },
+    {
+      "streetType": "Edge"
+    },
+    {
+      "streetType": "Elb"
+    },
+    {
+      "streetType": "End"
+    },
+    {
+      "streetType": "Ent"
+    },
+    {
+      "streetType": "Esp"
+    },
+    {
+      "streetType": "Est"
+    },
+    {
+      "streetType": "Fawy"
+    },
+    {
+      "streetType": "Fitr"
+    },
+    {
+      "streetType": "Flat"
+    },
+    {
+      "streetType": "Folw"
+    },
+    {
+      "streetType": "Frnt"
+    },
+    {
+      "streetType": "Frtg"
+    },
+    {
+      "streetType": "Fshr"
+    },
+    {
+      "streetType": "Ftrk"
+    },
+    {
+      "streetType": "Fwy"
+    },
+    {
+      "streetType": "Gap"
+    },
+    {
+      "streetType": "Gdn"
+    },
+    {
+      "streetType": "Gdns"
+    },
+    {
+      "streetType": "Gld"
+    },
+    {
+      "streetType": "Glen"
+    },
+    {
+      "streetType": "Gly"
+    },
+    {
+      "streetType": "Gr"
+    },
+    {
+      "streetType": "Gra"
+    },
+    {
+      "streetType": "Grn"
+    },
+    {
+      "streetType": "Gte"
+    },
+    {
+      "streetType": "Hill"
+    },
+    {
+      "streetType": "Hts"
+    },
+    {
+      "streetType": "Hwy"
+    },
+    {
+      "streetType": "Jnc"
+    },
+    {
+      "streetType": "Key"
+    },
+    {
+      "streetType": "Lane"
+    },
+    {
+      "streetType": "Ldg"
+    },
+    {
+      "streetType": "Line"
+    },
+    {
+      "streetType": "Link"
+    },
+    {
+      "streetType": "Lkt"
+    },
+    {
+      "streetType": "Lnwy"
+    },
+    {
+      "streetType": "Loop"
+    },
+    {
+      "streetType": "Mall"
+    },
+    {
+      "streetType": "Mew"
+    },
+    {
+      "streetType": "Mews"
+    },
+    {
+      "streetType": "Mndr"
+    },
+    {
+      "streetType": "Mwy"
+    },
+    {
+      "streetType": "Nook"
+    },
+    {
+      "streetType": "Otlk"
+    },
+    {
+      "streetType": "Park"
+    },
+    {
+      "streetType": "Part"
+    },
+    {
+      "streetType": "Pass"
+    },
+    {
+      "streetType": "Path"
+    },
+    {
+      "streetType": "Pde"
+    },
+    {
+      "streetType": "Phwy"
+    },
+    {
+      "streetType": "Pkt"
+    },
+    {
+      "streetType": "Pkwy"
+    },
+    {
+      "streetType": "Pl"
+    },
+    {
+      "streetType": "Plza"
+    },
+    {
+      "streetType": "Pnt"
+    },
+    {
+      "streetType": "Port"
+    },
+    {
+      "streetType": "Prom"
+    },
+    {
+      "streetType": "Psge"
+    },
+    {
+      "streetType": "Qdrt"
+    },
+    {
+      "streetType": "Quad"
+    },
+    {
+      "streetType": "Qy"
+    },
+    {
+      "streetType": "Qys"
+    },
+    {
+      "streetType": "Ramp"
+    },
+    {
+      "streetType": "Rch"
+    },
+    {
+      "streetType": "Rd"
+    },
+    {
+      "streetType": "Rdge"
+    },
+    {
+      "streetType": "Rds"
+    },
+    {
+      "streetType": "Rdwy"
+    },
+    {
+      "streetType": "Res"
+    },
+    {
+      "streetType": "Rest"
+    },
+    {
+      "streetType": "Ride"
+    },
+    {
+      "streetType": "Ring"
+    },
+    {
+      "streetType": "Rise"
+    },
+    {
+      "streetType": "Rmbl"
+    },
+    {
+      "streetType": "Rnd"
+    },
+    {
+      "streetType": "Rnge"
+    },
+    {
+      "streetType": "Row"
+    },
+    {
+      "streetType": "Rte"
+    },
+    {
+      "streetType": "Rtt"
+    },
+    {
+      "streetType": "Run"
+    },
+    {
+      "streetType": "Rvr"
+    },
+    {
+      "streetType": "Sbwy"
+    },
+    {
+      "streetType": "Slpe"
+    },
+    {
+      "streetType": "Spur"
+    },
+    {
+      "streetType": "Sq"
+    },
+    {
+      "streetType": "St"
+    },
+    {
+      "streetType": "Stps"
+    },
+    {
+      "streetType": "Strp"
+    },
+    {
+      "streetType": "Swy"
+    },
+    {
+      "streetType": "Tarn"
+    },
+    {
+      "streetType": "Tce"
+    },
+    {
+      "streetType": "Top"
+    },
+    {
+      "streetType": "Tor"
+    },
+    {
+      "streetType": "Trk"
+    },
+    {
+      "streetType": "Trl"
+    },
+    {
+      "streetType": "Turn"
+    },
+    {
+      "streetType": "Vale"
+    },
+    {
+      "streetType": "View"
+    },
+    {
+      "streetType": "Vsta"
+    },
+    {
+      "streetType": "Walk"
+    },
+    {
+      "streetType": "Way"
+    },
+    {
+      "streetType": "Whrf"
+    },
+    {
+      "streetType": "Wkwy"
+    },
+    {
+      "streetType": "Wynd"
+    }
+  ]
+}
