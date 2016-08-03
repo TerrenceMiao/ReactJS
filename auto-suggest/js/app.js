@@ -5,11 +5,12 @@ var ReactDOM = require('react-dom');
 var Autosuggest = require('react-autosuggest');
 
 var streetTypes = require('../data/streetTypes.json');
+// console.log("** ALL Street Types: " + JSON.stringify(streetTypes));
+
 
 //
-// React example
+// Clock example
 //
-
 var ExampleApplication = React.createClass({
     render: function () {
         var elapsed = Math.round(this.props.elapsed / 100);
@@ -26,70 +27,10 @@ setInterval(function () {
     ReactDOM.render(<ExampleApplication elapsed={new Date().getTime() - start}/>, document.getElementById('container'));
 }, 50);
 
-//
-// App
-//
 
-/* Data */
-const languages = [
-    {
-        name: 'C',
-        year: 1972
-    },
-    {
-        name: 'C#',
-        year: 2000
-    },
-    {
-        name: 'C++',
-        year: 1983
-    },
-    {
-        name: 'Clojure',
-        year: 2007
-    },
-    {
-        name: 'Elm',
-        year: 2012
-    },
-    {
-        name: 'Go',
-        year: 2009
-    },
-    {
-        name: 'Haskell',
-        year: 1990
-    },
-    {
-        name: 'Java',
-        year: 1995
-    },
-    {
-        name: 'Javascript',
-        year: 1995
-    },
-    {
-        name: 'Perl',
-        year: 1987
-    },
-    {
-        name: 'PHP',
-        year: 1995
-    },
-    {
-        name: 'Python',
-        year: 1991
-    },
-    {
-        name: 'Ruby',
-        year: 1995
-    },
-    {
-        name: 'Scala',
-        year: 2003
-    }
-];
-
+//
+// auto-suggest app
+//
 function getMatchingLanguages(value) {
     const escapedValue = escapeRegexCharacters(value.trim());
 
@@ -105,8 +46,6 @@ function getMatchingLanguages(value) {
 function getMatchingPostalAddresses(value, clazz) {
 
     console.log("** Query: " + value);
-
-    // console.log("** ALL Street Types: " + JSON.stringify(streetTypes));
 
     var headers = new Headers();
     headers.append('Content-Type', 'x-www-form-urlencoded');
@@ -132,29 +71,29 @@ function getMatchingPostalAddresses(value, clazz) {
 
             const suggestions = data.hits.hits;
 
-            clazz.setState({
-                isLoading: false,
-                suggestions
-            });
+            if (value === clazz.state.value) {
+                clazz.setState({
+                    isLoading: false,
+                    suggestions
+                });
+            } else {
+                // Ignore suggestions if input value changed
+                clazz.setState({
+                    isLoading: false
+                });
+            }
         })
         .catch(function (error) {
             console.log('Request failed with error: ', error);
         });
 }
 
-/* Utils */
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
 function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function randomDelay() {
-    return 300 + Math.random() * 1000;
-}
-
-/* Component */
 function getSuggestionValue(suggestion) {
-    // return suggestion.name;
 
     var postalAddress = suggestion._source;
 
@@ -167,8 +106,6 @@ function renderSuggestion(suggestion) {
     var postalAddress = suggestion._source;
 
     return (
-        // <span>{suggestion.name}</span>
-
         <span>
             {postalAddress.house_nbr_1 + " " + postalAddress.street_name + " " + postalAddress.street_type + ", " + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode}
         </span>
@@ -195,23 +132,7 @@ class App extends React.Component {
             isLoading: true
         });
 
-        // Make an AJAX call
-/*
-        setTimeout(() => {
-            const suggestions = getMatchingLanguages(value);
-
-            if (value === this.state.value) {
-                this.setState({
-                    isLoading: false,
-                    suggestions
-                });
-            } else { // Ignore suggestions if input value changed
-                this.setState({
-                    isLoading: false
-                });
-            }
-        }, randomDelay());
-*/
+        // Make an AJAX service call
         getMatchingPostalAddresses(value, this);
     }
 
