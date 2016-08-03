@@ -149,13 +149,23 @@ function randomDelay() {
 /* Component */
 function getSuggestionValue(suggestion) {
     // return suggestion.name;
-    return suggestion._source.delivy_point_id;
+
+    var postalAddress = suggestion._source;
+
+    return postalAddress.house_nbr_1 + " " + postalAddress.street_name + " " + postalAddress.street_type + ", "
+        + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode;
 }
 
 function renderSuggestion(suggestion) {
+
+    var postalAddress = suggestion._source;
+
     return (
         // <span>{suggestion.name}</span>
-        <span>{suggestion._source.delivy_point_id}</span>
+
+        <span>
+            {postalAddress.house_nbr_1 + " " + postalAddress.street_name + " " + postalAddress.street_type + ", " + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode}
+        </span>
     );
 }
 
@@ -196,7 +206,6 @@ class App extends React.Component {
             }
         }, randomDelay());
 */
-
         getMatchingPostalAddresses(this);
     }
 
