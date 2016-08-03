@@ -100,7 +100,7 @@ function getMatchingLanguages(value) {
     return languages.filter(language => regex.test(language.name));
 }
 
-function getMatchingPostalAddresses(clazz) {
+function getMatchingPostalAddresses(value, clazz) {
 
     var headers = new Headers();
     headers.append('Content-Type', 'x-www-form-urlencoded');
@@ -110,7 +110,7 @@ function getMatchingPostalAddresses(clazz) {
         method: 'POST',
         headers: headers,
         mode: 'cors',
-        body: JSON.stringify({"query":{"query_string":{"fields":["house_nbr_1","street_name","street_type","locality_name","state","postcode"],"query":"00018 Balfour Cl Point Cook VIC 3030"}}}),
+        body: JSON.stringify({"query":{"query_string":{"fields":["house_nbr_1","street_name","street_type","locality_name","state","postcode"],"query":value}}}),
         redirect: 'follow',
         cache: 'default'
     };
@@ -206,7 +206,7 @@ class App extends React.Component {
             }
         }, randomDelay());
 */
-        getMatchingPostalAddresses(this);
+        getMatchingPostalAddresses(value, this);
     }
 
     onChange(event, { newValue }) {
@@ -226,11 +226,11 @@ class App extends React.Component {
     render() {
         const { value, suggestions, isLoading } = this.state;
         const inputProps = {
-            placeholder: "Type 'c'",
+            placeholder: "Type to load suggestions",
             value,
             onChange: this.onChange
         };
-        const status = (isLoading ? 'Loading...' : 'Type to load suggestions');
+        const status = (isLoading ? 'Loading ...' : 'Type, type');
 
         return (
             <div className="app-container">
