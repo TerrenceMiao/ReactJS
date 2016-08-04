@@ -63,6 +63,23 @@ function getMatchingPostalAddresses(value, clazz) {
         body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
     }
 
+    // query value is ended with digits - ended digits mapped to "postcode"
+    regex = new RegExp('^([\\D|\\s]{1,})(\\d{1,4})$');
+
+    if (regex.test(escapedValue)) {
+        var matchedValueArray = regex.exec(escapedValue);
+
+        var wildValue = matchedValueArray[1].trim();
+        var postcode = matchedValueArray[2];
+
+        if (postcode.length == 4) {
+            body = {"query":{"bool":{"must":{"match":{"postcode":postcode}},"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+        } else {
+            postcode = postcode + "*";
+            body = {"query":{"bool":{"must":{"wildcard":{"postcode":postcode}},"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+        }
+    }
+
     // query value is beginning and ended with digits - beginning digits mapped to "house_nbr_1", ended to "postcode"
     regex = new RegExp('^(\\d{1,5})([\\D|\\s]{1,})(\\d{1,4})$');
 
