@@ -31,21 +31,57 @@ setInterval(function () {
 //
 // auto-suggest app
 //
-function getMatchingLanguages(value) {
+function getMatchingPostalAddresses(value, clazz) {
+
     const escapedValue = escapeRegexCharacters(value.trim());
 
     if (escapedValue === '') {
-        return [];
+        return;
     }
 
-    const regex = new RegExp('^' + escapedValue, 'i');
+    console.log("** Query value: " + escapedValue);
 
-    return languages.filter(language => regex.test(language.name));
-}
+    var body = '';
 
-function getMatchingPostalAddresses(value, clazz) {
+    // query value is one or more digits - mapped to "house_nbr_1"
+    var regex = new RegExp('^\\d{1,5}$');
 
-    console.log("** Query: " + value);
+    if (regex.test(escapedValue)) {
+        var zeroFilledHouseNumber = ('00000' + escapedValue).slice(-5);
+        body = {"query":{"match":{"house_nbr_1":zeroFilledHouseNumber}}}
+    }
+
+    // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
+    regex = new RegExp('^(\\d{1,5})([\\D|\\s]{1,})$');
+
+    if (regex.test(escapedValue)) {
+        var matchedValueArray = regex.exec(escapedValue);
+
+        var zeroFilledHouseNumber = ('00000' + matchedValueArray[1]).slice(-5);
+        var wildValue = matchedValueArray[2].trim();
+
+        body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
+    }
+
+    // query value is beginning and ended with digits - beginning digits mapped to "house_nbr_1", ended to "postcode"
+    regex = new RegExp('^(\\d{1,5})([\\D|\\s]{1,})(\\d{1,4})$');
+
+    if (regex.test(escapedValue)) {
+        var matchedValueArray = regex.exec(escapedValue);
+
+        var zeroFilledHouseNumber = ('00000' + matchedValueArray[1]).slice(-5);
+        var wildValue = matchedValueArray[2].trim();
+        var zeroFilledPostcode = (matchedValueArray[3] + '0000').slice(0, 4);
+
+        body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}},{"match":{"postcode":zeroFilledPostcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+    }
+
+    // query value not match any patterns
+    if (body === '') {
+        body = {"query":{"query_string":{"fields":["house_nbr_1","street_name","street_type","locality_name","state","postcode"],"query":escapedValue}}};
+    }
+
+    console.log("** Query request: " + JSON.stringify(body));
 
     var headers = new Headers();
     headers.append('Content-Type', 'x-www-form-urlencoded');
@@ -55,7 +91,7 @@ function getMatchingPostalAddresses(value, clazz) {
         method: 'POST',
         headers: headers,
         mode: 'cors',
-        body: JSON.stringify({"query":{"query_string":{"fields":["house_nbr_1","street_name","street_type","locality_name","state","postcode"],"query":value}}}),
+        body: JSON.stringify(body),
         redirect: 'follow',
         cache: 'default'
     };
@@ -67,7 +103,7 @@ function getMatchingPostalAddresses(value, clazz) {
             return response.json();
         })
         .then(function (data) {
-            console.log("** Result: " + JSON.stringify(data));
+            // console.log("** Result: " + JSON.stringify(data));
 
             const suggestions = data.hits.hits;
 
@@ -119,7 +155,7 @@ class App extends React.Component {
 
         this.state = {
             value: '',
-            suggestions: getMatchingLanguages(''),
+            suggestions: [],
             isLoading: false
         };
 
