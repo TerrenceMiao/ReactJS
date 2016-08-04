@@ -47,8 +47,7 @@ function getMatchingPostalAddresses(value, clazz) {
     var regex = new RegExp('^\\d{1,5}$');
 
     if (regex.test(escapedValue)) {
-        var zeroFilledHouseNumber = ('00000' + escapedValue).slice(-5);
-        body = {"query":{"match":{"house_nbr_1":zeroFilledHouseNumber}}}
+        body = {"query":{"match":{"house_nbr_1":escapedValue}}}
     }
 
     // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
@@ -57,10 +56,10 @@ function getMatchingPostalAddresses(value, clazz) {
     if (regex.test(escapedValue)) {
         var matchedValueArray = regex.exec(escapedValue);
 
-        var zeroFilledHouseNumber = ('00000' + matchedValueArray[1]).slice(-5);
+        var houseNumber = matchedValueArray[1];
         var wildValue = matchedValueArray[2].trim();
 
-        body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
+        body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
     }
 
     // query value is ended with digits - ended digits mapped to "postcode"
@@ -86,15 +85,15 @@ function getMatchingPostalAddresses(value, clazz) {
     if (regex.test(escapedValue)) {
         var matchedValueArray = regex.exec(escapedValue);
 
-        var zeroFilledHouseNumber = ('00000' + matchedValueArray[1]).slice(-5);
+        var houseNumber = matchedValueArray[1];
         var wildValue = matchedValueArray[2].trim();
         var postcode = matchedValueArray[3];
 
         if (postcode.length == 4) {
-            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}},{"match":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"match":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         } else {
             postcode = postcode + "*";
-            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}},{"wildcard":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"wildcard":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         }
     }
 
