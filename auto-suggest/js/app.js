@@ -71,9 +71,14 @@ function getMatchingPostalAddresses(value, clazz) {
 
         var zeroFilledHouseNumber = ('00000' + matchedValueArray[1]).slice(-5);
         var wildValue = matchedValueArray[2].trim();
-        var zeroFilledPostcode = (matchedValueArray[3] + '0000').slice(0, 4);
+        var postcode = matchedValueArray[3];
 
-        body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}},{"match":{"postcode":zeroFilledPostcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+        if (postcode.length == 4) {
+            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}},{"match":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+        } else {
+            postcode = postcode + "*";
+            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":zeroFilledHouseNumber}},{"wildcard":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+        }
     }
 
     // query value not match any patterns
