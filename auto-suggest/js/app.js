@@ -31,6 +31,17 @@ setInterval(function () {
 //
 // auto-suggest app
 //
+/* Data */
+const states = [
+    { name: 'VIC'},
+    { name: 'NSW'},
+    { name: 'QLD'},
+    { name: 'TAS'},
+    { name: 'SA'},
+    { name: 'WA'},
+    { name: 'NT'}
+]
+
 function getMatchingPostalAddresses(value, clazz) {
 
     const escapedValue = escapeRegexCharacters(value.trim());
