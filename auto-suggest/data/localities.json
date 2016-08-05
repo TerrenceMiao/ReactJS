@@ -1,5 +1,4 @@
-{
-  "suburbs": [
+[
     {
       "suburb": "AARONS PASS",
       "postcode": "2850",
@@ -78950,5 +78949,4 @@
       "postcode": "6536",
       "state": "WA"
     }
-  ]
-}
+]
