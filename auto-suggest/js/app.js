@@ -5,7 +5,10 @@ var ReactDOM = require('react-dom');
 var Autosuggest = require('react-autosuggest');
 
 var streetTypes = require('../data/streetTypes.json');
+var localities = require('../data/localities.json');
+
 // console.log("** ALL Street Types: " + JSON.stringify(streetTypes));
+// console.log("** ALL Localities: " + JSON.stringify(localities));
 
 
 //
