@@ -45,6 +45,11 @@ const states = [
     { name: 'NT'}
 ]
 
+const DIGIT_ONLY_PATTERN = /^\d{1,5}$/;
+const HOUSE_NUMBER_PATTERN = /^(\d{1,5})([\D|\s]{1,})$/;
+const POSTCODE_PATTERN = /^([\D|\s]{1,})(\d{1,4})$/;
+const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
+
 function getMatchingPostalAddresses(value, clazz) {
 
     const escapedValue = escapeRegexCharacters(value.trim());
@@ -55,36 +60,26 @@ function getMatchingPostalAddresses(value, clazz) {
 
     console.log("** Query value: " + escapedValue);
 
-    var body = '';
+    var body;
 
-    // query value is one or more digits - mapped to "house_nbr_1", or "postcode" if it's 4-digit
-    var regex = new RegExp('^\\d{1,5}$');
-
-    if (regex.test(escapedValue)) {
+    if (DIGIT_ONLY_PATTERN.test(escapedValue)) {
+        // query value is one or more digits - mapped to "house_nbr_1", or "postcode" if it's 4-digit and valid
         if (escapedValue.length == 4 && localities.filter(locality => locality.postcode == escapedValue).length > 0) {
             body = {"query":{"match":{"postcode":escapedValue}}}
         } else {
             body = {"query":{"match":{"house_nbr_1":escapedValue}}}
         }
-    }
-
-    // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
-    regex = new RegExp('^(\\d{1,5})([\\D|\\s]{1,})$');
-
-    if (regex.test(escapedValue)) {
-        var matchedValueArray = regex.exec(escapedValue);
+    } else if (HOUSE_NUMBER_PATTERN.test(escapedValue)) {
+        // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
+        var matchedValueArray = HOUSE_NUMBER_PATTERN.exec(escapedValue);
 
         var houseNumber = matchedValueArray[1];
         var wildValue = matchedValueArray[2].trim();
 
         body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
-    }
-
-    // query value is ended with digits - ended digits mapped to "postcode"
-    regex = new RegExp('^([\\D|\\s]{1,})(\\d{1,4})$');
-
-    if (regex.test(escapedValue)) {
-        var matchedValueArray = regex.exec(escapedValue);
+    } else if (POSTCODE_PATTERN.test(escapedValue)) {
+        // query value is ended with digits - ended digits mapped to "postcode"
+        var matchedValueArray = POSTCODE_PATTERN.exec(escapedValue);
 
         var wildValue = matchedValueArray[1].trim();
         var postcode = matchedValueArray[2];
@@ -95,13 +90,9 @@ function getMatchingPostalAddresses(value, clazz) {
             postcode = postcode + "*";
             body = {"query":{"bool":{"must":{"wildcard":{"postcode":postcode}},"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         }
-    }
-
-    // query value is beginning and ended with digits - beginning digits mapped to "house_nbr_1", ended to "postcode"
-    regex = new RegExp('^(\\d{1,5})([\\D|\\s]{1,})(\\d{1,4})$');
-
-    if (regex.test(escapedValue)) {
-        var matchedValueArray = regex.exec(escapedValue);
+    } else if (FULL_ADDRESS_PATTERN.test(escapedValue)) {
+        // query value is beginning and ended with digits - beginning digits mapped to "house_nbr_1", ended to "postcode"
+        var matchedValueArray = FULL_ADDRESS_PATTERN.exec(escapedValue);
 
         var houseNumber = matchedValueArray[1];
         var wildValue = matchedValueArray[2].trim();
@@ -113,12 +104,8 @@ function getMatchingPostalAddresses(value, clazz) {
             postcode = postcode + "*";
             body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"wildcard":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         }
-    }
-
-    states.filter(state => regex.test(state.name));
-
-    // query value not match any patterns
-    if (body === '') {
+    } else {
+        // query value not match any patterns
         body = {"query":{"query_string":{"fields":["house_nbr_1","street_name","street_type","locality_name","state","postcode"],"query":escapedValue}}};
     }
 
