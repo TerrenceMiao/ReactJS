@@ -57,11 +57,15 @@ function getMatchingPostalAddresses(value, clazz) {
 
     var body = '';
 
-    // query value is one or more digits - mapped to "house_nbr_1"
+    // query value is one or more digits - mapped to "house_nbr_1", or "postcode" if it's 4-digit
     var regex = new RegExp('^\\d{1,5}$');
 
     if (regex.test(escapedValue)) {
-        body = {"query":{"match":{"house_nbr_1":escapedValue}}}
+        if (escapedValue.length == 4 && localities.filter(locality => locality.postcode == escapedValue).length > 0) {
+            body = {"query":{"match":{"postcode":escapedValue}}}
+        } else {
+            body = {"query":{"match":{"house_nbr_1":escapedValue}}}
+        }
     }
 
     // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
@@ -110,6 +114,8 @@ function getMatchingPostalAddresses(value, clazz) {
             body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"wildcard":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         }
     }
+
+    states.filter(state => regex.test(state.name));
 
     // query value not match any patterns
     if (body === '') {
