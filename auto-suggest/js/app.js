@@ -46,13 +46,14 @@ const states = [
 ]
 
 const DIGIT_ONLY_PATTERN = /^\d{1,5}$/;
-const HOUSE_NUMBER_PATTERN = /^(\d{1,5})([\D|\s]{1,})$/;
-const POSTCODE_PATTERN = /^([\D|\s]{1,})(\d{1,4})$/;
+const WORD_ONLY_PATTERN = /^[\D|\s]*$/;
+const HOUSE_NUMBER_PRIORITY_PATTERN = /^(\d{1,5})([\D|\s]{1,})$/;
+const POSTCODE_PRIORITY_PATTERN = /^([\D|\s]{1,})(\d{1,4})$/;
 const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
 
 function getMatchingPostalAddresses(value, clazz) {
 
-    const escapedValue = escapeRegexCharacters(value.trim());
+    const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
 
     if (escapedValue === '') {
         return;
@@ -69,17 +70,26 @@ function getMatchingPostalAddresses(value, clazz) {
         } else {
             body = {"query":{"match":{"house_nbr_1":escapedValue}}}
         }
-    } else if (HOUSE_NUMBER_PATTERN.test(escapedValue)) {
+    } else if (WORD_ONLY_PATTERN.test(escapedValue)) {
+        if (states.filter(state => state.name == escapedValue).length > 0) {
+            body = {"query":{"match":{"state":escapedValue}}}
+        } else if (localities.filter(locality => locality.suburb == escapedValue).length > 0) {
+            // whitespace is reserved character and mean "OR" in ElasticSearch
+            body = {"query":{"query_string":{"fields":["locality_name"],"query":escapedValue.replace(" ", " && ")}}};
+        } else {
+            body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
+        }
+    } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
         // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
-        var matchedValueArray = HOUSE_NUMBER_PATTERN.exec(escapedValue);
+        var matchedValueArray = HOUSE_NUMBER_PRIORITY_PATTERN.exec(escapedValue);
 
         var houseNumber = matchedValueArray[1];
         var wildValue = matchedValueArray[2].trim();
 
         body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
-    } else if (POSTCODE_PATTERN.test(escapedValue)) {
+    } else if (POSTCODE_PRIORITY_PATTERN.test(escapedValue)) {
         // query value is ended with digits - ended digits mapped to "postcode"
-        var matchedValueArray = POSTCODE_PATTERN.exec(escapedValue);
+        var matchedValueArray = POSTCODE_PRIORITY_PATTERN.exec(escapedValue);
 
         var wildValue = matchedValueArray[1].trim();
         var postcode = matchedValueArray[2];
