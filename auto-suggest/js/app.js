@@ -50,11 +50,14 @@ function getMatchingPostalAddresses(value, clazz) {
         }
     } else if (WORD_ONLY_PATTERN.test(escapedValue)) {
         if (states.filter(state => state.name == escapedValue).length > 0) {
+            // query value matches one of states
             body = {"query":{"match":{"state":escapedValue}}}
         } else if (localities.filter(locality => locality.suburb == escapedValue).length > 0) {
+            // query value matches one of localities / suburbs
             // whitespace is reserved character and mean "OR" in ElasticSearch
             body = {"query":{"query_string":{"fields":["locality_name"],"query":escapedValue.replace(" ", " && ")}}};
         } else {
+            // query value not match any
             body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
         }
     } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
