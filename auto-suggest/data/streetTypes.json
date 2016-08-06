@@ -1,443 +1,443 @@
 [
     {
-      "streetType": "Accs"
+      "streetType": "ACCS"
     },
     {
-      "streetType": "Ally"
+      "streetType": "ALLY"
     },
     {
-      "streetType": "Ambl"
+      "streetType": "AMBL"
     },
     {
-      "streetType": "App"
+      "streetType": "APP"
     },
     {
-      "streetType": "Arc"
+      "streetType": "ARC"
     },
     {
-      "streetType": "Ave"
+      "streetType": "AVE"
     },
     {
-      "streetType": "Bch"
+      "streetType": "BCH"
     },
     {
-      "streetType": "Bdge"
+      "streetType": "BDGE"
     },
     {
-      "streetType": "Bdwy"
+      "streetType": "BDWY"
     },
     {
-      "streetType": "Bend"
+      "streetType": "BEND"
     },
     {
-      "streetType": "Brae"
+      "streetType": "BRAE"
     },
     {
-      "streetType": "Brce"
+      "streetType": "BRCE"
     },
     {
-      "streetType": "Brk"
+      "streetType": "BRK"
     },
     {
-      "streetType": "Brow"
+      "streetType": "BROW"
     },
     {
-      "streetType": "Bvd"
+      "streetType": "BVD"
     },
     {
-      "streetType": "Bypa"
+      "streetType": "BYPA"
     },
     {
-      "streetType": "Caus"
+      "streetType": "CAUS"
     },
     {
-      "streetType": "Cct"
+      "streetType": "CCT"
     },
     {
-      "streetType": "Ch"
+      "streetType": "CH"
     },
     {
-      "streetType": "Cir"
+      "streetType": "CIR"
     },
     {
-      "streetType": "Cl"
+      "streetType": "CL"
     },
     {
-      "streetType": "Clt"
+      "streetType": "CLT"
     },
     {
-      "streetType": "Cmmn"
+      "streetType": "CMMN"
     },
     {
-      "streetType": "Cnr"
+      "streetType": "CNR"
     },
     {
-      "streetType": "Cnwy"
+      "streetType": "CNWY"
     },
     {
-      "streetType": "Con"
+      "streetType": "CON"
     },
     {
-      "streetType": "Cove"
+      "streetType": "COVE"
     },
     {
-      "streetType": "Cps"
+      "streetType": "CPS"
     },
     {
-      "streetType": "Crcs"
+      "streetType": "CRCS"
     },
     {
-      "streetType": "Cres"
+      "streetType": "CRES"
     },
     {
-      "streetType": "Crsg"
+      "streetType": "CRSG"
     },
     {
-      "streetType": "Crss"
+      "streetType": "CRSS"
     },
     {
-      "streetType": "Crst"
+      "streetType": "CRST"
     },
     {
-      "streetType": "Cso"
+      "streetType": "CSO"
     },
     {
-      "streetType": "Ct"
+      "streetType": "CT"
     },
     {
-      "streetType": "Ctr"
+      "streetType": "CTR"
     },
     {
-      "streetType": "Cttg"
+      "streetType": "CTTG"
     },
     {
-      "streetType": "Ctyd"
+      "streetType": "CTYD"
     },
     {
-      "streetType": "Dale"
+      "streetType": "DALE"
     },
     {
-      "streetType": "Dell"
+      "streetType": "DELL"
     },
     {
-      "streetType": "Devn"
+      "streetType": "DEVN"
     },
     {
-      "streetType": "Dr"
+      "streetType": "DR"
     },
     {
-      "streetType": "Drwy"
+      "streetType": "DRWY"
     },
     {
-      "streetType": "Edge"
+      "streetType": "EDGE"
     },
     {
-      "streetType": "Elb"
+      "streetType": "ELB"
     },
     {
-      "streetType": "End"
+      "streetType": "END"
     },
     {
-      "streetType": "Ent"
+      "streetType": "ENT"
     },
     {
-      "streetType": "Esp"
+      "streetType": "ESP"
     },
     {
-      "streetType": "Est"
+      "streetType": "EST"
     },
     {
-      "streetType": "Fawy"
+      "streetType": "FAWY"
     },
     {
-      "streetType": "Fitr"
+      "streetType": "FITR"
     },
     {
-      "streetType": "Flat"
+      "streetType": "FLAT"
     },
     {
-      "streetType": "Folw"
+      "streetType": "FOLW"
     },
     {
-      "streetType": "Frnt"
+      "streetType": "FRNT"
     },
     {
-      "streetType": "Frtg"
+      "streetType": "FRTG"
     },
     {
-      "streetType": "Fshr"
+      "streetType": "FSHR"
     },
     {
-      "streetType": "Ftrk"
+      "streetType": "FTRK"
     },
     {
-      "streetType": "Fwy"
+      "streetType": "FWY"
     },
     {
-      "streetType": "Gap"
+      "streetType": "GAP"
     },
     {
-      "streetType": "Gdn"
+      "streetType": "GDN"
     },
     {
-      "streetType": "Gdns"
+      "streetType": "GDNS"
     },
     {
-      "streetType": "Gld"
+      "streetType": "GLD"
     },
     {
-      "streetType": "Glen"
+      "streetType": "GLEN"
     },
     {
-      "streetType": "Gly"
+      "streetType": "GLY"
     },
     {
-      "streetType": "Gr"
+      "streetType": "GR"
     },
     {
-      "streetType": "Gra"
+      "streetType": "GRA"
     },
     {
-      "streetType": "Grn"
+      "streetType": "GRN"
     },
     {
-      "streetType": "Gte"
+      "streetType": "GTE"
     },
     {
-      "streetType": "Hill"
+      "streetType": "HILL"
     },
     {
-      "streetType": "Hts"
+      "streetType": "HTS"
     },
     {
-      "streetType": "Hwy"
+      "streetType": "HWY"
     },
     {
-      "streetType": "Jnc"
+      "streetType": "JNC"
     },
     {
-      "streetType": "Key"
+      "streetType": "KEY"
     },
     {
-      "streetType": "Lane"
+      "streetType": "LANE"
     },
     {
-      "streetType": "Ldg"
+      "streetType": "LDG"
     },
     {
-      "streetType": "Line"
+      "streetType": "LINE"
     },
     {
-      "streetType": "Link"
+      "streetType": "LINK"
     },
     {
-      "streetType": "Lkt"
+      "streetType": "LKT"
     },
     {
-      "streetType": "Lnwy"
+      "streetType": "LNWY"
     },
     {
-      "streetType": "Loop"
+      "streetType": "LOOP"
     },
     {
-      "streetType": "Mall"
+      "streetType": "MALL"
     },
     {
-      "streetType": "Mew"
+      "streetType": "MEW"
     },
     {
-      "streetType": "Mews"
+      "streetType": "MEWS"
     },
     {
-      "streetType": "Mndr"
+      "streetType": "MNDR"
     },
     {
-      "streetType": "Mwy"
+      "streetType": "MWY"
     },
     {
-      "streetType": "Nook"
+      "streetType": "NOOK"
     },
     {
-      "streetType": "Otlk"
+      "streetType": "OTLK"
     },
     {
-      "streetType": "Park"
+      "streetType": "PARK"
     },
     {
-      "streetType": "Part"
+      "streetType": "PART"
     },
     {
-      "streetType": "Pass"
+      "streetType": "PASS"
     },
     {
-      "streetType": "Path"
+      "streetType": "PATH"
     },
     {
-      "streetType": "Pde"
+      "streetType": "PDE"
     },
     {
-      "streetType": "Phwy"
+      "streetType": "PHWY"
     },
     {
-      "streetType": "Pkt"
+      "streetType": "PKT"
     },
     {
-      "streetType": "Pkwy"
+      "streetType": "PKWY"
     },
     {
-      "streetType": "Pl"
+      "streetType": "PL"
     },
     {
-      "streetType": "Plza"
+      "streetType": "PLZA"
     },
     {
-      "streetType": "Pnt"
+      "streetType": "PNT"
     },
     {
-      "streetType": "Port"
+      "streetType": "PORT"
     },
     {
-      "streetType": "Prom"
+      "streetType": "PROM"
     },
     {
-      "streetType": "Psge"
+      "streetType": "PSGE"
     },
     {
-      "streetType": "Qdrt"
+      "streetType": "QDRT"
     },
     {
-      "streetType": "Quad"
+      "streetType": "QUAD"
     },
     {
-      "streetType": "Qy"
+      "streetType": "QY"
     },
     {
-      "streetType": "Qys"
+      "streetType": "QYS"
     },
     {
-      "streetType": "Ramp"
+      "streetType": "RAMP"
     },
     {
-      "streetType": "Rch"
+      "streetType": "RCH"
     },
     {
-      "streetType": "Rd"
+      "streetType": "RD"
     },
     {
-      "streetType": "Rdge"
+      "streetType": "RDGE"
     },
     {
-      "streetType": "Rds"
+      "streetType": "RDS"
     },
     {
-      "streetType": "Rdwy"
+      "streetType": "RDWY"
     },
     {
-      "streetType": "Res"
+      "streetType": "RES"
     },
     {
-      "streetType": "Rest"
+      "streetType": "REST"
     },
     {
-      "streetType": "Ride"
+      "streetType": "RIDE"
     },
     {
-      "streetType": "Ring"
+      "streetType": "RING"
     },
     {
-      "streetType": "Rise"
+      "streetType": "RISE"
     },
     {
-      "streetType": "Rmbl"
+      "streetType": "RMBL"
     },
     {
-      "streetType": "Rnd"
+      "streetType": "RND"
     },
     {
-      "streetType": "Rnge"
+      "streetType": "RNGE"
     },
     {
-      "streetType": "Row"
+      "streetType": "ROW"
     },
     {
-      "streetType": "Rte"
+      "streetType": "RTE"
     },
     {
-      "streetType": "Rtt"
+      "streetType": "RTT"
     },
     {
-      "streetType": "Run"
+      "streetType": "RUN"
     },
     {
-      "streetType": "Rvr"
+      "streetType": "RVR"
     },
     {
-      "streetType": "Sbwy"
+      "streetType": "SBWY"
     },
     {
-      "streetType": "Slpe"
+      "streetType": "SLPE"
     },
     {
-      "streetType": "Spur"
+      "streetType": "SPUR"
     },
     {
-      "streetType": "Sq"
+      "streetType": "SQ"
     },
     {
-      "streetType": "St"
+      "streetType": "ST"
     },
     {
-      "streetType": "Stps"
+      "streetType": "STPS"
     },
     {
-      "streetType": "Strp"
+      "streetType": "STRP"
     },
     {
-      "streetType": "Swy"
+      "streetType": "SWY"
     },
     {
-      "streetType": "Tarn"
+      "streetType": "TARN"
     },
     {
-      "streetType": "Tce"
+      "streetType": "TCE"
     },
     {
-      "streetType": "Top"
+      "streetType": "TOP"
     },
     {
-      "streetType": "Tor"
+      "streetType": "TOR"
     },
     {
-      "streetType": "Trk"
+      "streetType": "TRK"
     },
     {
-      "streetType": "Trl"
+      "streetType": "TRL"
     },
     {
-      "streetType": "Turn"
+      "streetType": "TURN"
     },
     {
-      "streetType": "Vale"
+      "streetType": "VALE"
     },
     {
-      "streetType": "View"
+      "streetType": "VIEW"
     },
     {
-      "streetType": "Vsta"
+      "streetType": "VSTA"
     },
     {
-      "streetType": "Walk"
+      "streetType": "WALK"
     },
     {
-      "streetType": "Way"
+      "streetType": "WAY"
     },
     {
-      "streetType": "Whrf"
+      "streetType": "WHRF"
     },
     {
-      "streetType": "Wkwy"
+      "streetType": "WKWY"
     },
     {
-      "streetType": "Wynd"
+      "streetType": "WYND"
     }
 ]
