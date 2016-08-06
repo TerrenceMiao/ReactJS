@@ -209,7 +209,7 @@ class App extends React.Component {
             value,
             onChange: this.onChange
         };
-        const status = (isLoading ? '... ...' : '');
+        const status = (isLoading ? '...' : '');
 
         return (
             <div className="app-container">
