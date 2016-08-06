@@ -1,5 +1,4 @@
-{
-  "streetTypes": [
+[
     {
       "streetType": "Accs"
     },
@@ -441,5 +440,4 @@
     {
       "streetType": "Wynd"
     }
-  ]
-}
+]
