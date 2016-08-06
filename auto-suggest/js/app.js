@@ -10,31 +10,9 @@ var localities = require('../data/localities.json');
 // console.log("** ALL Street Types: " + JSON.stringify(streetTypes));
 // console.log("** ALL Localities: " + JSON.stringify(localities));
 
-
-//
-// Clock example
-//
-var ExampleApplication = React.createClass({
-    render: function () {
-        var elapsed = Math.round(this.props.elapsed / 100);
-        var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
-        var message = 'React has been successfully running for ' + seconds + ' seconds.';
-
-        return <p>{message}</p>;
-    }
-});
-
-var start = new Date().getTime();
-
-setInterval(function () {
-    ReactDOM.render(<ExampleApplication elapsed={new Date().getTime() - start}/>, document.getElementById('container'));
-}, 50);
-
-
 //
 // auto-suggest app
 //
-/* Data */
 const states = [
     { name: 'VIC'},
     { name: 'NSW'},
@@ -231,7 +209,7 @@ class App extends React.Component {
             value,
             onChange: this.onChange
         };
-        const status = (isLoading ? 'Loading ...' : 'Type, type');
+        const status = (isLoading ? '... ...' : '');
 
         return (
             <div className="app-container">
@@ -240,9 +218,7 @@ class App extends React.Component {
                              getSuggestionValue={getSuggestionValue}
                              renderSuggestion={renderSuggestion}
                              inputProps={inputProps} />
-                <div className="status">
-                    <strong>Status:</strong> {status}
-                </div>
+                <div className="status">{status}</div>
             </div>
         );
     }
