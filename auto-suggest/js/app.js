@@ -78,8 +78,7 @@ function getMatchingPostalAddresses(value, clazz) {
         if (postcode.length == 4) {
             body = {"query":{"bool":{"must":{"match":{"postcode":postcode}},"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         } else {
-            postcode = postcode + "*";
-            body = {"query":{"bool":{"must":{"wildcard":{"postcode":postcode}},"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+            body = {"query":{"bool":{"must":{"wildcard":{"postcode":postcode + "*"}},"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         }
     } else if (FULL_ADDRESS_PATTERN.test(escapedValue)) {
         // query value is beginning and ended with digits - beginning digits mapped to "house_nbr_1", ended to "postcode"
@@ -92,8 +91,7 @@ function getMatchingPostalAddresses(value, clazz) {
         if (postcode.length == 4) {
             body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"match":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         } else {
-            postcode = postcode + "*";
-            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"wildcard":{"postcode":postcode}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
+            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"wildcard":{"postcode":postcode + "*"}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":wildValue}}}}};
         }
     } else {
         // query value not match any patterns
