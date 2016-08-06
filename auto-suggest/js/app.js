@@ -60,11 +60,10 @@ function getMatchingPostalAddresses(value, clazz) {
             var splitValue = escapedValue.split(" ");
 
             if (splitValue.length == 2) {
-                var streetName = splitValue[0];
-                var streetType = splitValue[1];
-
-                if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
-                    body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}}]}}};
+                if (states.filter(state => state.name == splitValue[1]).length > 0) {
+                    body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["locality_name"],"query":(splitValue[0]+"*")}}},{"match":{"state":splitValue[1]}}]}}};
+                } else if (streetTypes.filter(item => item.streetType == splitValue[1]).length > 0) {
+                    body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(splitValue[0]+"*")}}},{"match":{"street_type":splitValue[1]}}]}}};
                 } else {
                     body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
                 }
@@ -85,8 +84,17 @@ function getMatchingPostalAddresses(value, clazz) {
                         }
 
                         var locality = '';
+                        var state = '';
+                        var endPoint = splitValue.length;
 
-                        for (var j = i + 1; j < splitValue.length; j++) {
+                        if (states.filter(state => state.name == splitValue[endPoint - 1]).length > 0) {
+                            state = splitValue[endPoint - 1];
+                            endPoint = endPoint - 1;
+                        } else {
+                            state = '*';
+                        }
+
+                        for (var j = i + 1; j < endPoint; j++) {
                             if (j != i + 1) {
                                 locality += " ";
                             }
@@ -94,7 +102,7 @@ function getMatchingPostalAddresses(value, clazz) {
                             locality += splitValue[j];
                         }
 
-                        body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality+"*").replace(" "," && ")}}}]}}};
+                        body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality+"*").replace(" "," && ")}}},{"query":{"query_string":{"fields":["state"],"query":state}}}]}}};
 
                         break;
                     } else {
@@ -115,11 +123,10 @@ function getMatchingPostalAddresses(value, clazz) {
         var splitValue = wildValue.split(" ");
 
         if (splitValue.length == 2) {
-            var streetName = splitValue[0];
-            var streetType = splitValue[1];
-
-            if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
-                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}}]}}};
+            if (states.filter(state => state.name == splitValue[1]).length > 0) {
+                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["locality_name"],"query":(splitValue[0]+"*")}}},{"match":{"state":splitValue[1]}}]}}};
+            } else if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
+                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["street_name"],"query":(splitValue[0]+"*")}}},{"match":{"street_type":splitValue[1]}}]}}};
             } else {
                 body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}]}}};
             }
@@ -140,8 +147,17 @@ function getMatchingPostalAddresses(value, clazz) {
                     }
 
                     var locality = '';
+                    var state = '';
+                    var endPoint = splitValue.length;
 
-                    for (var j = i + 1; j < splitValue.length; j++) {
+                    if (states.filter(state => state.name == splitValue[endPoint - 1]).length > 0) {
+                        state = splitValue[endPoint - 1];
+                        endPoint = endPoint - 1;
+                    } else {
+                        state = '*';
+                    }
+
+                    for (var j = i + 1; j < endPoint; j++) {
                         if (j != i + 1) {
                             locality += " ";
                         }
@@ -149,7 +165,7 @@ function getMatchingPostalAddresses(value, clazz) {
                         locality += splitValue[j];
                     }
 
-                    body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality+"*").replace(" "," && ")}}}]}}};
+                    body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality+"*").replace(" "," && ")}}},{"query":{"query_string":{"fields":["state"],"query":state}}}]}}};
 
                     break;
                 } else {
