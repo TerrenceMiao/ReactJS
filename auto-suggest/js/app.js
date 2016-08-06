@@ -58,7 +58,53 @@ function getMatchingPostalAddresses(value, clazz) {
             body = {"query":{"query_string":{"fields":["locality_name"],"query":escapedValue.replace(" ", " && ")}}};
         } else {
             // query value not match any
-            body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
+            var splitValue = escapedValue.split(" ");
+
+            if (splitValue.length == 2) {
+                var streetName = splitValue[0];
+                var streetType = splitValue[1];
+
+                if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
+                    body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(streetName + "*").replace(" ", " && ")}}},{"match":{"street_type":streetType}}]}}};
+                } else {
+                    body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
+                }
+            } else if (splitValue.length >= 3) {
+                for (var i = splitValue.length - 1; i > 0; i--) {
+                    var streetType = splitValue[i];
+
+                    if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
+
+                        var streetName = '';
+
+                        for (var j = 0; j < i; j++) {
+                            if (j != 0) {
+                                streetName += " ";
+                            }
+
+                            streetName += splitValue[j];
+                        }
+
+                        var locality = '';
+
+                        for (var j = i + 1; j < splitValue.length; j++) {
+                            if (j != i + 1) {
+                                locality += " ";
+                            }
+
+                            locality += splitValue[j];
+                        }
+
+                        body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(streetName + "*").replace(" ", " && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality + "*").replace(" ", " && ")}}}]}}};
+
+                        break;
+                    } else {
+                        body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
+                    }
+                }
+            } else {
+                body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
+            }
         }
     } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
         // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
