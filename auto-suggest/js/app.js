@@ -57,124 +57,10 @@ function getMatchingPostalAddresses(value, clazz) {
             // whitespace is reserved character and mean "OR" in ElasticSearch
             body = {"query":{"query_string":{"fields":["locality_name"],"query":escapedValue.replace(" "," && ")}}};
         } else {
-            var splitValue = escapedValue.split(" ");
-
-            if (splitValue.length == 2) {
-                if (states.filter(state => state.name == splitValue[1]).length > 0) {
-                    body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["locality_name"],"query":(splitValue[0]+"*")}}},{"match":{"state":splitValue[1]}}]}}};
-                } else if (streetTypes.filter(item => item.streetType == splitValue[1]).length > 0) {
-                    body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(splitValue[0]+"*")}}},{"match":{"street_type":splitValue[1]}}]}}};
-                } else {
-                    body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
-                }
-            } else if (splitValue.length >= 3) {
-                for (var i = splitValue.length - 1; i > 0; i--) {
-                    var streetType = splitValue[i];
-
-                    if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
-
-                        var streetName = '';
-
-                        for (var j = 0; j < i; j++) {
-                            if (j != 0) {
-                                streetName += " ";
-                            }
-
-                            streetName += splitValue[j];
-                        }
-
-                        var locality = '';
-                        var state = '';
-                        var endPoint = splitValue.length;
-
-                        if (states.filter(state => state.name == splitValue[endPoint - 1]).length > 0) {
-                            state = splitValue[endPoint - 1];
-                            endPoint = endPoint - 1;
-                        } else {
-                            state = '*';
-                        }
-
-                        for (var j = i + 1; j < endPoint; j++) {
-                            if (j != i + 1) {
-                                locality += " ";
-                            }
-
-                            locality += splitValue[j];
-                        }
-
-                        body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality+"*").replace(" "," && ")}}},{"query":{"query_string":{"fields":["state"],"query":state}}}]}}};
-
-                        break;
-                    } else {
-                        body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
-                    }
-                }
-            } else {
-                body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
-            }
+           body = buildQuery(escapedValue);
         }
     } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
-        // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
-        var matchedValueArray = HOUSE_NUMBER_PRIORITY_PATTERN.exec(escapedValue);
-
-        var houseNumber = matchedValueArray[1];
-        var wildValue = matchedValueArray[2].trim();
-
-        var splitValue = wildValue.split(" ");
-
-        if (splitValue.length == 2) {
-            if (states.filter(state => state.name == splitValue[1]).length > 0) {
-                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["locality_name"],"query":(splitValue[0]+"*")}}},{"match":{"state":splitValue[1]}}]}}};
-            } else if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
-                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["street_name"],"query":(splitValue[0]+"*")}}},{"match":{"street_type":splitValue[1]}}]}}};
-            } else {
-                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}]}}};
-            }
-        } else if (splitValue.length >= 3) {
-            for (var i = splitValue.length - 1; i > 0; i--) {
-                var streetType = splitValue[i];
-
-                if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
-
-                    var streetName = '';
-
-                    for (var j = 0; j < i; j++) {
-                        if (j != 0) {
-                            streetName += " ";
-                        }
-
-                        streetName += splitValue[j];
-                    }
-
-                    var locality = '';
-                    var state = '';
-                    var endPoint = splitValue.length;
-
-                    if (states.filter(state => state.name == splitValue[endPoint - 1]).length > 0) {
-                        state = splitValue[endPoint - 1];
-                        endPoint = endPoint - 1;
-                    } else {
-                        state = '*';
-                    }
-
-                    for (var j = i + 1; j < endPoint; j++) {
-                        if (j != i + 1) {
-                            locality += " ";
-                        }
-
-                        locality += splitValue[j];
-                    }
-
-                    body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality+"*").replace(" "," && ")}}},{"query":{"query_string":{"fields":["state"],"query":state}}}]}}};
-
-                    break;
-                } else {
-                    body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
-                }
-            }
-        } else {
-            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
-        }
+        body = buildQuery(escapedValue);
     } else if (POSTCODE_PRIORITY_PATTERN.test(escapedValue)) {
         // query value is ended with digits - ended digits mapped to "postcode"
         var matchedValueArray = POSTCODE_PRIORITY_PATTERN.exec(escapedValue);
@@ -246,6 +132,115 @@ function getMatchingPostalAddresses(value, clazz) {
         .catch(function (error) {
             console.log('Request failed with error: ', error);
         });
+}
+
+function buildQuery(escapedValue) {
+
+    var body = '';
+    var houseNumber = '';
+    var postcode = '';
+    var wildValue = '';
+    var splitValue = '';
+
+    if (WORD_ONLY_PATTERN.test(escapedValue)) {
+        splitValue = escapedValue.split(" ");
+    } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
+        // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
+        var matchedValueArray = HOUSE_NUMBER_PRIORITY_PATTERN.exec(escapedValue);
+
+        houseNumber = matchedValueArray[1];
+        wildValue = matchedValueArray[2].trim();
+
+        splitValue = wildValue.split(" ");
+    } else if (POSTCODE_PRIORITY_PATTERN.test(escapedValue)) {
+        // query value is ended with digits - ended digits mapped to "postcode"
+        var matchedValueArray = POSTCODE_PRIORITY_PATTERN.exec(escapedValue);
+
+        wildValue = matchedValueArray[1].trim();
+        postcode = matchedValueArray[2];
+
+        splitValue = wildValue.split(" ");
+    }
+
+    if (splitValue.length == 2) {
+        if (states.filter(state => state.name == splitValue[1]).length > 0) {
+            if (WORD_ONLY_PATTERN.test(escapedValue)) {
+                body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["locality_name"],"query":(splitValue[0]+"*")}}},{"match":{"state":splitValue[1]}}]}}};
+            } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
+                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["locality_name"],"query":(splitValue[0]+"*")}}},{"match":{"state":splitValue[1]}}]}}};
+            }
+        } else if (streetTypes.filter(item => item.streetType == splitValue[1]).length > 0) {
+            if (WORD_ONLY_PATTERN.test(escapedValue)) {
+                body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(splitValue[0]+"*")}}},{"match":{"street_type":splitValue[1]}}]}}};
+            } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
+                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["street_name"],"query":(splitValue[0]+"*")}}},{"match":{"street_type":splitValue[1]}}]}}};
+            }
+        } else {
+            if (WORD_ONLY_PATTERN.test(escapedValue)) {
+                body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
+            } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
+                body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}]}}};
+            }
+        }
+    } else if (splitValue.length >= 3) {
+        for (var i = splitValue.length - 1; i > 0; i--) {
+            var streetType = splitValue[i];
+
+            if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
+
+                var streetName = '';
+
+                for (var j = 0; j < i; j++) {
+                    if (j != 0) {
+                        streetName += " ";
+                    }
+
+                    streetName += splitValue[j];
+                }
+
+                var locality = '';
+                var state = '';
+                var endPoint = splitValue.length;
+
+                if (states.filter(state => state.name == splitValue[endPoint - 1]).length > 0) {
+                    state = splitValue[endPoint - 1];
+                    endPoint = endPoint - 1;
+                } else {
+                    state = '*';
+                }
+
+                for (var j = i + 1; j < endPoint; j++) {
+                    if (j != i + 1) {
+                        locality += " ";
+                    }
+
+                    locality += splitValue[j];
+                }
+
+                if (WORD_ONLY_PATTERN.test(escapedValue)) {
+                    body = {"query":{"bool":{"must":[{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality+"*").replace(" "," && ")}}},{"query":{"query_string":{"fields":["state"],"query":state}}}]}}};
+                } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
+                    body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}},{"query":{"query_string":{"fields":["street_name"],"query":(streetName+"*").replace(" "," && ")}}},{"match":{"street_type":streetType}},{"query":{"query_string":{"fields":["locality_name"],"query":(locality+"*").replace(" "," && ")}}},{"query":{"query_string":{"fields":["state"],"query":state}}}]}}};
+                }
+
+                break;
+            } else {
+                if (WORD_ONLY_PATTERN.test(escapedValue)) {
+                    body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
+                } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
+                    body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
+                }
+            }
+        }
+    } else {
+        if (WORD_ONLY_PATTERN.test(escapedValue)) {
+            body = {"query":{"query_string":{"fields":["street_name","street_type","locality_name","state"],"query":escapedValue}}};
+        } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
+            body = {"query":{"bool":{"must":[{"match":{"house_nbr_1":houseNumber}}],"should":{"query_string":{"fields":["street_name","street_type","locality_name","state","postcode"],"query":wildValue}}}}};
+        }
+    }
+
+    return body;
 }
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
