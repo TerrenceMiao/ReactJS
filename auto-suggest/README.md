@@ -22,8 +22,8 @@ Input a few like:
 
 - 18 St Johns Wood Rd Mount Waverley VIC 3149 
 - 146 St Kilda Rd St Kilda VIC 3182
-- 18 Balfour Cl Point Cook VIC 3030
-- 28 Middle Park Dr Point Cook VIC 3030
+- 8 Balfour Cl Point Cook VIC 3030
+- 60 Middle Park Dr Point Cook VIC 3030
 
 to see how fewer keystrokes can let the target postal address on the top of the list. And a few more:
 
