@@ -136,7 +136,14 @@ function buildQuery(escapedValue) {
         console.log("** postcode = " + postcode);
     } else {
         // query value not match any patterns
-        return {"query":{"query_string":{"fields":["house_nbr_1","street_name","street_type","locality_name","state","postcode"],"query":escapedValue}}};
+        return {
+            "query": {
+                "query_string": {
+                    "fields": ["house_nbr_1", "street_name", "street_type", "locality_name", "state", "postcode"],
+                    "query": escapedValue
+                }
+            }
+        };
     }
 
     var isWordValueChanged = false;
