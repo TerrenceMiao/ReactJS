@@ -211,24 +211,8 @@ function buildQuery(escapedValue) {
             streetType = splitValue[i];
 
             if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
-                streetName = '';
-                locality = '';
-
-                for (var j = 0; j < i; j++) {
-                    if (j != 0) {
-                        streetName += " ";
-                    }
-
-                    streetName += splitValue[j];
-                }
-
-                for (var j = i + 1; j < splitValue.length; j++) {
-                    if (j != i + 1) {
-                        locality += " ";
-                    }
-
-                    locality += splitValue[j];
-                }
+                streetName = wordValue.substring(0, wordValue.lastIndexOf(streetType)).trim();
+                locality = wordValue.substr(wordValue.lastIndexOf(streetType) + streetType.length).trim();
 
                 return {
                     "query": {
