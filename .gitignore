@@ -4,7 +4,5 @@ node_modules/
 
 # Don't commit the following files
 bundle.js
-app-compiled.js
-app-compiled.js.map
-bundle-compiled.js
-bundle-compiled.js.map
+*-compiled.js
+*-compiled.js.map
