@@ -32,6 +32,7 @@ to see how fewer keystrokes can let the target postal address on the top of the 
 - 3080
 - 3081
 - Middle Park VIC
+- VIC 3052
 - 10002
 
 to see what could come up.
