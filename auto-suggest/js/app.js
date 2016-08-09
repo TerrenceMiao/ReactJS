@@ -310,7 +310,10 @@ class App extends React.Component {
     }
 
     onSuggestionSelected(event, { suggestionValue }) {
-        this.loadSuggestions(suggestionValue);
+        // Search selected Postal Address on Google Maps
+        document.getElementById('autocomplete').value = suggestionValue;
+
+        doQuery();
     }
 
     onSuggestionsUpdateRequested({ value }) {
@@ -330,6 +333,7 @@ class App extends React.Component {
             <div className="app-container">
                 <Autosuggest suggestions={suggestions}
                              onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
+                             onSuggestionSelected={this.onSuggestionSelected}
                              getSuggestionValue={getSuggestionValue}
                              renderSuggestion={renderSuggestion}
                              inputProps={inputProps} />
@@ -340,3 +344,5 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+initializeMaps();

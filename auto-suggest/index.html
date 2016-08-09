@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>Postal Address auto-suggest</title>
     <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/maps.css"/>
 </head>
 
 <body>
     <h1>Postal Address auto-suggest</h1>
 
-    <div id="app" />
+    <div class="wrapper">
+        <div class="left">
+            <div id="app"></div>
+        </div>
+
+        <div class="right">
+            <div id="locationField">
+                <input id="autocomplete" type="hidden" value="18 Balfour Cl, Point Cook VIC 3030" />
+            </div>
+            <div id="controls">
+                <form name="controls">
+                    <input type="radio" name="type" value="establishment" onclick="search()" checked="checked" />All<br/>
+                    <input type="radio" name="type" value="restaurant" onclick="search()" />Restaurants<br/>
+                    <input type="radio" name="type" value="lodging" onclick="search()" />Lodging
+                </form>
+            </div>
+            <div id="map_canvas"></div>
+            <div id="listing" onscroll="reviewsScroll()"><table id="resultsTable"><tbody id="results"></tbody></table></div>
+            <div id="reviews"></div>
+        </div>
+    </div>
+
+    <script src="js/google-maps.js"></script>
+    <script src="js/maps.js"></script>
 
     <script src="bundle.js"></script>
 </body>

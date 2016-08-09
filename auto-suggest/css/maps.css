@@ -1,0 +1,154 @@
+/* Google Maps */
+#map_canvas {
+    position: absolute;
+    width: 399px;
+    height: 399px;
+    top: 0px;
+    left: 0px;
+    border: 1px solid grey;
+}
+
+#listing {
+    position: absolute;
+    width: 200px;
+    height: 360px;
+    overflow: auto;
+    left: 401px;
+    top: 68px;
+    cursor: pointer;
+    border-right: 1px solid lightgrey;
+}
+
+#controls {
+    width: 200px;
+    position: absolute;
+    top: 0px;
+    left: 400px;
+    height: 60px;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.placeIcon {
+    width: 16px;
+    height: 16px;
+    margin: 8px 6px 2px 10px;
+}
+
+.placeName {
+    padding: 6px 0 0 0;
+}
+
+#resultsTable {
+    font-size: 12px;
+    border-collapse: collapse;
+}
+
+#locationField {
+    width: 400px;
+    height: 25px;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+
+#autocomplete {
+    width: 400px;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.right, .left {
+    width: 50%;
+    position: absolute;
+}
+
+.right {
+    right: 0;
+}
+
+.left {
+    left: 0;
+}
+
+.iwPlaceIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.iw_attribute_name {
+    font-weight: bold;
+    text-align: right;
+}
+
+.iw_table_row {
+    height: 14px;
+}
+
+.iw_attribute_name {
+    font-weight: bold;
+    text-align: right;
+}
+
+#reviews {
+    position:absolute;
+    width: 600px;
+    top: 440px;
+    height: 298px;
+    overflow: auto;
+}
+
+.review {
+    margin-bottom: 4px;
+    border-bottom: 1px solid grey;
+    width: 100%;
+}
+
+.hoursLink {
+    text-align: right;
+}
+
+.aspectsTable {
+    background-color: #f0f0f0;
+    border-collapse: collapse;
+    padding: 1px;
+}
+
+.aspectName {
+    text-align: right;
+    border: 1px solid white;
+    padding: 1px;
+}
+
+.aspectScore {
+    font-weight: bold;
+    border: 1px solid white;
+    width: 10px;
+    padding: 1px;
+}
+
+.reviewAuthor {
+    text-align: right;
+    font-style: italic;
+    width: 50%;
+}
+
+.reviewDate {
+    color: #808080;
+    width: 50%;
+}
+
+#hours {
+    position: absolute;
+    width: 360px;
+    height: 318px;
+    top: 42px;
+    left: 20px;
+    -moz-box-shadow: 2px 2px 3px #888;
+    -webkit-box-shadow: 2px 2px 3px #888;
+    box-shadow: 2px 2px 2px #888;
+    border: 1px solid #606060;
+    display: none;
+}
