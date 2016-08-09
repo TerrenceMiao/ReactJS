@@ -203,38 +203,41 @@ function buildQuery(escapedValue) {
     }
 
     // doesn't match state, locality and street type patterns
-    var splitValue = wordValue.split(" ");
+    // reverse looking for last appearance of street type in the middle of query
+    var lastIndexOfStreetType = -1;
 
-    if (splitValue.length >= 3) {
-        // reverse looking for street type in the middle of query
-        for (var i = splitValue.length - 2; i > 0; i--) {
-            streetType = splitValue[i];
+    streetTypes.some(function (entry) {
+        streetType = entry.streetType;
+        lastIndexOfStreetType = wordValue.lastIndexOf(" " + streetType + " ");
 
-            if (streetTypes.filter(item => item.streetType == streetType).length > 0) {
-                streetName = wordValue.substring(0, wordValue.lastIndexOf(streetType)).trim();
-                locality = wordValue.substr(wordValue.lastIndexOf(streetType) + streetType.length).trim();
+        if (lastIndexOfStreetType != -1) {
+            streetName = wordValue.substring(0, lastIndexOfStreetType);
+            locality = wordValue.substr(lastIndexOfStreetType + streetType.length + 2);
 
-                return {
-                    "query": {
-                        "bool": {
-                            "must": [{
-                                "query": { "query_string": { "fields": ["house_nbr_1"], "query": houseNumber } }
-                            }, {
-                                "query": { "query_string": { "fields": ["street_name"], "query": (streetName + "*").replace(new RegExp(" ", 'g'), " && ") } }
-                            }, {
-                                "query": { "query_string": { "fields": ["street_type"], "query": streetType } }
-                            }, {
-                                "query": { "query_string": { "fields": ["locality_name"], "query": (locality + "*").replace(new RegExp(" ", 'g'), " && ") } }
-                            }, {
-                                "query": { "query_string": { "fields": ["state"], "query": state } }
-                            }, {
-                                "query": { "query_string": { "fields": ["postcode"], "query": postcode } }
-                            }]
-                        }
-                    }
-                };
-            }
+            return true;
         }
+    });
+
+    if (lastIndexOfStreetType != -1) {
+       return {
+            "query": {
+                "bool": {
+                    "must": [{
+                        "query": { "query_string": { "fields": ["house_nbr_1"], "query": houseNumber } }
+                    }, {
+                        "query": { "query_string": { "fields": ["street_name"], "query": (streetName + "*").replace(new RegExp(" ", 'g'), " && ") } }
+                    }, {
+                        "query": { "query_string": { "fields": ["street_type"], "query": streetType } }
+                    }, {
+                        "query": { "query_string": { "fields": ["locality_name"], "query": (locality + "*").replace(new RegExp(" ", 'g'), " && ") } }
+                    }, {
+                        "query": { "query_string": { "fields": ["state"], "query": state } }
+                    }, {
+                        "query": { "query_string": { "fields": ["postcode"], "query": postcode } }
+                    }]
+                }
+            }
+        };
     }
 
     return {
