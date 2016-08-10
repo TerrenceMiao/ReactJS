@@ -14,11 +14,15 @@ The open index.html file in Chrome browser or start simple HTTP server:
 𝜆 python -m SimpleHTTPServer 8000
 ```
 
-Input a few like:
+Input an Postal Address like:
  
 - 111 Bourke St Melbourne VIC 3000
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Address%20-%20111%20Bourke%20St.png "111 Bourke St Melbourne VIC 3000")
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Address%20-%20111%20Bourke%20St%20on%20Google%20Maps.png "111 Bourke St Melbourne VIC 3000 on Google Maps")
+
+In put more addresses:
 
 - 18 St Johns Wood Rd Mount Waverley VIC 3149 
 - 146 St Kilda Rd St Kilda VIC 3182
