@@ -20,6 +20,8 @@ Input an Postal Address like:
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Address%20-%20111%20Bourke%20St.png "111 Bourke St Melbourne VIC 3000")
 
+After select the Postal Address, address is pinned on Google Maps:
+
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Address%20-%20111%20Bourke%20St%20on%20Google%20Maps.png "111 Bourke St Melbourne VIC 3000 on Google Maps")
 
 In put more addresses:
