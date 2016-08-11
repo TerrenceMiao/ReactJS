@@ -7,8 +7,6 @@ var Autosuggest = require('react-autosuggest');
 var streetTypes = require('../data/streetTypes.json');
 var localities = require('../data/localities.json');
 
-// auto-suggest app
-//
 const states = [
     { name: 'VIC'},
     { name: 'NSW'},
