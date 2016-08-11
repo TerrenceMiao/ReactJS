@@ -16,5 +16,10 @@
     "scripts": {
         "build": "browserify ./js/app.js -t babelify -o bundle.js",
         "start": "watchify ./js/app.js -v -t babelify -o bundle.js"
+    },
+    "devDependencies": {
+        "eslint": "^3.2.2",
+        "eslint-plugin-mocha": "^4.3.0",
+        "eslint-plugin-react": "^6.0.0"
     }
 }
