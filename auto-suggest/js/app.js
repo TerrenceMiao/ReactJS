@@ -90,6 +90,7 @@ function buildQuery(escapedValue) {
     var postcode = '*';
 
     var wordValue = '';
+    var matchedValueArray;
 
     if (DIGIT_ONLY_PATTERN.test(escapedValue)) {
         // query value is one or more digits - mapped to "house_nbr_1", or "postcode" if it's 4-digit and valid
@@ -102,7 +103,7 @@ function buildQuery(escapedValue) {
         wordValue = escapedValue;
     } else if (HOUSE_NUMBER_PRIORITY_PATTERN.test(escapedValue)) {
         // query value is beginning with digits - beginning digits mapped to "house_nbr_1"
-        var matchedValueArray = HOUSE_NUMBER_PRIORITY_PATTERN.exec(escapedValue);
+        matchedValueArray = HOUSE_NUMBER_PRIORITY_PATTERN.exec(escapedValue);
 
         houseNumber = matchedValueArray[1];
         wordValue = matchedValueArray[2].trim();
@@ -110,7 +111,7 @@ function buildQuery(escapedValue) {
         console.log("** houseNumber = " + houseNumber);
     } else if (POSTCODE_PRIORITY_PATTERN.test(escapedValue)) {
         // query value is ended with digits - ended digits mapped to "postcode"
-        var matchedValueArray = POSTCODE_PRIORITY_PATTERN.exec(escapedValue);
+        matchedValueArray = POSTCODE_PRIORITY_PATTERN.exec(escapedValue);
 
         wordValue = matchedValueArray[1].trim();
         postcode = matchedValueArray[2];
@@ -122,7 +123,7 @@ function buildQuery(escapedValue) {
         console.log("** postcode = " + postcode);
     } else if (FULL_ADDRESS_PATTERN.test(escapedValue)) {
         // query value is beginning and ended with digits - beginning digits mapped to "house_nbr_1", ended to "postcode"
-        var matchedValueArray = FULL_ADDRESS_PATTERN.exec(escapedValue);
+        matchedValueArray = FULL_ADDRESS_PATTERN.exec(escapedValue);
 
         houseNumber = matchedValueArray[1];
         wordValue = matchedValueArray[2].trim();
