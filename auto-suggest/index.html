@@ -36,9 +36,12 @@
     <!-- "google-maps.js" is a copy of "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" -->
     <!-- Download Google Maps JS by using curl -O "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" -->
     <!-- Run and display with Google Maps while open in file, rather than connect as web app in case "no-api-keys" error -->
-    <script src="js/google-maps.js"></script>
-    <script src="js/maps.js"></script>
+    <!--<script src="js/google-maps.js"></script>-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=[Google API Key]&libraries=places&callback=initializeMaps" type="text/javascript"></script>
 
+    <!-- Application JS libraries -->
+    <script src="js/maps.js"></script>
+    <!-- Babel artefact -->
     <script src="bundle.js"></script>
 </body>
 </html>
