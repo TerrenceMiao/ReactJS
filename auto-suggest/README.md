@@ -1,22 +1,27 @@
 # Auto Suggest example of using React with Browserify
 
-Run `npm install` in the directory to install React from npm. Then run:
+- Run `npm install` in the directory to install React from npm. 
+
+- Replace "[Google API Key]" in index.html with Google API Key - https://console.cloud.google.com/
+
+- Run:
 
 ```sh
 𝜆 npm start
 ```
 
-to produce `bundle.js` with example code and React.
+and produce `bundle.js` artefact. 
 
-The open index.html file in Chrome browser or start simple HTTP server:
+- The open index.html file in Chrome browser or start simple HTTP server:
 
 ```sh
 𝜆 python -m SimpleHTTPServer 8000
+
 ```
 
-Input an Postal Address like:
- 
-- 111 Bourke St Melbourne VIC 3000
+go to [http://localhost:8000/](http://localhost:8000/)
+
+- Input an Postal Address _111 Bourke St Melbourne VIC 3000_ like **"111 Bo St M"**
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Address%20-%20111%20Bourke%20St.png "111 Bourke St Melbourne VIC 3000")
 
