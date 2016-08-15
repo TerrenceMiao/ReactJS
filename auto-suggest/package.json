@@ -20,13 +20,17 @@
         "react-autosuggest": "^3.9.0"
     },
     "scripts": {
+        "lint": "eslint js/app.js js/google-maps.js",
+        "test": "mocha 'test/**/*.test.js'",
+        "prebuild": "npm run lint && npm test",
         "build": "browserify ./js/app.js -t babelify -o bundle.js",
         "start": "watchify ./js/app.js -v -t babelify -o bundle.js"
     },
     "devDependencies": {
         "eslint": "^3.2.2",
         "eslint-plugin-mocha": "^4.3.0",
-        "eslint-plugin-react": "^6.0.0"
+        "eslint-plugin-react": "^6.0.0",
+        "mocha": "^2.4.5"
     },
     "license": "GPLv3"
 }
