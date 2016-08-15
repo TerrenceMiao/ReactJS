@@ -1,8 +1,14 @@
 {
-    "name": "react-auto-suggest-example",
-    "description": "Auto Suggest example of using React",
+    "name": "Postal-Address-auto-suggest",
+    "version": "0.0.1",
+    "description": "Postal Address Auto Suggest example of using React",
     "private": true,
     "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TerrenceMiao/ReactJS.git"
+    },
+    "author": "Terrence Miao",
     "dependencies": {
         "babel-preset-es2015": "^6.9.0",
         "babel-preset-react": "^6.9.0",
@@ -21,5 +27,6 @@
         "eslint": "^3.2.2",
         "eslint-plugin-mocha": "^4.3.0",
         "eslint-plugin-react": "^6.0.0"
-    }
+    },
+    "license": "GPLv3"
 }
