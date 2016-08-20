@@ -6,3 +6,4 @@ node_modules/
 bundle.js
 *-compiled.js
 *-compiled.js.map
+npm-debug.log
