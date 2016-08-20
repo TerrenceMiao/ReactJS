@@ -15,7 +15,8 @@
         "watch": "watchify ./js/app.js -v -t babelify -o bundle.js",
         "start": "npm run watch & node server",
         "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
-        "test:watch": "npm test -- --watch"
+        "test:watch": "npm test -- --watch",
+        "standalone": "webpack --config webpack.config.js"
     },
     "dependencies": {
         "babel-polyfill": "^6.13.0",
@@ -48,7 +49,6 @@
         "node-libs-browser": "^0.5.2",
         "react-addons-test-utils": "^15.3.1",
         "webpack": "^1.9.11",
-        "webpack-dev-server": "^1.14.1",
         "webpack-dev-middleware": "^1.2.0",
         "webpack-hot-middleware": "^2.9.1"
     },
