@@ -23,7 +23,7 @@ const HOUSE_NUMBER_PRIORITY_PATTERN = /^(\d{1,5})([\D|\s]{1,})$/;
 const POSTCODE_PRIORITY_PATTERN = /^([\D|\s]{1,})(\d{1,4})$/;
 const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
 
-function getMatchingPostalAddresses(value, clazz) {
+function getMatchingPostalAddressesOrig(value, clazz) {
 
     const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
 
@@ -76,6 +76,79 @@ function getMatchingPostalAddresses(value, clazz) {
         .catch(function (error) {
             console.log('Request failed with error: ', error);
         });
+}
+
+function getMatchingPostalAddresses(value, clazz) {
+
+    const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
+
+    if (escapedValue === '') {
+        return;
+    }
+
+    console.log("** Query value: " + escapedValue);
+
+    var body = buildQuery(escapedValue);
+
+    console.log("** Query request: " + JSON.stringify(body));
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'x-www-form-urlencoded');
+    headers.append('Accept', 'application/json, text/plain, */*');
+
+    var init = {
+        method: 'POST',
+        headers: headers,
+        mode: 'cors',
+        body: JSON.stringify(body),
+        redirect: 'follow',
+        cache: 'default'
+    };
+
+    var request = new Request('http://localhost:9200/postaladdress/_search', init);
+
+    return dispatch => {
+        dispatch(setLoadingPostalAddress());
+
+        fetch(request, (response) => {
+            dispatch(doneLoadingPostalAddress());
+
+            if (response.status == 200) {
+                dispatch(setData(response.json(), value, clazz));
+            } else {
+                dispatch(showError())
+            }
+        })
+    }
+}
+
+function setData(data, value, clazz) {
+
+    const suggestions = data.hits.hits;
+
+    if (value === clazz.state.value) {
+        clazz.setState({
+            isLoading: false,
+            suggestions
+        });
+    } else {
+        // Ignore suggestions if input value changed
+        clazz.setState({
+            isLoading: false
+        });
+    }
+}
+
+function showError() {
+    console.log("Error connect to ElasticSearch service");
+}
+
+function setLoadingPostalAddress() {
+    console.log("Loading Postal Address ...");
+}
+
+function doneLoadingPostalAddress() {
+    console.log("Postal Address fetched");
 }
 
 function buildQuery(escapedValue) {
