@@ -4,6 +4,14 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Autosuggest = require('react-autosuggest');
 
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+
+const store = createStore(
+    rootReducer,
+    applyMiddleware(thunkMiddleware)
+)
+
 var streetTypes = require('../data/streetTypes.json');
 var localities = require('../data/localities.json');
 
@@ -23,61 +31,8 @@ const HOUSE_NUMBER_PRIORITY_PATTERN = /^(\d{1,5})([\D|\s]{1,})$/;
 const POSTCODE_PRIORITY_PATTERN = /^([\D|\s]{1,})(\d{1,4})$/;
 const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
 
-function getMatchingPostalAddressesOrig(value, clazz) {
 
-    const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
-
-    if (escapedValue === '') {
-        return;
-    }
-
-    console.log("** Query value: " + escapedValue);
-
-    var body = buildQuery(escapedValue);
-
-    console.log("** Query request: " + JSON.stringify(body));
-
-    var headers = new Headers();
-    headers.append('Content-Type', 'x-www-form-urlencoded');
-    headers.append('Accept', 'application/json, text/plain, */*');
-
-    var init = {
-        method: 'POST',
-        headers: headers,
-        mode: 'cors',
-        body: JSON.stringify(body),
-        redirect: 'follow',
-        cache: 'default'
-    };
-
-    var request = new Request('http://localhost:9200/postaladdress/_search', init);
-
-    fetch(request)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            // console.log("** Result: " + JSON.stringify(data));
-
-            const suggestions = data.hits.hits;
-
-            if (value === clazz.state.value) {
-                clazz.setState({
-                    isLoading: false,
-                    suggestions
-                });
-            } else {
-                // Ignore suggestions if input value changed
-                clazz.setState({
-                    isLoading: false
-                });
-            }
-        })
-        .catch(function (error) {
-            console.log('Request failed with error: ', error);
-        });
-}
-
+// Actions
 function getMatchingPostalAddresses(value, clazz) {
 
     const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
@@ -92,6 +47,8 @@ function getMatchingPostalAddresses(value, clazz) {
 
     console.log("** Query request: " + JSON.stringify(body));
 
+    var state = store.getState();
+
     var headers = new Headers();
     headers.append('Content-Type', 'x-www-form-urlencoded');
     headers.append('Accept', 'application/json, text/plain, */*');
@@ -107,48 +64,152 @@ function getMatchingPostalAddresses(value, clazz) {
 
     var request = new Request('http://localhost:9200/postaladdress/_search', init);
 
-    return dispatch => {
-        dispatch(setLoadingPostalAddress());
+    store.dispatch(setLoadingPostalAddressAction());
 
-        fetch(request, (response) => {
-            dispatch(doneLoadingPostalAddress());
+    fetch(request)
+        .then(function(response) {
+            store.dispatch(doneLoadingPostalAddressAction());
 
-            if (response.status == 200) {
-                dispatch(setData(response.json(), value, clazz));
-            } else {
-                dispatch(showError())
+            if (response.status === 200) {
+                return response.json();
             }
+
+            throw "ElasticSearch request failed";
         })
-    }
+        .then(function(data) {
+            // console.log("** Result: " + JSON.stringify(data));
+            store.dispatch(setDataAction(data, value, clazz));
+        })
+        .catch(function(error) {
+            store.dispatch(showErrorAction(error));
+        });
 }
 
-function setData(data, value, clazz) {
+function setDataAction(data, value, clazz) {
 
     const suggestions = data.hits.hits;
 
     if (value === clazz.state.value) {
-        clazz.setState({
+        return {
+            type: "SHOW_DATA",
             isLoading: false,
-            suggestions
-        });
+            clazz: clazz,
+            suggestions: suggestions
+        };
     } else {
         // Ignore suggestions if input value changed
-        clazz.setState({
-            isLoading: false
-        });
+        return {
+            type: "SHOW_DATA",
+            isLoading: false,
+            clazz: clazz,
+            suggestions: []
+        };
     }
 }
 
-function showError() {
-    console.log("Error connect to ElasticSearch service");
+function showErrorAction(error) {
+
+    console.log("Error thrown via invoking ElasticSearch service: " + error);
+
+    return {
+        type: "ERROR",
+        isLoading: false,
+        clazz: null,
+        suggestions: []
+    };
 }
 
-function setLoadingPostalAddress() {
+function setLoadingPostalAddressAction() {
+
     console.log("Loading Postal Address ...");
+
+    return {
+        type: "IS_LOADING",
+        isLoading: true,
+        clazz: null,
+        suggestions: []
+    };
 }
 
-function doneLoadingPostalAddress() {
+function doneLoadingPostalAddressAction() {
+
     console.log("Postal Address fetched");
+
+    return {
+        type: "LOADING_DONE",
+        isLoading: false,
+        clazz: null,
+        suggestions: []
+    };
+}
+
+// Reducers
+function setLoadingPostalAddressReducer(state, action) {
+
+    return {
+        isLoading: state.isLoading,
+        clazz: state.clazz,
+        suggestions: state.suggestions
+    };
+}
+
+function doneLoadingPostalAddressReducer(state, action) {
+
+    return {
+        isLoading: state.isLoading,
+        clazz: state.clazz,
+        suggestions: state.suggestions
+    };
+}
+
+function showErrorReducer(state, action) {
+
+    return {
+        isLoading: state.isLoading,
+        clazz: state.clazz,
+        suggestions: state.suggestions
+    };
+}
+
+function setDataReducer(state, action) {
+
+    action.clazz.setState({
+        isLoading: action.isLoading,
+        suggestions: action.suggestions
+    });
+
+    return {
+        isLoading: action.isLoading,
+        clazz: action.clazz,
+        suggestions: action.suggestions
+    };
+}
+
+function initialState() {
+
+    return {
+        isLoading: false,
+        clazz: null,
+        suggestions: []
+    }
+}
+
+function rootReducer(state, action) {
+
+    var previousState = (state ? state : initialState());
+
+    switch (action.type) {
+        case "IS_LOADING":
+            return setLoadingPostalAddressReducer(previousState, action);
+        case "LOADING_DONE":
+            return doneLoadingPostalAddressReducer(previousState, action);
+        case "ERROR":
+            return showErrorReducer(previousState, action);
+        case "SHOW_DATA":
+            return setDataReducer(previousState, action);
+        default:
+            return previousState;
+    }
 }
 
 function buildQuery(escapedValue) {
