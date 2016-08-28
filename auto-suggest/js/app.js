@@ -427,15 +427,6 @@ class App extends React.Component {
         this.onSuggestionsUpdateRequested = this.onSuggestionsUpdateRequested.bind(this);
     }
 
-    loadSuggestions(value) {
-        this.setState({
-            isLoading: true
-        });
-
-        // Make an AJAX service call
-        getMatchingPostalAddressesAction(value, this);
-    }
-
     onChange(event, { newValue }) {
         this.setState({
             value: newValue
@@ -450,7 +441,12 @@ class App extends React.Component {
     }
 
     onSuggestionsUpdateRequested({ value }) {
-        this.loadSuggestions(value);
+        this.setState({
+            isLoading: true
+        });
+
+        // Service call
+        getMatchingPostalAddressesAction(value, this);
     }
 
     render() {
