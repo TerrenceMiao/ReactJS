@@ -33,7 +33,7 @@ const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
 
 
 // Actions
-function getMatchingPostalAddresses(value, clazz) {
+function getMatchingPostalAddressesAction(value, clazz) {
 
     const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
 
@@ -433,7 +433,7 @@ class App extends React.Component {
         });
 
         // Make an AJAX service call
-        getMatchingPostalAddresses(value, this);
+        getMatchingPostalAddressesAction(value, this);
     }
 
     onChange(event, { newValue }) {
