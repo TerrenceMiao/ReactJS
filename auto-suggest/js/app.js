@@ -35,6 +35,8 @@ const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
 // Actions
 function getMatchingPostalAddressesAction(value, clazz) {
 
+    console.log("## Getting matching Postal Addresses");
+
     const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
 
     if (escapedValue === '') {
@@ -46,8 +48,6 @@ function getMatchingPostalAddressesAction(value, clazz) {
     var body = buildQuery(escapedValue);
 
     console.log("** Query request: " + JSON.stringify(body));
-
-    var state = store.getState();
 
     var headers = new Headers();
     headers.append('Content-Type', 'x-www-form-urlencoded');
@@ -87,29 +87,28 @@ function getMatchingPostalAddressesAction(value, clazz) {
 
 function setDataAction(data, value, clazz) {
 
-    const suggestions = data.hits.hits;
+    console.log("## Setting Postal Address data");
+
+    var suggestions;
 
     if (value === clazz.state.value) {
-        return {
-            type: "SHOW_DATA",
-            isLoading: false,
-            clazz: clazz,
-            suggestions: suggestions
-        };
+        suggestions = data.hits.hits;
     } else {
         // Ignore suggestions if input value changed
-        return {
-            type: "SHOW_DATA",
-            isLoading: false,
-            clazz: clazz,
-            suggestions: []
-        };
+        suggestions = [];
     }
+
+    return {
+        type: "SHOW_DATA",
+        isLoading: false,
+        clazz: clazz,
+        suggestions: suggestions
+    };
 }
 
 function showErrorAction(error) {
 
-    console.log("Error thrown via invoking ElasticSearch service: " + error);
+    console.log("## Error thrown via invoking ElasticSearch service: " + error);
 
     return {
         type: "ERROR",
@@ -121,7 +120,7 @@ function showErrorAction(error) {
 
 function setLoadingPostalAddressAction() {
 
-    console.log("Loading Postal Address ...");
+    console.log("## Loading Postal Address");
 
     return {
         type: "IS_LOADING",
@@ -133,7 +132,7 @@ function setLoadingPostalAddressAction() {
 
 function doneLoadingPostalAddressAction() {
 
-    console.log("Postal Address fetched");
+    console.log("## Postal Address fetched");
 
     return {
         type: "LOADING_DONE",
@@ -147,27 +146,27 @@ function doneLoadingPostalAddressAction() {
 function setLoadingPostalAddressReducer(state, action) {
 
     return {
-        isLoading: state.isLoading,
-        clazz: state.clazz,
-        suggestions: state.suggestions
+        isLoading: action.isLoading,
+        clazz: action.clazz,
+        suggestions: action.suggestions
     };
 }
 
 function doneLoadingPostalAddressReducer(state, action) {
 
     return {
-        isLoading: state.isLoading,
-        clazz: state.clazz,
-        suggestions: state.suggestions
+        isLoading: action.isLoading,
+        clazz: action.clazz,
+        suggestions: action.suggestions
     };
 }
 
 function showErrorReducer(state, action) {
 
     return {
-        isLoading: state.isLoading,
-        clazz: state.clazz,
-        suggestions: state.suggestions
+        isLoading: action.isLoading,
+        clazz: action.clazz,
+        suggestions: action.suggestions
     };
 }
 
@@ -434,9 +433,9 @@ class App extends React.Component {
     }
 
     onSuggestionSelected(event, { suggestionValue }) {
-        // Search selected Postal Address on Google Maps
+        // Get selected Postal Address from input field
         document.getElementById('autocomplete').value = suggestionValue;
-
+        // Pin selected Postal address on Google Maps
         doQuery();
     }
 
