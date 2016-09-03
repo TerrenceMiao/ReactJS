@@ -455,7 +455,11 @@ class App extends React.Component {
             value,
             onChange: this.onChange
         };
-        const status = (isLoading ? '...' : '');
+
+        store.subscribe(function() {
+        });
+
+        const status = (store.getState().isLoading ? 'loading ...' : '');
 
         return (
             <div className="app-container">
