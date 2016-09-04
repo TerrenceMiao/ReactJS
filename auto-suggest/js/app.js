@@ -173,7 +173,6 @@ function showErrorReducer(state, action) {
 function setDataReducer(state, action) {
 
     action.clazz.setState({
-        isLoading: action.isLoading,
         suggestions: action.suggestions
     });
 
@@ -418,8 +417,7 @@ class App extends React.Component {
 
         this.state = {
             value: '',
-            suggestions: [],
-            isLoading: false
+            suggestions: []
         };
 
         this.onChange = this.onChange.bind(this);
@@ -440,16 +438,12 @@ class App extends React.Component {
     }
 
     onSuggestionsUpdateRequested({ value }) {
-        this.setState({
-            isLoading: true
-        });
-
         // Service call
         getMatchingPostalAddressesAction(value, this);
     }
 
     render() {
-        const { value, suggestions, isLoading } = this.state;
+        const { value, suggestions } = this.state;
         const inputProps = {
             placeholder: "Type '111 Bourke St Melbourne VIC 3030' like for suggestions",
             value,
