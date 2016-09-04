@@ -35,7 +35,7 @@ const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
 // Actions
 function getMatchingPostalAddressesAction(value, clazz) {
 
-    console.log("## Getting matching Postal Addresses");
+    console.log("## Getting matching Postal Addresses action");
 
     const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
 
@@ -87,7 +87,7 @@ function getMatchingPostalAddressesAction(value, clazz) {
 
 function setDataAction(data, value, clazz) {
 
-    console.log("## Setting Postal Address data");
+    console.log("## Setting Postal Address data action");
 
     var suggestions;
 
@@ -108,7 +108,7 @@ function setDataAction(data, value, clazz) {
 
 function showErrorAction(error) {
 
-    console.log("## Error thrown via invoking ElasticSearch service: " + error);
+    console.log("## Error thrown via invoking ElasticSearch service action: " + error);
 
     return {
         type: "ERROR",
@@ -120,7 +120,7 @@ function showErrorAction(error) {
 
 function setLoadingPostalAddressAction() {
 
-    console.log("## Loading Postal Address");
+    console.log("## Loading Postal Address action");
 
     return {
         type: "IS_LOADING",
@@ -132,7 +132,7 @@ function setLoadingPostalAddressAction() {
 
 function doneLoadingPostalAddressAction() {
 
-    console.log("## Postal Address fetched");
+    console.log("## Postal Address fetched action");
 
     return {
         type: "LOADING_DONE",
