@@ -425,6 +425,7 @@ class App extends React.Component {
     }
 
     onChange(event, { newValue }) {
+        // ONLY update virtual DOM value, this.state.value won't change for now
         this.setState({
             value: newValue
         });
