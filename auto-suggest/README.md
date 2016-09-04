@@ -1,6 +1,12 @@
 # Auto Suggest example of using React with Browserify
 
-- Run `npm install` in the directory to install React from npm. 
+- Run: 
+
+```sh
+𝜆 npm install
+``` 
+
+in the directory to install React from npm. 
 
 - Replace "[Google API Key]" in index.html with Google API Key - https://console.cloud.google.com/
 
@@ -12,7 +18,11 @@
 
 and produce `bundle.js` artefact. 
 
-- The open index.html file in Chrome browser or start simple HTTP server:
+- The open index.html file in Chrome browser, or
+
+- go to [http://localhost:3000/](http://localhost:3000/), or
+
+- start simple HTTP server without dependency on "npm":
 
 ```sh
 𝜆 python -m SimpleHTTPServer 8000
@@ -47,3 +57,11 @@ to see how fewer keystrokes can let the target postal address on the top of the 
 - 10002
 
 to see what could come up.
+
+### How React Redux work
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Redux%20Async%20Actions.png "Redux in React Delegation Model")
+
+### Reference
+
+- React Ajax Best Practices, [http://andrewhfarmer.com/react-ajax-best-practices/](http://andrewhfarmer.com/react-ajax-best-practices/)
