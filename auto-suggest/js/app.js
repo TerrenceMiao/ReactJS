@@ -33,7 +33,7 @@ const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
 
 
 // Actions
-function getMatchingPostalAddressesAction(value, clazz) {
+function getMatchingPostalAddressesAction(value, app) {
 
     console.log("## Getting matching Postal Addresses action");
 
@@ -78,20 +78,20 @@ function getMatchingPostalAddressesAction(value, clazz) {
         })
         .then(function(data) {
             // console.log("** Result: " + JSON.stringify(data));
-            store.dispatch(setDataAction(data, value, clazz));
+            store.dispatch(setDataAction(data, value, app));
         })
         .catch(function(error) {
             store.dispatch(showErrorAction(error));
         });
 }
 
-function setDataAction(data, value, clazz) {
+function setDataAction(data, value, app) {
 
     console.log("## Setting Postal Address data action");
 
     var suggestions;
 
-    if (value === clazz.state.value) {
+    if (value === app.state.value) {
         suggestions = data.hits.hits;
     } else {
         // Ignore suggestions if input value changed
@@ -101,7 +101,7 @@ function setDataAction(data, value, clazz) {
     return {
         type: "SHOW_DATA",
         isLoading: false,
-        clazz: clazz,
+        app: app,
         suggestions: suggestions
     };
 }
@@ -113,7 +113,7 @@ function showErrorAction(error) {
     return {
         type: "ERROR",
         isLoading: false,
-        clazz: null,
+        app: null,
         suggestions: []
     };
 }
@@ -125,7 +125,7 @@ function setLoadingPostalAddressAction() {
     return {
         type: "IS_LOADING",
         isLoading: true,
-        clazz: null,
+        app: null,
         suggestions: []
     };
 }
@@ -137,7 +137,7 @@ function doneLoadingPostalAddressAction() {
     return {
         type: "LOADING_DONE",
         isLoading: false,
-        clazz: null,
+        app: null,
         suggestions: []
     };
 }
@@ -147,7 +147,7 @@ function setLoadingPostalAddressReducer(state, action) {
 
     return {
         isLoading: action.isLoading,
-        clazz: action.clazz,
+        app: action.app,
         suggestions: action.suggestions
     };
 }
@@ -156,7 +156,7 @@ function doneLoadingPostalAddressReducer(state, action) {
 
     return {
         isLoading: action.isLoading,
-        clazz: action.clazz,
+        app: action.app,
         suggestions: action.suggestions
     };
 }
@@ -165,20 +165,20 @@ function showErrorReducer(state, action) {
 
     return {
         isLoading: action.isLoading,
-        clazz: action.clazz,
+        app: action.app,
         suggestions: action.suggestions
     };
 }
 
 function setDataReducer(state, action) {
 
-    action.clazz.setState({
+    action.app.setState({
         suggestions: action.suggestions
     });
 
     return {
         isLoading: action.isLoading,
-        clazz: action.clazz,
+        app: action.app,
         suggestions: action.suggestions
     };
 }
@@ -187,7 +187,7 @@ function initialState() {
 
     return {
         isLoading: false,
-        clazz: null,
+        app: null,
         suggestions: []
     }
 }
