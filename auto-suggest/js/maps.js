@@ -11,6 +11,7 @@ var hostnameRegexp = new RegExp('^https?://.+?/');
 
 
 function initializeMaps() {
+
     // Melbourne, VIC
     var myLatlng = new google.maps.LatLng(-37.8131869, 144.9629796);
 
@@ -30,6 +31,78 @@ function initializeMaps() {
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         showSelectedPlace();
+    });
+}
+
+function deliveryCentreMaps() {
+
+    // Show Australia Post Delivery Centre
+    google.maps.event.addDomListener(window, 'load', function(){
+        var latLng = new google.maps.LatLng(-37.8131869, 144.9629796)
+        var options = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map_canvas'), options);
+        var icon = 'images/postal-charcoal.png';
+        var image = new google.maps.MarkerImage(icon,
+            new google.maps.Size(38, 33),
+            new google.maps.Point(0,0),
+            new google.maps.Point(14, 33));
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            clickable: false,
+            icon: image});
+    });
+}
+
+function parcelLockerMaps() {
+
+    // Show Australia Post Parcel Locker
+    google.maps.event.addDomListener(window, 'load', function(){
+        var latLng = new google.maps.LatLng(-37.872888, 144.728696)
+        var options = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map_canvas'), options);
+        var icon = 'images/parcel-small.png';
+        var image = new google.maps.MarkerImage(icon,
+            new google.maps.Size(38, 33),
+            new google.maps.Point(0,0),
+            new google.maps.Point(14, 33));
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            clickable: false,
+            icon: image});
+    });
+}
+
+function postOfficeMaps() {
+
+    // Show Australia Post Post Office Profile
+    google.maps.event.addDomListener(window, 'load', function(){
+        var latLng = new google.maps.LatLng(-37.895534, 144.753027)
+        var options = {
+            center: latLng,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map_canvas'), options);
+        var icon = 'images/postal.png';
+        var image = new google.maps.MarkerImage(icon,
+            new google.maps.Size(38, 33),
+            new google.maps.Point(0,0),
+            new google.maps.Point(14, 33));
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            clickable: false,
+            icon: image});
     });
 }
 
