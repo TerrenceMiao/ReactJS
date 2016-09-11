@@ -58,6 +58,10 @@ to see how fewer keystrokes can let the target postal address on the top of the 
 
 to see what could come up.
 
+### Display Postal Services on map
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20on%20Google%20Maps.png "Postal Services on map")
+
 ### How React Redux work
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Redux%20Async%20Actions.png "Redux in React Delegation Model")
