@@ -27,8 +27,8 @@ function initializeMaps() {
     map = new google.maps.Map(document.getElementById("map_canvas"), options);
     places = new google.maps.places.PlacesService(map);
 
-    // Show Australia Post Delivery Centre - Sunbury
-    var deliveryCentreLatLng = new google.maps.LatLng(-37.5784, 144.7338);
+    // Show Australia Post Delivery Centre - Port Melbourne
+    var deliveryCentreLatLng = new google.maps.LatLng(-37.8310, 144.9400);
     var deliveryCentreIcon = 'images/postal-charcoal.png';
     var deliveryCentreImage = new google.maps.MarkerImage(deliveryCentreIcon,
         new google.maps.Size(38, 33),
