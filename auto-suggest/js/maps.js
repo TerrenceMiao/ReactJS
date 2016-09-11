@@ -66,6 +66,45 @@ function initializeMaps() {
         clickable: false,
         icon: postOfficeImage});
 
+    // Show Australia Post Outstation PO Box - St Albans DC
+    var outstationLatLng = new google.maps.LatLng(-37.73535200, 144.79680100);
+    var outstationIcon = 'images/outstationed-pob.png';
+    var outstationImage = new google.maps.MarkerImage(outstationIcon,
+        new google.maps.Size(26, 22),
+        new google.maps.Point(0,0),
+        new google.maps.Point(13, 22));
+    var postOfficeMarker = new google.maps.Marker({
+        position: outstationLatLng,
+        map: map,
+        clickable: false,
+        icon: outstationImage});
+
+    // Show Australia Post Red Post Box - Point Cook RAAF base
+    var redStreetBoxLatLng = new google.maps.LatLng(-37.92216400, 144.74989300);
+    var redStreetBoxIcon = 'images/redbox.png';
+    var redStreetBoxImage = new google.maps.MarkerImage(redStreetBoxIcon,
+        new google.maps.Size(33, 30),
+        new google.maps.Point(0,0),
+        new google.maps.Point(10, 30));
+    var redStreetBoxMarker = new google.maps.Marker({
+        position: redStreetBoxLatLng,
+        map: map,
+        clickable: false,
+        icon: redStreetBoxImage});
+
+    // Show Australia Post Combined Post Box -
+    var combinedStreetBoxLatLng = new google.maps.LatLng(-37.84107900, 144.87068300);
+    var combinedStreetBoxIcon = 'images/goldbox.png';
+    var combinedStreetBoxImage = new google.maps.MarkerImage(combinedStreetBoxIcon,
+        new google.maps.Size(33, 30),
+        new google.maps.Point(0,0),
+        new google.maps.Point(10, 30));
+    var redStreetBoxMarker = new google.maps.Marker({
+        position: combinedStreetBoxLatLng,
+        map: map,
+        clickable: false,
+        icon: combinedStreetBoxImage});
+
     google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
