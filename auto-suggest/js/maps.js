@@ -13,91 +13,64 @@ var hostnameRegexp = new RegExp('^https?://.+?/');
 function initializeMaps() {
 
     // Basic maps, default is "Melbourne, VIC"
-    var myLatlng = new google.maps.LatLng(-37.8131869, 144.9629796);
+    var latLng = new google.maps.LatLng(-37.8131869, 144.9629796);
 
-    var myOptions = {
+    var options = {
         zoom: 12,
-        center: myLatlng,
+        center: latLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         panControl: true,
         streetViewControl: true,
         zoomControl: true
     }
 
-    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    map = new google.maps.Map(document.getElementById("map_canvas"), options);
     places = new google.maps.places.PlacesService(map);
+
+    // Show Australia Post Delivery Centre - Sunbury
+    var deliveryCentreLatLng = new google.maps.LatLng(-37.5784, 144.7338);
+    var deliveryCentreIcon = 'images/postal-charcoal.png';
+    var deliveryCentreImage = new google.maps.MarkerImage(deliveryCentreIcon,
+        new google.maps.Size(38, 33),
+        new google.maps.Point(0,0),
+        new google.maps.Point(14, 33));
+    var deliveryCentreMarker = new google.maps.Marker({
+        position: deliveryCentreLatLng,
+        map: map,
+        clickable: false,
+        icon: deliveryCentreImage});
+
+    // Show Australia Post Parcel Locker - Hoppers Crossing
+    var parcelLockerLatLng = new google.maps.LatLng(-37.872888, 144.728696);
+    var parcelLockerIcon = 'images/parcel-small.png';
+    var parcelLockerImage = new google.maps.MarkerImage(parcelLockerIcon,
+        new google.maps.Size(38, 33),
+        new google.maps.Point(0,0),
+        new google.maps.Point(14, 33));
+    marker = new google.maps.Marker({
+        position: parcelLockerLatLng,
+        map: map,
+        clickable: false,
+        icon: parcelLockerImage});
+
+    // Show Australia Post Post Office Profile - Point Cook road
+    var postOfficeLatLng = new google.maps.LatLng(-37.895534, 144.753027);
+    var postOfficeIcon = 'images/postal.png';
+    var postOfficeImage = new google.maps.MarkerImage(postOfficeIcon,
+        new google.maps.Size(38, 33),
+        new google.maps.Point(0,0),
+        new google.maps.Point(14, 33));
+    var postOfficeMarker = new google.maps.Marker({
+        position: postOfficeLatLng,
+        map: map,
+        clickable: false,
+        icon: postOfficeImage});
 
     google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         showSelectedPlace();
     });
-}
-
-function deliveryCentreMaps() {
-
-    // Show Australia Post Delivery Centre - Melbourne CBD
-    var latLng = new google.maps.LatLng(-37.8131869, 144.9629796);
-    var options = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById('map_canvas'), options);
-    var icon = 'images/postal-charcoal.png';
-    var image = new google.maps.MarkerImage(icon,
-        new google.maps.Size(38, 33),
-        new google.maps.Point(0,0),
-        new google.maps.Point(14, 33));
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        clickable: false,
-        icon: image});
-}
-
-function parcelLockerMaps() {
-
-    // Show Australia Post Parcel Locker - Hoppers Crossing
-    var latLng = new google.maps.LatLng(-37.872888, 144.728696);
-    var options = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById('map_canvas'), options);
-    var icon = 'images/parcel-small.png';
-    var image = new google.maps.MarkerImage(icon,
-        new google.maps.Size(38, 33),
-        new google.maps.Point(0,0),
-        new google.maps.Point(14, 33));
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        clickable: false,
-        icon: image});
-}
-
-function postOfficeMaps() {
-
-    // Show Australia Post Post Office Profile - Point Cook road
-    var latLng = new google.maps.LatLng(-37.895534, 144.753027);
-    var options = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById('map_canvas'), options);
-    var icon = 'images/postal.png';
-    var image = new google.maps.MarkerImage(icon,
-        new google.maps.Size(38, 33),
-        new google.maps.Point(0,0),
-        new google.maps.Point(14, 33));
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        clickable: false,
-        icon: image});
 }
 
 function doQuery() {
