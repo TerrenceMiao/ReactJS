@@ -53,7 +53,7 @@ function initializeMaps() {
         clickable: false,
         icon: parcelLockerImage});
 
-    // Show Australia Post Post Office Profile - Point Cook road
+    // Show Australia Post Post Office - Point Cook road
     var postOfficeLatLng = new google.maps.LatLng(-37.895534, 144.753027);
     var postOfficeIcon = 'images/postal.png';
     var postOfficeImage = new google.maps.MarkerImage(postOfficeIcon,
