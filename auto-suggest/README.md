@@ -60,6 +60,8 @@ to see what could come up.
 
 ### Display Postal Services on map
 
+Postal Services like Post Offices, Delivery Centre, Parcel Lockers / Parcel Collect, Out Stationed PO Boxes, Street Red / Express Post Boxes  
+
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20on%20Google%20Maps.png "Postal Services on map")
 
 ### How React Redux work
