@@ -47,7 +47,7 @@ function initializeMaps() {
         new google.maps.Size(38, 33),
         new google.maps.Point(0,0),
         new google.maps.Point(14, 33));
-    marker = new google.maps.Marker({
+    var parcelLockerMarker = new google.maps.Marker({
         position: parcelLockerLatLng,
         map: map,
         clickable: false,
@@ -73,7 +73,7 @@ function initializeMaps() {
         new google.maps.Size(26, 22),
         new google.maps.Point(0,0),
         new google.maps.Point(13, 22));
-    var postOfficeMarker = new google.maps.Marker({
+    var outstationMarker = new google.maps.Marker({
         position: outstationLatLng,
         map: map,
         clickable: false,
@@ -99,11 +99,19 @@ function initializeMaps() {
         new google.maps.Size(33, 30),
         new google.maps.Point(0,0),
         new google.maps.Point(10, 30));
-    var redStreetBoxMarker = new google.maps.Marker({
+    var combinedStreetBoxMarker = new google.maps.Marker({
         position: combinedStreetBoxLatLng,
         map: map,
         clickable: false,
         icon: combinedStreetBoxImage});
+
+    // clean up markers
+    // deliveryCentreMarker.setMap(null);
+    // parcelLockerMarker.setMap(null);
+    // postOfficeMarker.setMap(null);
+    // outstationMarker.setMap(null);
+    // redStreetBoxMarker.setMap(null);
+    // combinedStreetBoxMarker.setMap(null);
 
     google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
@@ -150,15 +158,17 @@ function tilesLoaded() {
     google.maps.event.clearListeners(map, 'tilesloaded');
 
     // Have to disable "zoom_changed" event due to it flushes searched location
-    //google.maps.event.addListener(map, 'zoom_changed', search);
+    // google.maps.event.addListener(map, 'zoom_changed', search);
     google.maps.event.addListener(map, 'dragend', search);
 
     search();
 }
 
 function showSelectedPlace() {
+
     clearResults();
     clearMarkers();
+
     var place = autocomplete.getPlace();
     map.panTo(place.geometry.location);
     markers[0] = new google.maps.Marker({
