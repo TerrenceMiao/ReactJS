@@ -1,5 +1,3 @@
-
-
 var autocomplete;
 
 var map, places, iw;
@@ -114,9 +112,17 @@ function initializeMaps() {
     // combinedStreetBoxMarker.setMap(null);
 
     google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
+
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         showSelectedPlace();
+    });
+
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+        console.log("Latitude of SouthWest  = " + map.getBounds().getSouthWest().lat());
+        console.log("Longitude of SouthWest = " + map.getBounds().getSouthWest().lng());
+        console.log("Latitude of NorthEast  = " + map.getBounds().getNorthEast().lat());
+        console.log("Longitude of NorthEast = " + map.getBounds().getNorthEast().lng());
     });
 }
 
