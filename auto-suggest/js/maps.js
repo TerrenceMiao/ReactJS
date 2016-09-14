@@ -109,13 +109,6 @@ function initializeMaps() {
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         showSelectedPlace();
     });
-
-    google.maps.event.addListener(map, 'bounds_changed', function() {
-        console.log("Latitude of bottomLeft  = " + map.getBounds().getSouthWest().lat());
-        console.log("Longitude of bottomLeft = " + map.getBounds().getSouthWest().lng());
-        console.log("Latitude of topRight  = " + map.getBounds().getNorthEast().lat());
-        console.log("Longitude of topRight = " + map.getBounds().getNorthEast().lng());
-    });
 }
 
 function doQuery() {
@@ -153,6 +146,7 @@ function addResults(results, status, p) {
 }
 
 function tilesLoaded() {
+
     google.maps.event.clearListeners(map, 'tilesloaded');
 
     // Have to disable "zoom_changed" event due to it flushes searched location
@@ -180,7 +174,9 @@ function showSelectedPlace() {
 }
 
 function search() {
+
     var type;
+
     for (var i = 0; i < document.controls.type.length; i++) {
         if (document.controls.type[i].checked) {
             type = document.controls.type[i].value;
@@ -212,6 +208,11 @@ function search() {
             }
         }
     })
+
+    console.log("Latitude of bottomLeft  = " + map.getBounds().getSouthWest().lat());
+    console.log("Longitude of bottomLeft = " + map.getBounds().getSouthWest().lng());
+    console.log("Latitude of topRight    = " + map.getBounds().getNorthEast().lat());
+    console.log("Longitude of topRight   = " + map.getBounds().getNorthEast().lng());
 }
 
 function clearMarkers() {
