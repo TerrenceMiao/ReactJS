@@ -103,14 +103,6 @@ function initializeMaps() {
         clickable: false,
         icon: combinedStreetBoxImage});
 
-    // clean up markers
-    // deliveryCentreMarker.setMap(null);
-    // parcelLockerMarker.setMap(null);
-    // postOfficeMarker.setMap(null);
-    // outstationMarker.setMap(null);
-    // redStreetBoxMarker.setMap(null);
-    // combinedStreetBoxMarker.setMap(null);
-
     google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
 
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
@@ -119,10 +111,10 @@ function initializeMaps() {
     });
 
     google.maps.event.addListener(map, 'bounds_changed', function() {
-        console.log("Latitude of SouthWest  = " + map.getBounds().getSouthWest().lat());
-        console.log("Longitude of SouthWest = " + map.getBounds().getSouthWest().lng());
-        console.log("Latitude of NorthEast  = " + map.getBounds().getNorthEast().lat());
-        console.log("Longitude of NorthEast = " + map.getBounds().getNorthEast().lng());
+        console.log("Latitude of bottomLeft  = " + map.getBounds().getSouthWest().lat());
+        console.log("Longitude of bottomLeft = " + map.getBounds().getSouthWest().lng());
+        console.log("Latitude of topRight  = " + map.getBounds().getNorthEast().lat());
+        console.log("Longitude of topRight = " + map.getBounds().getNorthEast().lng());
     });
 }
 
