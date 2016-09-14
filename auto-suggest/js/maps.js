@@ -35,7 +35,7 @@ function initializeMaps() {
     var deliveryCentreMarker = new google.maps.Marker({
         position: deliveryCentreLatLng,
         map: map,
-        clickable: false,
+        clickable: true,
         icon: deliveryCentreImage});
 
     // Show Australia Post Parcel Locker - Hoppers Crossing
@@ -48,7 +48,7 @@ function initializeMaps() {
     var parcelLockerMarker = new google.maps.Marker({
         position: parcelLockerLatLng,
         map: map,
-        clickable: false,
+        clickable: true,
         icon: parcelLockerImage});
 
     // Show Australia Post Post Office - Point Cook road
@@ -61,7 +61,7 @@ function initializeMaps() {
     var postOfficeMarker = new google.maps.Marker({
         position: postOfficeLatLng,
         map: map,
-        clickable: false,
+        clickable: true,
         icon: postOfficeImage});
 
     // Show Australia Post Outstation PO Box - St Albans DC
@@ -74,7 +74,7 @@ function initializeMaps() {
     var outstationMarker = new google.maps.Marker({
         position: outstationLatLng,
         map: map,
-        clickable: false,
+        clickable: true,
         icon: outstationImage});
 
     // Show Australia Post Red Post Box - Point Cook RAAF base
@@ -87,7 +87,7 @@ function initializeMaps() {
     var redStreetBoxMarker = new google.maps.Marker({
         position: redStreetBoxLatLng,
         map: map,
-        clickable: false,
+        clickable: true,
         icon: redStreetBoxImage});
 
     // Show Australia Post Combined Post Box -
@@ -100,7 +100,7 @@ function initializeMaps() {
     var combinedStreetBoxMarker = new google.maps.Marker({
         position: combinedStreetBoxLatLng,
         map: map,
-        clickable: false,
+        clickable: true,
         icon: combinedStreetBoxImage});
 
     google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
