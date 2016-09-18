@@ -64,6 +64,8 @@ Postal Services like Post Offices, Delivery Centre, Parcel Lockers / Parcel Coll
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20on%20Google%20Maps.png "Postal Services on map")
 
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20on%20Google%20Maps%20after%20search.png "Postal Services on map after search")
+
 ### How React Redux work
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Redux%20Async%20Actions.png "Redux in React Delegation Model")
