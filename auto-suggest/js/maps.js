@@ -4,10 +4,18 @@ var map, places, iw;
 var markers = [];
 var resultsBounds = null;
 var resultsCount = 0;
-var resultsMax = 5;
+var resultsMax = 3;
 var pagination = null;
 var hostnameRegexp = new RegExp('^https?://.+?/');
 
+var services = ["DC", "UPL", "PO", "OS", "R_SPB", "C_SPB"];
+
+var deliveryCentreMarkers = [];
+var parcelLockerMarkers = [];
+var postOfficeMarkers = []
+var outstationMarkers = [];
+var redStreetBoxMarkers = [];
+var combinedStreetBoxMarkers = [];
 
 function initializeMaps() {
 
@@ -25,84 +33,6 @@ function initializeMaps() {
 
     map = new google.maps.Map(document.getElementById("map_canvas"), options);
     places = new google.maps.places.PlacesService(map);
-
-    // Show Australia Post Delivery Centre - Port Melbourne
-    var deliveryCentreLatLng = new google.maps.LatLng(-37.8310, 144.9400);
-    var deliveryCentreIcon = 'images/postal-charcoal.png';
-    var deliveryCentreImage = new google.maps.MarkerImage(deliveryCentreIcon,
-        new google.maps.Size(38, 33),
-        new google.maps.Point(0,0),
-        new google.maps.Point(14, 33));
-    var deliveryCentreMarker = new google.maps.Marker({
-        position: deliveryCentreLatLng,
-        map: map,
-        clickable: true,
-        icon: deliveryCentreImage});
-
-    // Show Australia Post Parcel Locker - Hoppers Crossing
-    var parcelLockerLatLng = new google.maps.LatLng(-37.872888, 144.728696);
-    var parcelLockerIcon = 'images/parcel-small.png';
-    var parcelLockerImage = new google.maps.MarkerImage(parcelLockerIcon,
-        new google.maps.Size(38, 33),
-        new google.maps.Point(0,0),
-        new google.maps.Point(14, 33));
-    var parcelLockerMarker = new google.maps.Marker({
-        position: parcelLockerLatLng,
-        map: map,
-        clickable: true,
-        icon: parcelLockerImage});
-
-    // Show Australia Post Post Office - Point Cook road
-    var postOfficeLatLng = new google.maps.LatLng(-37.895534, 144.753027);
-    var postOfficeIcon = 'images/postal.png';
-    var postOfficeImage = new google.maps.MarkerImage(postOfficeIcon,
-        new google.maps.Size(38, 33),
-        new google.maps.Point(0,0),
-        new google.maps.Point(14, 33));
-    var postOfficeMarker = new google.maps.Marker({
-        position: postOfficeLatLng,
-        map: map,
-        clickable: true,
-        icon: postOfficeImage});
-
-    // Show Australia Post Outstation PO Box - St Albans DC
-    var outstationLatLng = new google.maps.LatLng(-37.73535200, 144.79680100);
-    var outstationIcon = 'images/outstationed-pob.png';
-    var outstationImage = new google.maps.MarkerImage(outstationIcon,
-        new google.maps.Size(26, 22),
-        new google.maps.Point(0,0),
-        new google.maps.Point(13, 22));
-    var outstationMarker = new google.maps.Marker({
-        position: outstationLatLng,
-        map: map,
-        clickable: true,
-        icon: outstationImage});
-
-    // Show Australia Post Red Post Box - Point Cook RAAF base
-    var redStreetBoxLatLng = new google.maps.LatLng(-37.92216400, 144.74989300);
-    var redStreetBoxIcon = 'images/redbox.png';
-    var redStreetBoxImage = new google.maps.MarkerImage(redStreetBoxIcon,
-        new google.maps.Size(33, 30),
-        new google.maps.Point(0,0),
-        new google.maps.Point(10, 30));
-    var redStreetBoxMarker = new google.maps.Marker({
-        position: redStreetBoxLatLng,
-        map: map,
-        clickable: true,
-        icon: redStreetBoxImage});
-
-    // Show Australia Post Combined Post Box -
-    var combinedStreetBoxLatLng = new google.maps.LatLng(-37.84107900, 144.87068300);
-    var combinedStreetBoxIcon = 'images/goldbox.png';
-    var combinedStreetBoxImage = new google.maps.MarkerImage(combinedStreetBoxIcon,
-        new google.maps.Size(33, 30),
-        new google.maps.Point(0,0),
-        new google.maps.Point(10, 30));
-    var combinedStreetBoxMarker = new google.maps.Marker({
-        position: combinedStreetBoxLatLng,
-        map: map,
-        clickable: true,
-        icon: combinedStreetBoxImage});
 
     google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
 
@@ -221,12 +151,171 @@ function search() {
                 addResult(results[i], i);
             }
         }
-    })
+    });
 
-    console.log("Latitude of bottomLeft  = " + map.getBounds().getSouthWest().lat());
-    console.log("Longitude of bottomLeft = " + map.getBounds().getSouthWest().lng());
-    console.log("Latitude of topRight    = " + map.getBounds().getNorthEast().lat());
-    console.log("Longitude of topRight   = " + map.getBounds().getNorthEast().lng());
+    services.forEach(function (service) {
+        var query = {
+            "query": {
+                "filtered": {
+                    "query": {
+                        "query_string": {
+                            "fields": ["type"],
+                            "query": service
+                        }
+                    },
+                    "filter": {
+                        "geo_bounding_box": {
+                            "geo_location": {
+                                "top_right": {
+                                    "lat": map.getBounds().getNorthEast().lat(),
+                                    "lon": map.getBounds().getNorthEast().lng()
+                                },
+                                "bottom_left": {
+                                    "lat": map.getBounds().getSouthWest().lat(),
+                                    "lon": map.getBounds().getSouthWest().lng()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        switch (service) {
+            case "DC":
+                queryAndShowServices(query, service, deliveryCentreMarkers);
+                break;
+            case "UPL":
+                queryAndShowServices(query, service, parcelLockerMarkers, 0, 10);
+                break;
+            case "PO":
+                queryAndShowServices(query, service, postOfficeMarkers);
+                break;
+            case "OS":
+                queryAndShowServices(query, service, outstationMarkers, 0, 5);
+                break;
+            case "R_SPB":
+                queryAndShowServices(query, service, redStreetBoxMarkers);
+                break;
+            case "C_SPB":
+                queryAndShowServices(query, service, combinedStreetBoxMarkers);
+                break;
+            default:
+                console.log("Out of available service: " + service);
+        }
+    });
+}
+
+function queryAndShowServices(query, service, serviceMarkers, from, size) {
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'x-www-form-urlencoded');
+    headers.append('Accept', 'application/json, text/plain, */*');
+
+    var init = {
+        method: 'POST',
+        headers: headers,
+        mode: 'cors',
+        body: JSON.stringify(query),
+        redirect: 'follow',
+        cache: 'default'
+    };
+
+    var url = 'http://localhost:9200/location/_search';
+
+    if (!isNaN(from) && !isNaN(size)) {
+        url += '?from=' + from + '&size=' + size;
+    }
+
+    var request = new Request(url, init);
+
+    fetch(request)
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            }
+
+            throw "ElasticSearch request failed";
+        })
+        .then(function(data) {
+            showMarkers(data, service, serviceMarkers);
+        })
+        .catch(function(error) {
+            console.log("Error thrown: " + error);
+        });
+}
+
+function showMarkers(data, service, serviceMarkers) {
+
+    for (var i = 0; i < serviceMarkers.length; i++) {
+        if (serviceMarkers[i]) {
+            serviceMarkers[i].setMap(null);
+            serviceMarkers[i] == null;
+        }
+    }
+
+    var serviceIcon;
+    var serviceImage;
+
+    switch (service) {
+        case "DC":
+            serviceIcon = 'images/postal-charcoal.png';
+            serviceImage = new google.maps.MarkerImage(serviceIcon,
+                new google.maps.Size(38, 33),
+                new google.maps.Point(0, 0),
+                new google.maps.Point(14, 33));
+            break;
+        case "UPL":
+            serviceIcon = 'images/parcel-small.png';
+            serviceImage = new google.maps.MarkerImage(serviceIcon,
+                new google.maps.Size(38, 33),
+                new google.maps.Point(0,0),
+                new google.maps.Point(14, 33));
+            break;
+        case "PO":
+            serviceIcon = 'images/postal.png';
+            serviceImage = new google.maps.MarkerImage(serviceIcon,
+                new google.maps.Size(38, 33),
+                new google.maps.Point(0,0),
+                new google.maps.Point(14, 33));
+            break;
+        case "OS":
+            serviceIcon = 'images/outstationed-pob.png';
+            serviceImage = new google.maps.MarkerImage(serviceIcon,
+                new google.maps.Size(26, 22),
+                new google.maps.Point(0,0),
+                new google.maps.Point(13, 22));
+            break;
+        case "R_SPB":
+            serviceIcon = 'images/redbox.png';
+            serviceImage = new google.maps.MarkerImage(serviceIcon,
+                new google.maps.Size(33, 30),
+                new google.maps.Point(0,0),
+                new google.maps.Point(10, 30));
+            break;
+        case "C_SPB":
+            serviceIcon = 'images/goldbox.png';
+            serviceImage = new google.maps.MarkerImage(serviceIcon,
+                new google.maps.Size(33, 30),
+                new google.maps.Point(0,0),
+                new google.maps.Point(10, 30));
+            break;
+        default:
+            console.log("Out of available service: " + service);
+    }
+
+    if (data.hits.total > 0) {
+        for (var i = 0; i < data.hits.hits.length; i++) {
+            var geo_location = data.hits.hits[i]._source.geo_location;
+            var serviceLatLng = new google.maps.LatLng(geo_location.lat, geo_location.lon);
+            serviceMarkers[i] = new google.maps.Marker({
+                position: serviceLatLng,
+                map: map,
+                clickable: true,
+                icon: serviceImage
+            });
+        }
+    }
 }
 
 function clearMarkers() {
