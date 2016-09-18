@@ -82,6 +82,8 @@ function addResults(results, status, p) {
             map.fitBounds(resultsBounds);
         }
     }
+
+    showServiceMarkers();
 }
 
 function tilesLoaded() {
@@ -152,6 +154,11 @@ function search() {
             }
         }
     });
+
+   showServiceMarkers();
+}
+
+function showServiceMarkers() {
 
     services.forEach(function (service) {
         var query = {
