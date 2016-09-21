@@ -17,6 +17,9 @@ var outstationMarkers = [];
 var redStreetBoxMarkers = [];
 var combinedStreetBoxMarkers = [];
 
+var lastInfoBubble = null;
+
+
 function initializeMaps() {
 
     // Basic maps, default is "Melbourne, VIC"
@@ -320,6 +323,38 @@ function showMarkers(data, service, serviceMarkers) {
                 map: map,
                 clickable: true,
                 icon: serviceImage
+            });
+
+            google.maps.event.addListener(serviceMarkers[i], 'click', function() {
+                if (lastInfoBubble != null &&  lastInfoBubble.isOpen()) {
+                    lastInfoBubble.close();
+                }
+
+                var infoBubble = new InfoBubble({
+                    map: map,
+                    content: 'Welcome Stranger',
+                    position: new google.maps.LatLng(geo_location.lat, geo_location.lon),
+                    shadowStyle: 1,
+                    padding: 0,
+                    // backgroundColor: 'rgb(57,57,57,0.9)',
+                    // backgroundColor: 'rgb(57,57,57)',
+                    backgroundColor: 'rgb(200,200,200)',
+                    borderRadius: 4,
+                    arrowSize: 10,
+                    borderWidth: 1,
+                    borderColor: '#2c2c2c',
+                    disableAutoPan: true,
+                    hideCloseButton: true,
+                    minWidth: 210,
+                    minHeight: 55,
+                    arrowPosition: 30,
+                    // backgroundClassName: 'phoney',
+                    arrowStyle: 2
+                });
+
+                infoBubble.open(map, serviceMarkers[i]);
+
+                lastInfoBubble = infoBubble;
             });
         }
     }
