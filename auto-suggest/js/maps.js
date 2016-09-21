@@ -316,8 +316,25 @@ function showMarkers(data, service, serviceMarkers) {
 
     if (data.hits.total > 0) {
         for (var i = 0; i < data.hits.hits.length; i++) {
+            var address = data.hits.hits[i]._source.address;
+            var phone_number = data.hits.hits[i]._source.phone_number;
             var geo_location = data.hits.hits[i]._source.geo_location;
+
+            var content = '<div class="phoneytext">' + address.address_line_1;
+
+            if (typeof address.address_line_2 !== "undefined") {
+                content += ', ' + address.address_line_2;
+            }
+
+            content += '</br>';
+            content += address.suburb + '</br>';
+            
+            if (typeof phone_number !== "undefined") {
+                content += phone_number + '</div>';
+            }
+
             var serviceLatLng = new google.maps.LatLng(geo_location.lat, geo_location.lon);
+
             serviceMarkers[i] = new google.maps.Marker({
                 position: serviceLatLng,
                 map: map,
@@ -332,8 +349,8 @@ function showMarkers(data, service, serviceMarkers) {
 
                 var infoBubble = new InfoBubble({
                     map: map,
-                    content: '<div class="phoneytext">Welcome Stranger</br>It is nice to see you</br>Nice to see you!</div>',
-                    position: new google.maps.LatLng(geo_location.lat, geo_location.lon),
+                    content: content,
+                    position: serviceLatLng,
                     shadowStyle: 1,
                     padding: 1,
                     backgroundColor: 'rgba(57,57,57,0.9)',
@@ -350,9 +367,13 @@ function showMarkers(data, service, serviceMarkers) {
                     arrowStyle: 2
                 });
 
+                map.setCenter(serviceLatLng);
+
                 infoBubble.open(map, serviceMarkers[i]);
 
                 lastInfoBubble = infoBubble;
+
+                showServiceMarkers();
             });
         }
     }
