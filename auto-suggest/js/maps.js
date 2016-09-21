@@ -332,23 +332,21 @@ function showMarkers(data, service, serviceMarkers) {
 
                 var infoBubble = new InfoBubble({
                     map: map,
-                    content: 'Welcome Stranger',
+                    content: '<div class="phoneytext">Welcome Stranger</br>It is nice to see you</br>Nice to see you!</div>',
                     position: new google.maps.LatLng(geo_location.lat, geo_location.lon),
                     shadowStyle: 1,
-                    padding: 0,
-                    // backgroundColor: 'rgb(57,57,57,0.9)',
-                    // backgroundColor: 'rgb(57,57,57)',
-                    backgroundColor: 'rgb(200,200,200)',
+                    padding: 1,
+                    backgroundColor: 'rgba(57,57,57,0.9)',
                     borderRadius: 4,
                     arrowSize: 10,
                     borderWidth: 1,
                     borderColor: '#2c2c2c',
                     disableAutoPan: true,
-                    hideCloseButton: true,
+                    hideCloseButton: false,
                     minWidth: 210,
-                    minHeight: 55,
+                    maxHeight: 55,
                     arrowPosition: 30,
-                    // backgroundClassName: 'phoney',
+                    backgroundClassName: 'phoney',
                     arrowStyle: 2
                 });
 
