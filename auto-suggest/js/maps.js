@@ -320,15 +320,15 @@ function showMarkers(data, service, serviceMarkers) {
             var phone_number = data.hits.hits[i]._source.phone_number;
             var geo_location = data.hits.hits[i]._source.geo_location;
 
-            var content = '<div class="phoneytext">' + address.address_line_1;
+            // content to display in Info Bubble in Google Maps
+            var content = '<div class="phoneytext">' + address.address_line_1 + '</br>';
 
             if (typeof address.address_line_2 !== "undefined") {
-                content += ', ' + address.address_line_2;
+                content += address.address_line_2 + '</br>';
             }
 
-            content += '</br>';
             content += address.suburb + '</br>';
-            
+
             if (typeof phone_number !== "undefined") {
                 content += phone_number + '</div>';
             }
@@ -339,18 +339,21 @@ function showMarkers(data, service, serviceMarkers) {
                 position: serviceLatLng,
                 map: map,
                 clickable: true,
+                content: content,
                 icon: serviceImage
             });
 
-            google.maps.event.addListener(serviceMarkers[i], 'click', function() {
-                if (lastInfoBubble != null &&  lastInfoBubble.isOpen()) {
+            var marker = serviceMarkers[i];
+
+            google.maps.event.addListener(marker, 'click', function() {
+                if (lastInfoBubble != null && lastInfoBubble.isOpen()) {
                     lastInfoBubble.close();
                 }
 
                 var infoBubble = new InfoBubble({
                     map: map,
-                    content: content,
-                    position: serviceLatLng,
+                    content: this.content,
+                    position: this.position,
                     shadowStyle: 1,
                     padding: 1,
                     backgroundColor: 'rgba(57,57,57,0.9)',
@@ -361,19 +364,17 @@ function showMarkers(data, service, serviceMarkers) {
                     disableAutoPan: true,
                     hideCloseButton: false,
                     minWidth: 210,
-                    maxHeight: 55,
+                    maxHeight: 75,
                     arrowPosition: 30,
                     backgroundClassName: 'phoney',
                     arrowStyle: 2
                 });
 
-                map.setCenter(serviceLatLng);
+                map.setCenter(this.position);
 
-                infoBubble.open(map, serviceMarkers[i]);
+                infoBubble.open(map, this);
 
                 lastInfoBubble = infoBubble;
-
-                showServiceMarkers();
             });
         }
     }
