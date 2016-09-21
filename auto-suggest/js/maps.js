@@ -364,7 +364,7 @@ function showMarkers(data, service, serviceMarkers) {
                     disableAutoPan: true,
                     hideCloseButton: false,
                     minWidth: 210,
-                    maxHeight: 75,
+                    maxHeight: 55,
                     arrowPosition: 30,
                     backgroundClassName: 'phoney',
                     arrowStyle: 2
