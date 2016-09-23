@@ -324,7 +324,7 @@ function showMarkers(data, service, serviceMarkers) {
             var content = '<div class="phoneytext">' + address.address_line_1 + '</br>';
 
             if (typeof address.address_line_2 !== "undefined") {
-                content += address.address_line_2 + '</br>';
+                content += address.address_line_2 + ', ';
             }
 
             content += address.suburb + '</br>';
@@ -363,7 +363,7 @@ function showMarkers(data, service, serviceMarkers) {
                     borderColor: '#2c2c2c',
                     disableAutoPan: true,
                     hideCloseButton: false,
-                    minWidth: 210,
+                    minWidth: 270,
                     maxHeight: 55,
                     arrowPosition: 30,
                     backgroundClassName: 'phoney',
