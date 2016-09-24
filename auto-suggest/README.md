@@ -68,6 +68,32 @@ Postal Services show up in Google Maps after address search
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20on%20Google%20Maps%20after%20search.png "Postal Services on map after search")
 
+### Available Postal Services on Google Maps with detailed information
+
+- Delivery Centre
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20-%20Delivery%20Centre.png "Delivery Centre")
+
+- Outstationed Box
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20-%20Outstationed%20Box.png "Outstationed Box")
+
+- Parcel Locker
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20-%20Parcel%20Locker.png "Parcel Locker")
+
+- Post Office
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20-%20Post%20Office.png "Post Office")
+
+- Street Box Express
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20-%20Street%20Box%20Express.png "Street Box Express")
+
+- Street Box Red
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20-%20Street%20Box%20Red.png "Street Box Red")
+ 
 ### How React Redux work
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Redux%20Async%20Actions.png "Redux in React Delegation Model")
