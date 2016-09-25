@@ -375,6 +375,8 @@ function showMarkers(data, service, serviceMarkers) {
                 infoBubble.open(map, this);
 
                 lastInfoBubble = infoBubble;
+
+                showServiceMarkers();
             });
         }
     }
