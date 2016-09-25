@@ -199,16 +199,16 @@ function showServiceMarkers() {
                 queryAndShowServices(query, service, parcelLockerMarkers, 0, 10);
                 break;
             case "PO":
-                queryAndShowServices(query, service, postOfficeMarkers);
+                queryAndShowServices(query, service, postOfficeMarkers, 0, 15);
                 break;
             case "OS":
                 queryAndShowServices(query, service, outstationMarkers, 0, 5);
                 break;
             case "R_SPB":
-                queryAndShowServices(query, service, redStreetBoxMarkers);
+                queryAndShowServices(query, service, redStreetBoxMarkers, 0, 25);
                 break;
             case "C_SPB":
-                queryAndShowServices(query, service, combinedStreetBoxMarkers);
+                queryAndShowServices(query, service, combinedStreetBoxMarkers, 0, 20);
                 break;
             default:
                 console.log("Out of available service: " + service);
