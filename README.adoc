@@ -1,2 +1,18 @@
 All the goodies play in ReactJS
 ===============================
+
+How React Redux work
+--------------------
+
+image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Redux%20Async%20Actions.png [Redux in React Delegation Model]
+
+
+Reference
+---------
+
+- React Ajax Best Practices, _http://andrewhfarmer.com/react-ajax-best-practices/_
+
+
+Copying
+-------
+Copyright © 2016 - Terrence Miao. Free use of this software is granted under the terms of the GNU General Public License version 3 (GPLv3).

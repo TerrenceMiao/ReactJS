@@ -94,10 +94,4 @@ Postal Services show up in Google Maps after address search
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20-%20Street%20Box%20Red.png "Street Box Red")
  
-### How React Redux work
-
-![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Redux%20Async%20Actions.png "Redux in React Delegation Model")
-
 ### Reference
-
-- React Ajax Best Practices, [http://andrewhfarmer.com/react-ajax-best-practices/](http://andrewhfarmer.com/react-ajax-best-practices/)
