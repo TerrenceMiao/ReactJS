@@ -4,7 +4,7 @@ All the goodies play in ReactJS
 How React Redux work
 --------------------
 
-image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Redux%20Async%20Actions.png [Redux in React Delegation Model]
+image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Redux%20Async%20Actions.png[Redux in React Delegation Model]
 
 
 Reference
