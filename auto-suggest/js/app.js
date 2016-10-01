@@ -399,13 +399,18 @@ function getSuggestionValue(suggestion) {
         + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode;
 }
 
-function renderSuggestion(suggestion) {
+function renderSuggestion(suggestion, { query }) {
 
     var postalAddress = suggestion._source;
 
     return (
         <span>
-            {postalAddress.house_nbr_1 + " " + postalAddress.street_name + " " + postalAddress.street_type + ", " + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode}
+            {postalAddress.house_nbr_1 + " "}
+            {postalAddress.street_name + " "}
+            {postalAddress.street_type + ", "}
+            {postalAddress.locality_name + " "}
+            {postalAddress.state + " "}
+            {postalAddress.postcode}
         </span>
     );
 }
