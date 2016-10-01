@@ -121,3 +121,8 @@ ul {
 .react-autosuggest__suggestion--focused {
     background-color: #ddd;
 }
+
+/* Highlight of suggestions */
+.true {
+    font-weight: bold;
+}

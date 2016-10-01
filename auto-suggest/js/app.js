@@ -7,6 +7,8 @@ var Autosuggest = require('react-autosuggest');
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
+import highlight from 'autosuggest-highlight';
+
 const store = createStore(
     rootReducer,
     applyMiddleware(thunkMiddleware)
@@ -399,18 +401,25 @@ function getSuggestionValue(suggestion) {
         + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode;
 }
 
-function renderSuggestion(suggestion, { query }) {
+function renderSuggestion(suggestion, query) {
 
     var postalAddress = suggestion._source;
 
+    const suggestionText = postalAddress.house_nbr_1 + " " + postalAddress.street_name + " " + postalAddress.street_type + ", " + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode;
+    const matches = highlight.match(suggestionText, query.value);
+    const parts = highlight.parse(suggestionText, matches);
+
     return (
         <span>
-            {postalAddress.house_nbr_1 + " "}
-            {postalAddress.street_name + " "}
-            {postalAddress.street_type + ", "}
-            {postalAddress.locality_name + " "}
-            {postalAddress.state + " "}
-            {postalAddress.postcode}
+            {
+                parts.map((part, index) => {
+                    const className = part.highlight;
+
+                    return (
+                        <span className={className} key={index}>{part.text}</span>
+                    );
+                })
+            }
         </span>
     );
 }
