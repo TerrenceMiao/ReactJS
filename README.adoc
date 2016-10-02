@@ -11,7 +11,7 @@ Reference
 ---------
 
 - React Ajax Best Practices, _http://andrewhfarmer.com/react-ajax-best-practices/_
-
+- Getting Started With React Redux: An Intro, _https://www.codementor.io/reactjs/tutorial/intro-to-react-redux-pros_
 
 Copying
 -------
