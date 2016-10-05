@@ -79,6 +79,8 @@ function addResults(results, status, p) {
         resultsCount += results.length;
 
         if (resultsCount == 1) {
+            console.log("@@ Centre lat: " + results[0].geometry.location.lat());
+            console.log("@@ Centre lng: " + results[0].geometry.location.lng());
             map.setCenter(results[0].geometry.location);
             map.setZoom(17);
         } else {
