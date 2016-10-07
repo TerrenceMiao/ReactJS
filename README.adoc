@@ -12,6 +12,10 @@ Reference
 
 - React Ajax Best Practices, _http://andrewhfarmer.com/react-ajax-best-practices/_
 - Getting Started With React Redux: An Intro, _https://www.codementor.io/reactjs/tutorial/intro-to-react-redux-pros_
+- React Developer Tools, _https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi_
+- JetBrains IDE Support, _https://chrome.google.com/webstore/detail/jetbrains-ide-support/hmhgeddbohgjknpmjagkdomcpobmllji_
+- WebStorm Using JetBrains Chrome Extension, _https://www.jetbrains.com/help/webstorm/2016.2/using-jetbrains-chrome-extension.html_
+
 
 Copying
 -------
