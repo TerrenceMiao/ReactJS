@@ -8,6 +8,7 @@ image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/Redux%20Asy
 
 Reference
 ---------
+- MVC is dead – what comes next? _http://blog.netopyr.com/2016/10/11/mvc-dead-comes-next/_
 - React Ajax Best Practices, _http://andrewhfarmer.com/react-ajax-best-practices/_
 - Getting Started With React Redux: An Intro, _https://www.codementor.io/reactjs/tutorial/intro-to-react-redux-pros_
 - React Developer Tools, _https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi_
