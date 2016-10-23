@@ -4,7 +4,7 @@ All the goodies play in ReactJS
 How React Redux work
 --------------------
 
-image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/Functional%20Reactive%20Programming.png[Functional Reactive Programming]
+image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/Functional%20Reactive%20Programming.jpg[Functional Reactive Programming]
 
 How to make Ajax call in React
 ------------------------------
