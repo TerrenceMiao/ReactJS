@@ -1,2 +1,6 @@
 GraphQL in React realm
 ======================
+
+References
+----------
+- Full-stack React + GraphQL Tutorial, _https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b_
