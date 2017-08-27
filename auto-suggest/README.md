@@ -97,3 +97,5 @@ Postal Services show up in Google Maps after address search
 ### Reference
 
 - Google Maps GPS Coordinates, [http://www.gps-coordinates.net/](http://www.gps-coordinates.net/)
+- Reactive Maps, A real time components library for building reactive UIs, [https://opensource.appbase.io/reactivemaps/](https://opensource.appbase.io/reactivemaps/)
+- React Native Mapview component for iOS + Android, [https://github.com/airbnb/react-native-maps](https://github.com/airbnb/react-native-maps)
