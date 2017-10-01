@@ -58,6 +58,11 @@
         "webpack-dev-middleware": "^1.2.0",
         "webpack-hot-middleware": "^2.9.1"
     },
+    "keywords": [
+        "Postal Address",
+        "auto-suggest",
+        "React applciation"
+    ],
     "author": "Terrence Miao",
     "homepage": "http://terrencemiao.github.io/",
     "license": "GPLv3"
