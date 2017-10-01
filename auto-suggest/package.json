@@ -58,6 +58,8 @@
         "webpack-dev-middleware": "^1.2.0",
         "webpack-hot-middleware": "^2.9.1"
     },
+    "files": [
+    ],
     "keywords": [
         "Postal Address",
         "auto-suggest",
