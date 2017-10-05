@@ -7,15 +7,16 @@ var Autosuggest = require('react-autosuggest');
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import highlight from 'autosuggest-highlight';
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
 
 const store = createStore(
     rootReducer,
     applyMiddleware(thunkMiddleware)
 )
 
-var streetTypes = require('../data/streetTypes.json');
-var localities = require('../data/localities.json');
+const streetTypes = require('../data/streetTypes.json');
+const localities = require('../data/localities.json');
 
 const states = [
     { name: 'VIC'},
@@ -406,8 +407,8 @@ function renderSuggestion(suggestion, query) {
     var postalAddress = suggestion._source;
 
     const suggestionText = postalAddress.house_nbr_1 + " " + postalAddress.street_name + " " + postalAddress.street_type + ", " + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode;
-    const matches = highlight.match(suggestionText, query.value);
-    const parts = highlight.parse(suggestionText, matches);
+    const matches = match(suggestionText, query.value);
+    const parts = parse(suggestionText, matches);
 
     return (
         <span>

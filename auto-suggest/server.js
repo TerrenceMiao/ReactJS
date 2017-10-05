@@ -1,27 +1,26 @@
 var webpack = require('webpack')
+var WebpackDevServer = require('webpack-dev-server');
 var webpackDevMiddleware = require('webpack-dev-middleware')
 var webpackHotMiddleware = require('webpack-hot-middleware')
-var config = require('./webpack.config')
 
-var express = require('express')
+var openUrl = require('openurl');
 
-var app = express()
-var port = 3000
+var config = require('./webpack.dev.config')
 
-app.use(express.static(__dirname + '/'))
+var host = process.env.NODE_HOST || 'localhost';
+var port = process.env.NODE_PORT || 3000;
 
-var compiler = webpack(config)
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
-app.use(webpackHotMiddleware(compiler))
-
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html')
-})
-
-app.listen(port, function(error) {
+new WebpackDevServer(webpack(config), {
+    publicPath: config.output.publicPath
+}).listen(port, host, function(error) {
     if (error) {
-        console.error(error)
-    } else {
-        console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s in your browser.", port, port)
+        console.error(error); // eslint-disable-line no-console
+        process.exit(1);
     }
-})
+
+    var url = `http://${host}:${port}/index.html`;
+
+    console.log('==> 🌎  Listening on port %s. Open up %s in your browser.', port, url);
+
+    openUrl.open(url);
+});
