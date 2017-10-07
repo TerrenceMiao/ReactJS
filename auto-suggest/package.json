@@ -90,30 +90,30 @@
     "files": [
     ],
     "lint-staged": {
-      ".*.js": [
-        "npm run prettier",
-        "git add"
-      ],
-      "*.js": [
-        "npm run prettier",
-        "git add"
-      ],
-      "demo/src/**/*.js": [
-        "npm run prettier",
-        "git add"
-      ],
-      "demo/standalone/app.js": [
-        "npm run prettier",
-        "git add"
-      ],
-      "src/**/*.js": [
-        "npm run prettier",
-        "git add"
-      ],
-      "test/**/*.js": [
-        "npm run prettier",
-        "git add"
-      ]
+        ".*.js": [
+            "npm run prettier",
+            "git add"
+        ],
+        "*.js": [
+            "npm run prettier",
+            "git add"
+        ],
+        "demo/src/**/*.js": [
+            "npm run prettier",
+            "git add"
+        ],
+        "demo/standalone/app.js": [
+            "npm run prettier",
+            "git add"
+        ],
+        "src/**/*.js": [
+            "npm run prettier",
+            "git add"
+        ],
+        "test/**/*.js": [
+            "npm run prettier",
+            "git add"
+        ]
     },
     "keywords": [
         "Postal Address",
@@ -121,25 +121,25 @@
         "React applciation"
     ],
     "nyc": {
-      "statements": 95,
-      "branches": 91,
-      "functions": 100,
-      "lines": 95,
-      "include": [
-        "src/*.js"
-      ],
-      "exclude": [
-        "test/**/*.js"
-      ],
-      "reporter": [
-        "lcov",
-        "text-summary"
-      ],
-      "require": [
-        "babel-register",
-        "./test/setup.js"
-      ],
-      "check-coverage": true
+        "statements": 95,
+        "branches": 91,
+        "functions": 100,
+        "lines": 95,
+        "include": [
+            "src/*.js"
+        ],
+        "exclude": [
+            "test/**/*.js"
+        ],
+        "reporter": [
+            "lcov",
+            "text-summary"
+        ],
+        "require": [
+            "babel-register",
+            "./test/setup.js"
+        ],
+        "check-coverage": true
     },
     "author": "Terrence Miao",
     "homepage": "http://terrencemiao.github.io/",
