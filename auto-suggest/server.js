@@ -1,7 +1,5 @@
 var webpack = require('webpack')
 var WebpackDevServer = require('webpack-dev-server');
-var webpackDevMiddleware = require('webpack-dev-middleware')
-var webpackHotMiddleware = require('webpack-hot-middleware')
 
 var openUrl = require('openurl');
 
@@ -20,7 +18,7 @@ new WebpackDevServer(webpack(config), {
 
     var url = `http://${host}:${port}/index.html`;
 
-    console.log('==> 🌎  Listening on port %s. Open up %s in your browser.', port, url);
+    console.log('==> 🌎 Listening on port %s. Open up %s in your browser.', port, url);
 
     openUrl.open(url);
 });

@@ -16,7 +16,7 @@
         "start": "npm run watch & node server",
         "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
         "test:watch": "npm test -- --watch",
-        "standalone": "webpack --config webpack.config.js"
+        "standalone": "webpack --config webpack.dev.config.js"
     },
     "dependencies": {
         "prop-types": "^15.6.0"
@@ -83,9 +83,7 @@
         "url-loader": "^0.5.9",
         "watchify": "^3.7.0",
         "webpack": "^1.14.0",
-        "webpack-dev-middleware": "^1.2.0",
-        "webpack-dev-server": "^1.16.2",
-        "webpack-hot-middleware": "^2.9.1"
+        "webpack-dev-server": "^1.16.2"
     },
     "files": [
     ],
