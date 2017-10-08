@@ -1527,7 +1527,8 @@ InfoBubble.prototype.removeTab = function(index) {
 
   this.tabs_.splice(index, 1);
 
-  delete tab;
+  // This looks likely a defect, deleting a variable then referring it later stage
+  // delete tab;
 
   for (var i = 0, t; t = this.tabs_[i]; i++) {
     t.tab.index = i;
@@ -1592,7 +1593,11 @@ InfoBubble.prototype.getElementSize_ = function(element, opt_maxWidth,
   }
 
   document.body.removeChild(sizer);
-  delete sizer;
+
+  // Babel raises error "Deleting local variable in strict mode"
+  // delete sizer;
+  sizer = undefined;
+
   return size;
 };
 
