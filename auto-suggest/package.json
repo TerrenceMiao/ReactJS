@@ -10,15 +10,15 @@
     },
     "scripts": {
         "lint": "eslint js/app.js js/google-maps.js",
-        "prebuild": "npm run lint && npm test",
-        "dist": "rm -rf dist && mkdir dist && babel js -d dist/js",
-        "copy-static-files": "cp -a index.html css data images dist",
-        "build": "browserify ./js/app.js -t babelify -o dist/bundle.js",
-        "watch": "watchify ./js/app.js -v -t babelify -o dist/bundle.js",
-        "start": "npm run dist && npm run copy-static-files && npm run watch & node server",
         "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
         "test:watch": "npm test -- --watch",
-        "standalone": "webpack --config webpack.dev.config.js"
+        "prebuild": "npm run lint && npm test",
+        "copy-static-files": "rm -rf dist && mkdir dist && cp -a index.html css data images dist",
+        "compile": "babel js -d dist/js",
+        "build": "browserify ./js/app.js -t babelify -o dist/compiled.app.js",
+        "watch": "watchify ./js/app.js -v -t babelify -o dist/compiled.app.js",
+        "start": "npm run copy-static-files && npm run watch & node server",
+        "standalone": "npm run copy-static-files && npm run compile && cross-env BABEL_ENV=development webpack --config webpack.dev.config.js"
     },
     "dependencies": {
         "prop-types": "^15.6.0"

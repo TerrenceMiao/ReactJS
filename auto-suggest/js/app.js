@@ -10,6 +10,8 @@ import thunkMiddleware from 'redux-thunk';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 
+import PropTypes from 'prop-types';
+
 const store = createStore(
     rootReducer,
     applyMiddleware(thunkMiddleware)

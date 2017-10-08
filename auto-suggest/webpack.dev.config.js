@@ -9,13 +9,12 @@ var port = process.env.NODE_PORT || 3000;
 
 module.exports = {
     entry: [
-        `webpack-dev-server/client?http://${host}:${port}`,
         './js/app'
     ],
 
     output: {
         path: path.join(__dirname, 'dist'), // Must be an absolute path
-        filename: 'bundle.js',
+        filename: 'compiled.app.js',
         publicPath: '/'
     },
 
@@ -56,9 +55,7 @@ module.exports = {
     resolve: {
         modulesDirectories: [
             'node_modules',
-            'components',
-            'src',
-            path.join(__dirname, 'demo', 'src') // Must be an absolute path
+            'js'
         ]
     },
 
@@ -66,6 +63,6 @@ module.exports = {
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('app.css')
+        new ExtractTextPlugin('base.css')
     ]
 };
