@@ -1,6 +1,7 @@
 # Don’t commit the following directories
 .idea/
 node_modules/
+dist/
 
 # Don't commit the following files
 bundle.js
