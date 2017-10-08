@@ -15,9 +15,9 @@
         "prebuild": "npm run lint && npm test",
         "copy-static-files": "rm -rf dist && mkdir dist && cp -a index.html css data images dist",
         "compile": "babel js -d dist/js",
-        "build": "browserify ./js/app.js -t babelify -o dist/compiled.app.js",
-        "watch": "watchify ./js/app.js -v -t babelify -o dist/compiled.app.js",
-        "start": "npm run copy-static-files && npm run watch & node server",
+        "build": "browserify ./js/app.js -t babelify -o compiled.app.js",
+        "watch": "watchify ./js/app.js -v -t babelify -o compiled.app.js",
+        "start": "npm run watch & node server",
         "standalone": "npm run copy-static-files && npm run compile && cross-env BABEL_ENV=development webpack --config webpack.dev.config.js"
     },
     "dependencies": {
