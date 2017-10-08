@@ -4,7 +4,6 @@ node_modules/
 dist/
 
 # Don't commit the following files
-bundle.js
-*-compiled.js
-*-compiled.js.map
+compiled.*.js
+compiled.*.js.map
 npm-debug.log
