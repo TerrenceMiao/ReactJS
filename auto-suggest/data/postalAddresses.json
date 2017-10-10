@@ -1,0 +1,245 @@
+{
+  "took": 19,
+  "timed_out": false,
+  "_shards": {
+    "total": 2,
+    "successful": 2,
+    "failed": 0
+  },
+  "hits": {
+    "total": 340250,
+    "max_score": 1.7320508,
+    "hits": [
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpEA",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "72075908",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "",
+          "flat_unit_nbr": "",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "LOTUS",
+          "street_type": "LANE",
+          "locality_name": "BOWEN",
+          "postcode": "4805",
+          "state": "QLD"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpEW",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "30327404",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "",
+          "flat_unit_nbr": "",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "AVICENNIA",
+          "street_type": "ST",
+          "locality_name": "BOWEN",
+          "postcode": "4805",
+          "state": "QLD"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpEy",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "34537134",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "",
+          "flat_unit_nbr": "",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "PANDANUS",
+          "street_type": "ST",
+          "locality_name": "BOWEN",
+          "postcode": "4805",
+          "state": "QLD"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpFo",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "60965963",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "U",
+          "flat_unit_nbr": "4",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "CASUARINA",
+          "street_type": "ST",
+          "locality_name": "BOWEN",
+          "postcode": "4805",
+          "state": "QLD"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpFp",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "61712177",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "U",
+          "flat_unit_nbr": "7",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "CASUARINA",
+          "street_type": "ST",
+          "locality_name": "BOWEN",
+          "postcode": "4805",
+          "state": "QLD"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpFw",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "82804143",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "U",
+          "flat_unit_nbr": "1",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "CASUARINA",
+          "street_type": "ST",
+          "locality_name": "BOWEN",
+          "postcode": "4805",
+          "state": "QLD"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpHl",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "90919453",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "",
+          "flat_unit_nbr": "",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "BARTON",
+          "street_type": "ST",
+          "locality_name": "BOWEN",
+          "postcode": "4805",
+          "state": "QLD"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpHr",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "97031673",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "",
+          "flat_unit_nbr": "",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "BURSARIA",
+          "street_type": "CT",
+          "locality_name": "TOLMANS HILL",
+          "postcode": "7007",
+          "state": "TAS"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpKG",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "34130469",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "",
+          "flat_unit_nbr": "",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "WHITSUNDAY",
+          "street_type": "ST",
+          "locality_name": "BOWEN",
+          "postcode": "4805",
+          "state": "QLD"
+        }
+      },
+      {
+        "_index": "postaladdress",
+        "_type": "postaladdress",
+        "_id": "AVdkNjcaF7R-AMWjWpLu",
+        "_score": 1.7320508,
+        "_source": {
+          "delivy_point_id": "99434628",
+          "postal_delivery_nbr": "00000",
+          "postal_delivery_type": "",
+          "lot_nbr": "",
+          "floor_level_type": "",
+          "floor_level_nbr": "",
+          "flat_unit_type": "",
+          "flat_unit_nbr": "",
+          "house_nbr_1": 1,
+          "house_nbr_sfx_1": "",
+          "street_name": "LYAM",
+          "street_type": "PL",
+          "locality_name": "EIMEO",
+          "postcode": "4740",
+          "state": "QLD"
+        }
+      }
+    ]
+  }
+}
