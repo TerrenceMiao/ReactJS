@@ -1,21 +1,14 @@
-'use strict';
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Autosuggest = require('react-autosuggest');
-
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Autosuggest from 'react-autosuggest';
 
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 
 import PropTypes from 'prop-types';
 
-const store = createStore(
-    rootReducer,
-    applyMiddleware(thunkMiddleware)
-)
+import request from 'sync-request';
+
 
 const streetTypes = require('../data/streetTypes.json');
 const localities = require('../data/localities.json');
@@ -36,184 +29,6 @@ const HOUSE_NUMBER_PRIORITY_PATTERN = /^(\d{1,5})([\D|\s]{1,})$/;
 const POSTCODE_PRIORITY_PATTERN = /^([\D|\s]{1,})(\d{1,4})$/;
 const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
 
-
-// Actions
-function getMatchingPostalAddressesAction(value, app) {
-
-    console.log("## Getting matching Postal Addresses action");
-
-    const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
-
-    if (escapedValue === '') {
-        return;
-    }
-
-    console.log("** Query value: " + escapedValue);
-
-    var body = buildQuery(escapedValue);
-
-    console.log("** Query request: " + JSON.stringify(body));
-
-    var headers = new Headers();
-    headers.append('Content-Type', 'x-www-form-urlencoded');
-    headers.append('Accept', 'application/json, text/plain, */*');
-
-    var init = {
-        method: 'POST',
-        headers: headers,
-        mode: 'cors',
-        body: JSON.stringify(body),
-        redirect: 'follow',
-        cache: 'default'
-    };
-
-    var request = new Request('http://localhost:9200/postaladdress/_search', init);
-
-    store.dispatch(setLoadingPostalAddressAction());
-
-    fetch(request)
-        .then(function(response) {
-            store.dispatch(doneLoadingPostalAddressAction());
-
-            if (response.status === 200) {
-                return response.json();
-            }
-
-            throw "ElasticSearch request failed";
-        })
-        .then(function(data) {
-            // console.log("** Result: " + JSON.stringify(data));
-            store.dispatch(setDataAction(data, value, app));
-        })
-        .catch(function(error) {
-            store.dispatch(showErrorAction(error));
-        });
-}
-
-function setDataAction(data, value, app) {
-
-    console.log("## Setting Postal Address data action");
-
-    var suggestions;
-
-    if (value === app.state.value) {
-        suggestions = data.hits.hits;
-    } else {
-        // Ignore suggestions if input value changed
-        suggestions = [];
-    }
-
-    return {
-        type: "SHOW_DATA",
-        isLoading: false,
-        app: app,
-        suggestions: suggestions
-    };
-}
-
-function showErrorAction(error) {
-
-    console.log("## Error thrown via invoking ElasticSearch service action: " + error);
-
-    return {
-        type: "ERROR",
-        isLoading: false,
-        app: null,
-        suggestions: []
-    };
-}
-
-function setLoadingPostalAddressAction() {
-
-    console.log("## Loading Postal Address action");
-
-    return {
-        type: "IS_LOADING",
-        isLoading: true,
-        app: null,
-        suggestions: []
-    };
-}
-
-function doneLoadingPostalAddressAction() {
-
-    console.log("## Postal Address fetched action");
-
-    return {
-        type: "LOADING_DONE",
-        isLoading: false,
-        app: null,
-        suggestions: []
-    };
-}
-
-// Reducers
-function setLoadingPostalAddressReducer(state, action) {
-
-    return {
-        isLoading: action.isLoading,
-        app: action.app,
-        suggestions: action.suggestions
-    };
-}
-
-function doneLoadingPostalAddressReducer(state, action) {
-
-    return {
-        isLoading: action.isLoading,
-        app: action.app,
-        suggestions: action.suggestions
-    };
-}
-
-function showErrorReducer(state, action) {
-
-    return {
-        isLoading: action.isLoading,
-        app: action.app,
-        suggestions: action.suggestions
-    };
-}
-
-function setDataReducer(state, action) {
-
-    action.app.setState({
-        suggestions: action.suggestions
-    });
-
-    return {
-        isLoading: action.isLoading,
-        app: action.app,
-        suggestions: action.suggestions
-    };
-}
-
-function initialState() {
-
-    return {
-        isLoading: false,
-        app: null,
-        suggestions: []
-    }
-}
-
-function rootReducer(state, action) {
-
-    var previousState = (state ? state : initialState());
-
-    switch (action.type) {
-        case "IS_LOADING":
-            return setLoadingPostalAddressReducer(previousState, action);
-        case "LOADING_DONE":
-            return doneLoadingPostalAddressReducer(previousState, action);
-        case "ERROR":
-            return showErrorReducer(previousState, action);
-        case "SHOW_DATA":
-            return setDataReducer(previousState, action);
-        default:
-            return previousState;
-    }
-}
 
 function buildQuery(escapedValue) {
 
@@ -396,20 +211,45 @@ function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function getSuggestionValue(suggestion) {
+
+const findMatchedPostalAddresses = value => {
+
+    console.log("## Getting matching Postal Addresses action");
+
+    const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
+
+    if (escapedValue === '') {
+        return [];
+    }
+
+    console.log("** Query value: " + escapedValue);
+
+    var requestBody = buildQuery(escapedValue);
+
+    console.log("** Query request body: " + JSON.stringify(requestBody));
+
+    var response = request('POST', 'http://localhost:9200/postaladdress/_search', {body: JSON.stringify(requestBody)});
+    var responseBody = JSON.parse(response.getBody('utf8'));
+
+    console.log("** Query response body: " + requestBody);
+
+    return responseBody.hits.hits;
+};
+
+const getSuggestionValue = suggestion => {
 
     var postalAddress = suggestion._source;
 
     return postalAddress.house_nbr_1 + " " + postalAddress.street_name + " " + postalAddress.street_type + ", "
         + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode;
-}
+};
 
-function renderSuggestion(suggestion, query) {
+const renderSuggestion = (suggestion, query) => {
 
     var postalAddress = suggestion._source;
 
     const suggestionText = postalAddress.house_nbr_1 + " " + postalAddress.street_name + " " + postalAddress.street_type + ", " + postalAddress.locality_name + " " + postalAddress.state + " " + postalAddress.postcode;
-    const matches = match(suggestionText, query.value);
+    const matches = match(suggestionText, query.query);
     const parts = parse(suggestionText, matches);
 
     return (
@@ -425,9 +265,9 @@ function renderSuggestion(suggestion, query) {
             }
         </span>
     );
-}
+};
 
-class App extends React.Component {
+class App extends React.Component { // eslint-disable-line no-undef
 
     constructor() {
         super();
@@ -436,55 +276,45 @@ class App extends React.Component {
             value: '',
             suggestions: []
         };
-
-        this.onChange = this.onChange.bind(this);
-        this.onSuggestionsUpdateRequested = this.onSuggestionsUpdateRequested.bind(this);
     }
 
-    onChange(event, { newValue }) {
-        // ONLY update virtual DOM value, this.state.value won't change for now
+    onChange = (event, { newValue }) => {
         this.setState({
             value: newValue
         });
-    }
+    };
 
-    onSuggestionSelected(event, { suggestionValue }) {
-        // Get selected Postal Address from input field
-        document.getElementById('autocomplete').value = suggestionValue;
-        // Pin selected Postal address on Google Maps
-        doQuery();
-    }
-
-    onSuggestionsUpdateRequested({ value }) {
-        // Service call
-        getMatchingPostalAddressesAction(value, this);
-    }
-
-    render() {
-        const { value, suggestions } = this.state;
-        const inputProps = {
-            placeholder: "Type '111 Bourke St Melbourne VIC 3030' like for suggestions",
-            value,
-            onChange: this.onChange
-        };
-
-        store.subscribe(function() {
+    onSuggestionsFetchRequested = ({ value }) => {
+        this.setState({
+            suggestions: findMatchedPostalAddresses(value)
         });
+    };
 
-        const status = (store.getState().isLoading ? 'loading ...' : '');
+    onSuggestionsClearRequested = () => {
+        this.setState({
+            suggestions: []
+        });
+    };
 
-        return (
-            <div className="app-container">
-                <Autosuggest suggestions={suggestions}
-                             onSuggestionsUpdateRequested={this.onSuggestionsUpdateRequested}
-                             onSuggestionSelected={this.onSuggestionSelected}
-                             getSuggestionValue={getSuggestionValue}
-                             renderSuggestion={renderSuggestion}
-                             inputProps={inputProps} />
-                <div className="status">{status}</div>
-            </div>
-        );
-    }
+  render() {
+    const { value, suggestions } = this.state;
+    const inputProps = {
+      placeholder: "Type '111 Bourke St Melbourne VIC 3030' like for suggestions",
+      value,
+      onChange: this.onChange
+    };
+
+    return (
+      <Autosuggest // eslint-disable-line react/jsx-no-undef
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+      />
+    );
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
