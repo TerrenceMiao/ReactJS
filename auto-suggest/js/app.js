@@ -296,25 +296,33 @@ class App extends React.Component { // eslint-disable-line no-undef
         });
     };
 
-  render() {
-    const { value, suggestions } = this.state;
-    const inputProps = {
-      placeholder: "Type '111 Bourke St Melbourne VIC 3030' like for suggestions",
-      value,
-      onChange: this.onChange
+    onSuggestionSelected = (event, { suggestionValue }) => {
+        // Get selected Postal Address from input field
+        document.getElementById('autocomplete').value = suggestionValue;
+        // Pin selected Postal address on Google Maps
+        doQuery();
     };
 
-    return (
-      <Autosuggest // eslint-disable-line react/jsx-no-undef
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-      />
-    );
-  }
+    render() {
+        const { value, suggestions } = this.state;
+        const inputProps = {
+            placeholder: "Type '111 Bourke St Melbourne VIC 3030' like for suggestions",
+            value,
+            onChange: this.onChange
+        };
+
+        return (
+            <Autosuggest // eslint-disable-line react/jsx-no-undef
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                onSuggestionSelected={this.onSuggestionSelected}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={inputProps}
+            />
+        );
+    }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
