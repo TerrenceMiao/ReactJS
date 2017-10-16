@@ -7,8 +7,6 @@ import parse from 'autosuggest-highlight/parse';
 
 import PropTypes from 'prop-types';
 
-import request from 'sync-request';
-
 
 const streetTypes = require('../data/streetTypes.json');
 const localities = require('../data/localities.json');
@@ -212,30 +210,6 @@ function escapeRegexCharacters(str) {
 }
 
 
-const findMatchedPostalAddresses = value => {
-
-    console.log("## Getting matching Postal Addresses action");
-
-    const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
-
-    if (escapedValue === '') {
-        return [];
-    }
-
-    console.log("** Query value: " + escapedValue);
-
-    var requestBody = buildQuery(escapedValue);
-
-    console.log("** Query request body: " + JSON.stringify(requestBody));
-
-    var response = request('POST', 'http://localhost:9200/postaladdress/_search', {body: JSON.stringify(requestBody)});
-    var responseBody = JSON.parse(response.getBody('utf8'));
-
-    console.log("** Query response body: " + requestBody);
-
-    return responseBody.hits.hits;
-};
-
 const getSuggestionValue = suggestion => {
 
     var postalAddress = suggestion._source;
@@ -274,8 +248,63 @@ class App extends React.Component { // eslint-disable-line no-undef
 
         this.state = {
             value: '',
-            suggestions: []
+            suggestions: [],
+            isLoading: false
         };
+
+        this.lastRequestId = null;
+    }
+
+    loadSuggestions(value) {
+        this.setState({
+            isLoading: true
+          });
+
+        console.log("## Getting matching Postal Addresses action");
+
+        const escapedValue = escapeRegexCharacters(value.trim().toUpperCase());
+
+        if (escapedValue === '') {
+            return;
+        }
+
+        console.log("** Query value: " + escapedValue);
+
+        var requestBody = buildQuery(escapedValue);
+
+        console.log("** Query request body: " + JSON.stringify(requestBody));
+
+        var headers = new Headers();
+        headers.append('Content-Type', 'x-www-form-urlencoded');
+        headers.append('Accept', 'application/json, text/plain, */*');
+
+        var init = {
+            method: 'POST',
+            headers: headers,
+            mode: 'cors',
+            body: JSON.stringify(requestBody),
+            redirect: 'follow',
+            cache: 'default'
+        }
+
+        var request = new Request('http://localhost:9200/postaladdress/_search', init);
+
+        const thisRequest = this.latestRequest = fetch(request)
+            .then(response => response.json())
+            .then(data => {
+                // If this is true there's a newer request happening, stop everything
+                if (thisRequest !== this.latestRequest) {
+                    return;
+                }
+
+                // If this is executed then it's the latest request
+                console.log("** Result: " + JSON.stringify(data));
+
+                this.setState({
+                    suggestions: data.hits.hits,
+                    isLoading: false
+                });
+        })
     }
 
     onChange = (event, { newValue }) => {
@@ -285,9 +314,7 @@ class App extends React.Component { // eslint-disable-line no-undef
     };
 
     onSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
-            suggestions: findMatchedPostalAddresses(value)
-        });
+        this.loadSuggestions(value);
     };
 
     onSuggestionsClearRequested = () => {
@@ -304,23 +331,29 @@ class App extends React.Component { // eslint-disable-line no-undef
     };
 
     render() {
-        const { value, suggestions } = this.state;
+        const { value, suggestions, isLoading } = this.state;
+
         const inputProps = {
             placeholder: "Type '111 Bourke St Melbourne VIC 3030' like for suggestions",
             value,
             onChange: this.onChange
         };
 
+        const status = (isLoading ? 'loading ...' : '');
+
         return (
-            <Autosuggest // eslint-disable-line react/jsx-no-undef
-                suggestions={suggestions}
-                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                onSuggestionSelected={this.onSuggestionSelected}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
-                inputProps={inputProps}
-            />
+            <div className="app-container">
+                <Autosuggest // eslint-disable-line react/jsx-no-undef
+                    suggestions={suggestions}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    onSuggestionSelected={this.onSuggestionSelected}
+                    getSuggestionValue={getSuggestionValue}
+                    renderSuggestion={renderSuggestion}
+                    inputProps={inputProps}
+                />
+                <div className="status">{status}</div>
+            </div>
         );
     }
 }
