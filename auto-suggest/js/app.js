@@ -230,7 +230,11 @@ const renderSuggestion = (suggestion, query) => {
         <span>
             {
                 parts.map((part, index) => {
-                    const className = part.highlight;
+                    let className = undefined;
+
+                    if (part.highlight === true) {
+                        className = 'highlight';
+                    }
 
                     return (
                         <span className={className} key={index}>{part.text}</span>
@@ -298,7 +302,7 @@ class App extends React.Component { // eslint-disable-line no-undef
                 }
 
                 // If this is executed then it's the latest request
-                console.log("** Result: " + JSON.stringify(data));
+                // console.log("** Query result: " + JSON.stringify(data));
 
                 this.setState({
                     suggestions: data.hits.hits,

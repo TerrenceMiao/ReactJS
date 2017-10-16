@@ -124,6 +124,6 @@ ul {
 }
 
 /* Highlight of suggestions */
-.true {
+.highlight {
     font-weight: bold;
 }
