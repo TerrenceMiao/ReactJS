@@ -29,6 +29,13 @@ and produce `bundle.js` artefact.
 
 ```
 
+on Python 3, run:
+
+```sh
+𝜆 python -m http.server 8000
+
+```
+
 go to [http://localhost:8000/](http://localhost:8000/)
 
 - Input an Postal Address _111 Bourke St Melbourne VIC 3000_ like **"111 Bo St M"**
