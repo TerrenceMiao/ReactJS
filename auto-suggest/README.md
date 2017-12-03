@@ -6,6 +6,8 @@ Current Postal Address and Location data is based on **ElasticSearch 2.x**. To r
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Allow-Control-Allow-Origin%20setting.png "Allow-Control-Allow-Origin: * setting")
 
+Latest Chrome complains Cross Origin API request for ... Origin: http://evil.com/, Host: ... which caused by _Allow-Control-Allow-Origin: *_ extension.
+
 - Run: 
 
 ```sh
