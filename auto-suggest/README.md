@@ -1,5 +1,9 @@
 # Auto Suggest example of using React with Browserify
 
+- Note
+
+Current Postal Address and Location data is based on *ElasticSearch 2.x*
+
 - Run: 
 
 ```sh
