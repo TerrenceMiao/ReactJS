@@ -2,7 +2,7 @@
 
 - Note
 
-Current Postal Address and Location data is based on *ElasticSearch 2.x*. To run this application on localhost, visit from browser like Chrome, need to have extension Allow-Control-Allow-Origin: * (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi) installed and enabled, with setting:
+Current Postal Address and Location data is based on **ElasticSearch 2.x**. To run this application on localhost, visit from browser like Chrome, need to have extension _Allow-Control-Allow-Origin: *_ (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi) installed and enabled, with setting:
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Allow-Control-Allow-Origin%20setting.png "Allow-Control-Allow-Origin: * setting")
 
