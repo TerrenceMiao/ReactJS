@@ -1,12 +1,14 @@
 # Auto Suggest example of using React with Browserify
 
-- Note
-
 Current Postal Address and Location data is based on **ElasticSearch 2.x**. To run this application on localhost, visit from browser like Chrome, need to have extension _Allow-Control-Allow-Origin: *_ (https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi) installed and enabled, with setting:
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Allow-Control-Allow-Origin%20setting.png "Allow-Control-Allow-Origin: * setting")
 
 Latest Chrome complains Cross Origin API request for ... Origin: http://evil.com/, Host: ... which caused by _Allow-Control-Allow-Origin: *_ extension.
+
+An **alternative solution** has been provided. Without client side CORS enabled (Enable CORS on ElasticSearch server side).
+
+Based on ElasticSearch 5.x, back compatible with ElasticSearch 2.x data, and run ElasticSearch in Docker container. Check details on: [https://github.com/TerrenceMiao/docker/blob/master/elasticsearch/README.adoc](https://github.com/TerrenceMiao/docker/blob/master/elasticsearch/README.adoc)
 
 - Run: 
 
@@ -114,4 +116,3 @@ Postal Services show up in Google Maps after address search
 - Google Maps GPS Coordinates, [http://www.gps-coordinates.net/](http://www.gps-coordinates.net/)
 - Reactive Maps, A real time components library for building reactive UIs, [https://opensource.appbase.io/reactivemaps/](https://opensource.appbase.io/reactivemaps/)
 - React Native Mapview component for iOS + Android, [https://github.com/airbnb/react-native-maps](https://github.com/airbnb/react-native-maps)
-- Step by step run ElasticSearch / Kibana Docker image, [https://github.com/TerrenceMiao/docker/blob/master/elasticsearch/README.adoc](https://github.com/TerrenceMiao/docker/blob/master/elasticsearch/README.adoc)
