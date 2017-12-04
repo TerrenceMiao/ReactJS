@@ -134,17 +134,17 @@ function buildQuery(escapedValue) {
             "query": {
                 "bool": {
                     "must": [{
-                        "query": { "query_string": { "fields": ["house_nbr_1"], "query": houseNumber } }
+                        "query_string": { "fields": ["house_nbr_1"], "query": houseNumber }
                     }, {
-                        "query": { "query_string": { "fields": ["street_name"], "query": (wordValue + "*").replace(new RegExp(" ", 'g'), " && ") } }
+                        "query_string": { "fields": ["street_name"], "query": (wordValue + "*").replace(new RegExp(" ", 'g'), " && ") }
                     }, {
-                        "query": { "query_string": { "fields": ["street_type"], "query": streetType } }
+                        "query_string": { "fields": ["street_type"], "query": streetType }
                     }, {
-                        "query": { "query_string": { "fields": ["locality_name"], "query": locality.replace(new RegExp(" ", 'g'), " && ") } }
+                        "query_string": { "fields": ["locality_name"], "query": locality.replace(new RegExp(" ", 'g'), " && ") }
                     }, {
-                        "query": { "query_string": { "fields": ["state"], "query": state } }
+                        "query_string": { "fields": ["state"], "query": state }
                     }, {
-                        "query": { "query_string": { "fields": ["postcode"], "query": postcode } }
+                        "query_string": { "fields": ["postcode"], "query": postcode }
                     }]
                 }
             }
@@ -172,17 +172,17 @@ function buildQuery(escapedValue) {
             "query": {
                 "bool": {
                     "must": [{
-                        "query": { "query_string": { "fields": ["house_nbr_1"], "query": houseNumber } }
+                        "query_string": { "fields": ["house_nbr_1"], "query": houseNumber }
                     }, {
-                        "query": { "query_string": { "fields": ["street_name"], "query": (streetName + "*").replace(new RegExp(" ", 'g'), " && ") } }
+                        "query_string": { "fields": ["street_name"], "query": (streetName + "*").replace(new RegExp(" ", 'g'), " && ") }
                     }, {
-                        "query": { "query_string": { "fields": ["street_type"], "query": streetType } }
+                        "query_string": { "fields": ["street_type"], "query": streetType }
                     }, {
-                        "query": { "query_string": { "fields": ["locality_name"], "query": (locality + "*").replace(new RegExp(" ", 'g'), " && ") } }
+                        "query_string": { "fields": ["locality_name"], "query": (locality + "*").replace(new RegExp(" ", 'g'), " && ") }
                     }, {
-                        "query": { "query_string": { "fields": ["state"], "query": state } }
+                        "query_string": { "fields": ["state"], "query": state }
                     }, {
-                        "query": { "query_string": { "fields": ["postcode"], "query": postcode } }
+                        "query_string": { "fields": ["postcode"], "query": postcode }
                     }]
                 }
             }
@@ -193,11 +193,11 @@ function buildQuery(escapedValue) {
         "query": {
             "bool": {
                 "must": [{
-                    "query": { "query_string": { "fields": ["house_nbr_1"], "query": houseNumber } }
+                    "query_string": { "fields": ["house_nbr_1"], "query": houseNumber }
                 }, {
-                    "query": { "query_string": { "fields": ["street_name", "street_type", "locality_name", "state"], "query": (wordValue + "*").replace(new RegExp(" ", 'g'), " && ") } }
+                    "query_string": { "fields": ["street_name", "street_type", "locality_name", "state"], "query": (wordValue + "*").replace(new RegExp(" ", 'g'), " && ") }
                 }, {
-                    "query": { "query_string": { "fields": ["postcode"], "query": postcode } }
+                    "query_string": { "fields": ["postcode"], "query": postcode }
                 }]
             }
         }
@@ -281,7 +281,7 @@ class App extends React.Component { // eslint-disable-line no-undef
         var headers = new Headers();
 
         // Since ElasticSearch 5.x, content type "x-www-form-urlencoded" is NOT supported anymore. Replace with "application/json"
-        headers.append('Content-Type', 'x-www-form-urlencoded');
+        headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json, text/plain, */*');
 
         var init = {

@@ -168,8 +168,8 @@ function showServiceMarkers() {
     services.forEach(function (service) {
         var query = {
             "query": {
-                "filtered": {
-                    "query": {
+                "bool": {
+                    "must": {
                         "query_string": {
                             "fields": ["type"],
                             "query": service
@@ -223,7 +223,7 @@ function queryAndShowServices(query, service, serviceMarkers, from, size) {
     var headers = new Headers();
 
     // Since ElasticSearch 5.x, content type "x-www-form-urlencoded" is NOT supported anymore. Replace with "application/json"
-    headers.append('Content-Type', 'x-www-form-urlencoded');
+    headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json, text/plain, */*');
 
     var init = {
