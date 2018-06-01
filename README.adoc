@@ -1,6 +1,11 @@
 All the goodies play in ReactJS
 ===============================
 
+Why React?
+----------
+
+**Learn once, write everywhere**.
+
 How React Redux work
 --------------------
 
