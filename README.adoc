@@ -61,7 +61,7 @@ image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/Redux%20Asy
 Why React Native?
 -----------------
 
-image::React%20Native%20architecture.png[React Native architecture]
+image::React%20Native%20Architecture.png[React Native Architecture]
 
 
 Reference
