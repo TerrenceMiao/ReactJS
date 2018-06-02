@@ -4,7 +4,19 @@ All the goodies play in ReactJS
 Why React?
 ----------
 
-**Learn once, write everywhere**.
+**Learn once, write everywhere. Write once, run everywhere**.
+
+ReactJS's declarative views with a straightforward and elegant architecture that brings some of the best ideas of software engineering theory:
+
+- Immutable Global State
+- Functional Programming
+- Event Sourcing
+- CQRS (Command Query Responsibility Segregation)
+
+into the web development mainstream.
+
+image::https://camo.githubusercontent.com/77e3bbcf38c92533e831c155190901541d56a7ac/687474703a2f2f692e696d6775722e636f6d2f575a5452346c512e706e67[Cloud Native CQRS]
+
 
 How React Redux work
 --------------------
