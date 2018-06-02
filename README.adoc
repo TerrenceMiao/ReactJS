@@ -1,10 +1,12 @@
 All the goodies play in ReactJS
 ===============================
 
-Why React?
-----------
+**Frameworks are primarily a tool for structuring your thoughts, not your code.**
 
-**Learn once, write everywhere. Write once, run everywhere**.
+Why ReactJS?
+------------
+
+**Learn once, write everywhere. Write once, run everywhere.**
 
 ReactJS's declarative views with a straightforward and elegant architecture that brings some of the best ideas of software engineering theory:
 
@@ -15,17 +17,51 @@ ReactJS's declarative views with a straightforward and elegant architecture that
 
 into the web development mainstream.
 
+**Cloud Native CQRS**
+
 image::https://camo.githubusercontent.com/77e3bbcf38c92533e831c155190901541d56a7ac/687474703a2f2f692e696d6775722e636f6d2f575a5452346c512e706e67[Cloud Native CQRS]
+
+Why should you use smaller components like the view-only library react (with some event module like flux) over a full-fledged MVC framework like angular?
+
+- Small components usually **do one thing very well**
+- There will never be a perfect framework so you can just **hack the most relevant features together using npm**
+- Small libraries have **simple documentation and they are easy to set up and use**
+- Any problems and **there’s no waiting for the next release of the entire framework**, you simply throw up an issue, the authors fix it, push it and then bam it’s on npm for everyone else and no other components have been disturbed
+- If you find you don’t like the templating language or error handling, you don’t have to rethink the entire project, you just **hot-swap the component** for another and you’re on your way again
+- By using small libraries – components with a dedicated purpose and a small surface area – it becomes **possible to pick and mix**, to swap parts of our front end stack out if and when they are superseded
+- New projects can **replace only the parts that matter**, whilst core functionality whose designs are settled – routing APIs, say – can stay exactly the same between the years
+- You can **move your legacy projects to new technologies incrementally**, rather than rewriting everything, providing you stick to good practices and wrap those libraries carefully
+- When different problems are answered by different libraries, **their solutions can compete directly**. If Framework A does X well and Y badly, compared to Framework B’s great Y and shaky X, you’re stuck. But if Library A and B both try and do X, they can compete in a direct fashion in discrete and measurable ways
+- Last but not least, if something goes wrong, **fail fast, fail early**
 
 
 How React Redux work
 --------------------
 
+The end of Model-View-Controller (MVC) - Introduce Flux architecture
+
+- A unidirectional data flow
+- No two-way data bindings that lead to cascading updates
+- When updates can only change data within a single round, the system as a whole becomes more predictable
+
 image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/Functional%20Reactive%20Programming.jpg[Functional Reactive Programming]
+
+ReactJS focuses a lot on treating code as a black box so there is no sort of observable abstraction inside.
+
+AngularJS basically passes data throughout scope as observable data model which is a very leaky abstraction and it forces to compose application not in terms of functions and objects but in terms of directives and AngularJS's model-view-controller. As applications scale up, it starts to miss the past 40, 50 years research on how to abstract the program.
+
+If move AngularJS data bindings out of the edges of system, the application is likely to have a fast reaction time.
+
 
 How to make Ajax call in React
 ------------------------------
 image::https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/Redux%20Async%20Actions.png[Redux in React Delegation Model]
+
+
+Why React Native?
+-----------------
+
+image::React%20Native%20architecture.png[React Native architecture]
 
 
 Reference
