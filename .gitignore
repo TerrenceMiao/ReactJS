@@ -7,3 +7,4 @@ dist/
 compiled.*.js
 compiled.*.js.map
 npm-debug.log
+package-lock.json
