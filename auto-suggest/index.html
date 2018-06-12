@@ -9,7 +9,9 @@
 </head>
 
 <body>
-    <h1>Postal Address auto-suggest</h1>
+    <!-- <h1>Postal Address auto-suggest</h1> -->
+
+    <div id="map_canvas"></div>
 
     <div class="wrapper">
         <div class="left">
@@ -27,11 +29,16 @@
                     <input type="radio" name="type" value="lodging" onclick="search()" />Lodging
                 </form>
             </div>
-            <div id="map_canvas"></div>
+            
+            <!-- Move this div into body to display Google Maps in full screen -->
+            <!-- <div id="map_canvas"></div> -->
+
             <div id="listing" onscroll="reviewsScroll()"><table id="resultsTable"><tbody id="results"></tbody></table></div>
+            
             <div id="reviews"></div>
         </div>
     </div>
+
 
     <!-- "google-maps.js" is a copy of "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" -->
     <!-- Download Google Maps JS by using curl -O "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" -->
@@ -41,7 +48,9 @@
 
     <!-- Application JS libraries -->
     <script src="js/maps.js"></script>
+
     <script src="js/infobubble.js"></script>
+    
     <!-- Babel artefact -->
     <script src="compiled.app.js"></script>
 </body>

@@ -1,11 +1,14 @@
 /* Google Maps */
 #map_canvas {
+    /* To display Google Maps in full screen */
     position: absolute;
-    width: 399px;
-    height: 399px;
+    width: 100%;
+    height: 100%;
+    /* width: 399px; */
+    /* height: 399px; */
+    /* border: 1px solid grey; */
     top: 0px;
     left: 0px;
-    border: 1px solid grey;
 }
 
 #listing {
