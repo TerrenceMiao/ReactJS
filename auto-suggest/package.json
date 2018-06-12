@@ -83,8 +83,7 @@
         "webpack": "^1.14.0",
         "webpack-dev-server": "^1.16.2"
     },
-    "files": [
-    ],
+    "files": [],
     "lint-staged": {
         ".*.js": [
             "npm run prettier",
