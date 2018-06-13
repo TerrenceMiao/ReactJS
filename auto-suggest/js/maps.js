@@ -4,7 +4,7 @@ var map, places, iw;
 var markers = [];
 var resultsBounds = null;
 var resultsCount = 0;
-var resultsMax = 3;
+var resultsMax = 8;
 var pagination = null;
 var hostnameRegexp = new RegExp('^https?://.+?/');
 
