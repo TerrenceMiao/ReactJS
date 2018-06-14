@@ -4,9 +4,6 @@ var autoprefixer = require('autoprefixer');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var host = process.env.NODE_HOST || 'localhost';
-var port = process.env.NODE_PORT || 3000;
-
 module.exports = {
     entry: [
         './js/app'
