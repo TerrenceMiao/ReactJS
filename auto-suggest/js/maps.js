@@ -40,8 +40,18 @@ function initializeMaps() {
     google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
 
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         showSelectedPlace();
+    });
+
+    // Note that the API is still vendor-prefixed in browsers implementing it
+    document.addEventListener('webkitfullscreenchange', function() {
+        console.log("Full screen event triggered");
+        // google.maps.event.trigger(map, 'resize');
+
+        document.getElementById('autocomplete').style.display = 'none';
+        document.getElementById('autocomplete').style.display = 'disp';
     });
 }
 
