@@ -5,6 +5,12 @@ var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+
+    devServer: {
+        compress: true,
+        disableHostCheck: true
+    },
+
     entry: [
         './js/app'
     ],
@@ -19,7 +25,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 include: __dirname
             },
             {
@@ -28,10 +34,10 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract(
-                    'style',
-                    'css?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss!less'
-                ),
+                loader: ExtractTextPlugin.extract({
+                    fallback: 'style',
+                    use: 'css?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss!less'
+                }),
                 exclude: /node_modules/
             },
             {
@@ -45,12 +51,8 @@ module.exports = {
         ]
     },
 
-    postcss: function() {
-        return [autoprefixer];
-    },
-
     resolve: {
-        modulesDirectories: [
+        modules: [
             'node_modules',
             'js'
         ]
@@ -60,6 +62,14 @@ module.exports = {
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                context: __dirname,
+                postcss: [
+                    autoprefixer
+                ]
+            }
+        }),
         new ExtractTextPlugin('base.css')
     ]
 };

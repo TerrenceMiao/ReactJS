@@ -51,7 +51,7 @@
         "eslint": "^3.19.0",
         "eslint-plugin-mocha": "^4.3.0",
         "eslint-plugin-react": "^6.10.3",
-        "extract-text-webpack-plugin": "^1.0.1",
+        "extract-text-webpack-plugin": "^2.1.2",
         "expect": "^1.8.0",
         "file-loader": "^0.11.2",
         "husky": "^0.13.4",
@@ -80,8 +80,8 @@
         "svgo-loader": "^1.2.1",
         "url-loader": "^0.5.9",
         "watchify": "^3.7.0",
-        "webpack": "^1.14.0",
-        "webpack-dev-server": "^1.16.2"
+        "webpack": "^2.6.1",
+        "webpack-dev-server": "^2.11.1"
     },
     "files": [],
     "lint-staged": {
