@@ -20,6 +20,14 @@ in the directory to install React from npm.
 
 - Replace "[Google API Key]" in index.html with Google API Key - https://console.cloud.google.com/
 
+- Change the URL of ElasticSearch, which with Postal Addresses and Post Office Location data, in **settings.json** file
+
+```sh
+{
+    "elasticSearchUrl": "http://10.101.36.82:9200"
+}
+```  
+
 - Run:
 
 ```sh

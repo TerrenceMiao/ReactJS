@@ -19,8 +19,41 @@ var combinedStreetBoxMarkers = [];
 
 var lastInfoBubble = null;
 
+var settings = null;
+
 
 function initializeMaps() {
+
+    // Get application settings from 
+    var url = "/settings.json";
+
+    var headers = new Headers();
+
+    headers.append('Accept', 'application/json');
+
+    var init = {
+        method: 'GET',
+        headers: headers,
+        redirect: 'follow',
+        cache: 'default'
+    };
+
+    var request = new Request(url, init);
+
+    fetch(request)
+        .then(function(response) {
+            if (response.status === 200) {
+                return response.json();
+            }
+
+            throw "Getting application settings request failed";
+        })
+        .then(function(data) {
+            settings = data;
+        })
+        .catch(function(error) {
+            console.log("Error thrown: " + error);
+        });
 
     // Basic maps, default is "Melbourne, VIC"
     var latLng = new google.maps.LatLng(-37.8131869, 144.9629796);
@@ -45,13 +78,15 @@ function initializeMaps() {
         showSelectedPlace();
     });
 
-    // Note that the API is still vendor-prefixed in browsers implementing it
+    // Catch the event when click on "Toggle fullscreen view" on Google Maps
+    // Note that the API is still vendor-prefixed in browsers implementing it. Event 'webkitfullscreenchange' 
+    // is the event for Chrome browser. Chrome browser "Enter Full Screen" won't trigger this event. 
     document.addEventListener('webkitfullscreenchange', function() {
-        console.log("Full screen event triggered");
+        console.log("Fullscreen view event triggered");
         // google.maps.event.trigger(map, 'resize');
 
-        document.getElementById('autocomplete').style.display = 'none';
-        document.getElementById('autocomplete').style.display = 'disp';
+        // document.getElementById('autocomplete').style.display = 'none';
+        // document.getElementById('autocomplete').style.display = 'disp';
     });
 }
 
@@ -230,6 +265,8 @@ function showServiceMarkers() {
 
 function queryAndShowServices(query, service, serviceMarkers, from, size) {
 
+    var url = settings.elasticSearchUrl + '/location/_search';
+
     var headers = new Headers();
 
     // Since ElasticSearch 5.x, content type "x-www-form-urlencoded" is NOT supported anymore. Replace with "application/json"
@@ -245,11 +282,11 @@ function queryAndShowServices(query, service, serviceMarkers, from, size) {
         cache: 'default'
     };
 
-    var url = 'http://localhost:9200/location/_search';
-
     if (!isNaN(from) && !isNaN(size)) {
         url += '?from=' + from + '&size=' + size;
     }
+
+    console.log("Connecting to ElasticSearch on URL: " + url);
 
     var request = new Request(url, init);
 

@@ -8,6 +8,8 @@ import parse from 'autosuggest-highlight/parse';
 import streetTypes from '../data/streetTypes.json';
 import localities from '../data/localities.json';
 
+import settings from '../settings.json';
+
 const states = [
     { name: 'VIC'},
     { name: 'NSW'},
@@ -23,6 +25,10 @@ const WORD_ONLY_PATTERN = /^[\D|\s]*$/;
 const HOUSE_NUMBER_PRIORITY_PATTERN = /^(\d{1,5})([\D|\s]{1,})$/;
 const POSTCODE_PRIORITY_PATTERN = /^([\D|\s]{1,})(\d{1,4})$/;
 const FULL_ADDRESS_PATTERN = /^(\d{1,5})([\D|\s]{1,})(\d{1,4})$/;
+
+// global environment configuration "ELASTICSEARCH_URL" defined in web.config.js file, and ONLY accessible from
+// this JavaScript file
+// const elasticSearchUrl = ELASTICSEARCH_URL;
 
 
 function buildQuery(escapedValue) {
@@ -290,7 +296,7 @@ class App extends React.Component { // eslint-disable-line no-undef
             cache: 'default'
         }
 
-        var request = new Request('http://localhost:9200/postaladdress/_search', init);
+        var request = new Request(settings.elasticSearchUrl + '/postaladdress/_search', init);
 
         const thisRequest = this.latestRequest = fetch(request)
             .then(response => response.json())
