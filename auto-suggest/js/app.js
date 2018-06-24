@@ -5,11 +5,8 @@ import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 
-import PropTypes from 'prop-types';
-
-
-const streetTypes = require('../data/streetTypes.json');
-const localities = require('../data/localities.json');
+import streetTypes from '../data/streetTypes.json';
+import localities from '../data/localities.json';
 
 const states = [
     { name: 'VIC'},
