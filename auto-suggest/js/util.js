@@ -76,7 +76,10 @@ function getIPs(callback) {
 
 // Test
 getIPs(function(ip) {
+
+    console.log("IP adresses are: " + ip);
+
     if (ipv4 = /[0-9]{1,3}(\.[0-9]{1,3}){3}/.exec(ip)) {
-        console.log("The client-side JavaScripts are running on IP adress: " + ipv4[0]);
+        console.log("The client-side JavaScripts are running on IPv4 adress: " + ipv4[0]);
     }
 });
