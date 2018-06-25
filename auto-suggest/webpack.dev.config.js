@@ -26,7 +26,11 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: __dirname
+                include: __dirname,
+                // Turn off the warning:
+                //  [BABEL] Note: The code generator has deoptimised the styling of "/Users/terrence/Projects/ReactJS/auto-suggest/node_modules/react-dom/cjs/react-dom.development.js"
+                //  as it exceeds the max of "500KB".
+                exclude: /node_modules/
             },
             {
                 test: /\.json$/,
