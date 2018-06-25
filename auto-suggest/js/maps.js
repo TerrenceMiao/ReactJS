@@ -19,41 +19,17 @@ var combinedStreetBoxMarkers = [];
 
 var lastInfoBubble = null;
 
-var settings = null;
+var settings;
 
+
+function setSettings(appSettings) {
+    settings = appSettings;
+}
 
 function initializeMaps() {
 
     // Get application settings from 
-    var url = "/settings.json";
-
-    var headers = new Headers();
-
-    headers.append('Accept', 'application/json');
-
-    var init = {
-        method: 'GET',
-        headers: headers,
-        redirect: 'follow',
-        cache: 'default'
-    };
-
-    var request = new Request(url, init);
-
-    fetch(request)
-        .then(function(response) {
-            if (response.status === 200) {
-                return response.json();
-            }
-
-            throw "Getting application settings request failed";
-        })
-        .then(function(data) {
-            settings = data;
-        })
-        .catch(function(error) {
-            console.log("Error thrown: " + error);
-        });
+    settings = getAppSettings(setSettings);
 
     // Basic maps, default is "Melbourne, VIC"
     var latLng = new google.maps.LatLng(-37.8131869, 144.9629796);

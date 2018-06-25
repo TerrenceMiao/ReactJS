@@ -1,4 +1,36 @@
+// Get application settings
+function getAppSettings(callback)  {
 
+   var url = "/settings.json";
+
+   var headers = new Headers();
+
+   headers.append('Accept', 'application/json');
+
+   var init = {
+       method: 'GET',
+       headers: headers,
+       redirect: 'follow',
+       cache: 'default'
+   };
+
+   var request = new Request(url, init);
+
+   fetch(request)
+       .then(function(response) {
+           if (response.status === 200) {
+               return response.json();
+           }
+
+           throw "Getting application settings request failed";
+       })
+       .then(function(data) {
+           callback(data);
+       })
+       .catch(function(error) {
+           console.log("Error thrown: " + error);
+       });
+}
 
 // Get client's, which this JavaScript is running on, IP addresses
 function getIPs(callback) {
