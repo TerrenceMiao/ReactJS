@@ -28,6 +28,8 @@ function setSettings(appSettings) {
 
 function initializeMaps() {
 
+    console.log("Initialising Google Maps");
+
     // Get application settings from 
     settings = getAppSettings(setSettings);
 
@@ -39,8 +41,12 @@ function initializeMaps() {
         center: latLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         panControl: true,
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true,
         streetViewControl: true,
-        zoomControl: true
+        rotateControl: true,
+        fullscreenControl: true
     }
 
     map = new google.maps.Map(document.getElementById("map_canvas"), options);
@@ -59,10 +65,14 @@ function initializeMaps() {
     // is the event for Chrome browser. Chrome browser "Enter Full Screen" won't trigger this event. 
     document.addEventListener('webkitfullscreenchange', function() {
         console.log("Fullscreen view event triggered");
+
+        // doesn't have any effect starting from version 3.32
         // google.maps.event.trigger(map, 'resize');
+
 
         // document.getElementById('autocomplete').style.display = 'none';
         // document.getElementById('autocomplete').style.display = 'disp';
+
     });
 }
 
