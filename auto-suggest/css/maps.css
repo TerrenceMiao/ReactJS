@@ -9,6 +9,8 @@
     /* border: 1px solid grey; */
     top: 0px;
     left: 0px;
+    /* set maps as the background */
+    z-index: -100;
 }
 
 #listing {
