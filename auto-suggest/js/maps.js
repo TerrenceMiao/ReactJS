@@ -40,6 +40,8 @@ function initializeMaps() {
         zoom: 12,
         center: latLng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
+        // enable zoom and pan interaction
+        gestureHandling: 'greedy',
         panControl: true,
         zoomControl: true,
         mapTypeControl: true,
