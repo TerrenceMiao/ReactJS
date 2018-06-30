@@ -11,16 +11,20 @@
 <body>
     <!-- <h1>Postal Address auto-suggest</h1> -->
 
+    <div id="map_canvas"></div>
+
     <div class="wrapper">
         <div class="left">
             <div id="app"></div>
+
+            <div id="listing" onscroll="reviewsScroll()"><table id="resultsTable"><tbody id="results"></tbody></table></div>
         </div>
 
         <div class="right">
             <div id="locationField">
                 <input id="autocomplete" type="hidden" value="18 Balfour Cl, Point Cook VIC 3030" />
             </div>
-            
+
             <div id="controls">
                 <form name="controls">
                     <input type="radio" name="type" value="establishment" onclick="search()" checked="checked" />All<br/>
@@ -29,13 +33,9 @@
                 </form>
             </div>
             
-            <div id="listing" onscroll="reviewsScroll()"><table id="resultsTable"><tbody id="results"></tbody></table></div>
-            
             <div id="reviews"></div>
         </div>
     </div>
-
-    <div id="map_canvas"></div>
 
     <!-- "google-maps.js" is a copy of "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" -->
     <!-- Download Google Maps JS by using curl -O "http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" -->
@@ -47,7 +47,7 @@
     <script src="js/maps.js"></script>
 
     <script src="js/infobubble.js"></script>
-    
+
     <script src="js/util.js"></script>
     
     <!-- Babel artefact -->

@@ -63,20 +63,53 @@ function initializeMaps() {
     });
 
     // Catch the event when click on "Toggle fullscreen view" on Google Maps
-    // Note that the API is still vendor-prefixed in browsers implementing it. Event 'webkitfullscreenchange' 
+    // Note that the API is still vendor-prefixed in browsers implementing it. For example event 'webkitfullscreenchange' 
     // is the event for Chrome browser. Chrome browser "Enter Full Screen" won't trigger this event. 
-    document.addEventListener('webkitfullscreenchange', function() {
-        console.log("Fullscreen view event triggered");
-
-        // doesn't have any effect starting from version 3.32
-        // google.maps.event.trigger(map, 'resize');
-
-
-        // document.getElementById('autocomplete').style.display = 'none';
-        // document.getElementById('autocomplete').style.display = 'disp';
-
-    });
+    // So far, only video, canvas, img element to take up full screen mode.
+    ['webkitfullscreenchange', 'mozFullScreen'].forEach(function(e) {
+        document.addEventListener(e, function() {
+            // doesn't have any effect starting from version 3.32
+            // google.maps.event.trigger(map, 'resize');
+    
+            var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+            // fullscreenEnabled always "true"
+            // var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled;
+    
+            if (fullscreenElement !== null) {
+                console.log("Turn on fullscreen view");
+                // launchIntoFullscreen(document.getElementById('listing'));
+            } else {
+                console.log("Turn off fullscreen view");
+                exitFullscreen();
+            }
+        });
+    }); 
 }
+
+function launchIntoFullscreen(element) {
+
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    }
+}
+
+// Whack fullscreen, called on the document object only
+function exitFullscreen() {
+  
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if(document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if(document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
 
 function doQuery() {
 
@@ -135,6 +168,7 @@ function tilesLoaded() {
     search();
 }
 
+/* This function is never triggered */
 function showSelectedPlace() {
 
     clearResults();
