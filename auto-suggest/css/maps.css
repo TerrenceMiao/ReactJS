@@ -2,10 +2,10 @@
 #map_canvas {
     /* To display Google Maps in full screen */
     position: absolute;
-    width: 100%;
+    width: 100vw;
+    /* Can't "vh" though map_canvas has "offsetHeight" value, but Input & Listings disappear in full screen */
+    /* height: 100vh; */
     height: 100%;
-    /* width: 399px; */
-    /* height: 399px; */
     /* border: 1px solid grey; */
     top: 0px;
     left: 0px;

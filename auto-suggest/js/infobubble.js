@@ -1714,7 +1714,8 @@ InfoBubble.prototype.figureOutSize_ = function() {
     width = mapWidth;
   }
 
-  if (height > mapHeight) {
+  // Workaround when map_canvas height is 100% mapDiv.offsetHeight return 0
+  if (mapHeight !== 0 && height > mapHeight) {
     height = mapHeight - tabHeight;
   }
 
