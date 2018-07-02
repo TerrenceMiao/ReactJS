@@ -611,22 +611,24 @@ function getAspectsTable(aspects) {
     var scoresTBody = document.createElement('tbody');
     var scoresTr = document.createElement('tr');
 
-    for (var j = 0; j < aspects.length; j++) {
-        var aspectTd = document.createElement('td');
+    if (aspects !== undefined) {
+        for (var j = 0; j < aspects.length; j++) {
+            var aspectTd = document.createElement('td');
 
-        aspectTd.setAttribute('class', 'aspectName');
-        aspectTd.setAttribute('className', 'aspectName');
+            aspectTd.setAttribute('class', 'aspectName');
+            aspectTd.setAttribute('className', 'aspectName');
 
-        var scoreTd = document.createElement('td');
+            var scoreTd = document.createElement('td');
 
-        scoreTd.setAttribute('class', 'aspectScore');
-        scoreTd.setAttribute('className', 'aspectScore');
+            scoreTd.setAttribute('class', 'aspectScore');
+            scoreTd.setAttribute('className', 'aspectScore');
 
-        aspectTd.appendChild(document.createTextNode(aspects[j].type.toUpperCase() + ':'));
-        scoreTd.appendChild(document.createTextNode(aspects[j].rating));
+            aspectTd.appendChild(document.createTextNode(aspects[j].type.toUpperCase() + ':'));
+            scoreTd.appendChild(document.createTextNode(aspects[j].rating));
 
-        scoresTr.appendChild(aspectTd);
-        scoresTr.appendChild(scoreTd);
+            scoresTr.appendChild(aspectTd);
+            scoresTr.appendChild(scoreTd);
+        }
     }
 
     scoresTBody.appendChild(scoresTr);
