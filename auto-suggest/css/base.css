@@ -1,10 +1,19 @@
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background: #fff;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
     line-height: 1.7;
+    /* Way to determine the height of the screen and use that number of pixels as the height of the map div */
+    /* However can't control the map if height: 100% enabled */
+    /* height: 100%; */
     margin: 0;
-    /* padding: 30px; */
+    padding: 0;
 }
 
 a {

@@ -123,6 +123,7 @@ Postal Services show up in Google Maps after address search
 
 - Google Maps JavaScript API - Controls Overview, [https://developers.google.com/maps/documentation/javascript/controls](https://developers.google.com/maps/documentation/javascript/controls)
 - Google Maps JavaScript API - Controls Zoom and Pan, [https://developers.google.com/maps/documentation/javascript/interaction](https://developers.google.com/maps/documentation/javascript/interaction)
+- Google Maps JavaScript API - Examples, [https://developers.google.com/maps/documentation/javascript/examples/](https://developers.google.com/maps/documentation/javascript/examples/)
 - MDN Fullscreen API, [https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API)
 - Google Maps GPS Coordinates, [http://www.gps-coordinates.net/](http://www.gps-coordinates.net/)
 - Reactive Maps, A real time components library for building reactive UIs, [https://opensource.appbase.io/reactivemaps/](https://opensource.appbase.io/reactivemaps/)
