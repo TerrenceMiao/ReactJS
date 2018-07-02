@@ -104,11 +104,12 @@
 }
 
 #reviews {
-    position:absolute;
+    position: absolute;
     width: 600px;
     top: 440px;
     height: 298px;
     overflow: auto;
+    visibility: hidden;
 }
 
 .review {
