@@ -119,6 +119,12 @@ Postal Services show up in Google Maps after address search
 
 ![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20-%20Street%20Box%20Red.png "Street Box Red")
  
+
+ ### Display Postal Services on Google Maps fullscreen view
+
+![alt text](https://raw.githubusercontent.com/TerrenceMiao/ReactJS/master/auto-suggest/Postal%20Services%20on%20Google%20Maps%20fullscreen%20view.png "Postal Services on Google Maps fullscreen view")
+
+
 ### Reference
 
 - Google Maps JavaScript API - Controls Overview, [https://developers.google.com/maps/documentation/javascript/controls](https://developers.google.com/maps/documentation/javascript/controls)
