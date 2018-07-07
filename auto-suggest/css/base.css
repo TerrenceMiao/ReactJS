@@ -84,8 +84,6 @@ ul {
 
 .react-autosuggest__container {
     position: relative;
-    /* In Google Maps fullscreen mode, but can't input */
-    z-index: 2147483647;
 }
 
 .react-autosuggest__input {
@@ -138,4 +136,15 @@ ul {
 /* Highlight of suggestions */
 .highlight {
     font-weight: bold;
+}
+
+/* Enforce autosuggest input and listing customised position when Google Maps in fullscreen view */
+div.gm-style #app { 
+    top: 49px !important; 
+    left: 10px !important; 
+}
+
+div.gm-style #listing { 
+    top: 49px !important; 
+    right: 100px !important; 
 }

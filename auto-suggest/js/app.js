@@ -343,6 +343,7 @@ class App extends React.Component { // eslint-disable-line no-undef
         const { value, suggestions, isLoading } = this.state;
 
         const inputProps = {
+            id: "autosuggest",
             placeholder: "Type '111 Bourke St Melbourne VIC 3030' like for suggestions",
             value,
             onChange: this.onChange

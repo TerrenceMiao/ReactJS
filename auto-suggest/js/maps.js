@@ -78,9 +78,13 @@ function initializeMaps() {
             if (fullscreenElement !== null) {
                 console.log("Turn on fullscreen view");
                 // launchIntoFullscreen(document.getElementById('listing'));
+
+                // Display autosuggent input box when Google Maps in fullscreen view
+                map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('app'));
+                map.controls[google.maps.ControlPosition.RIGHT_TOP].push(document.getElementById('listing'));
             } else {
                 console.log("Turn off fullscreen view");
-                exitFullscreen();
+                // exitFullscreen();
             }
         });
     }); 

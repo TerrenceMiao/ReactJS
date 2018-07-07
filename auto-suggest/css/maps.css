@@ -9,8 +9,6 @@
     /* border: 1px solid grey; */
     top: 0px;
     left: 0px;
-    /* set maps as the background */
-    z-index: -2147483647;
 }
 
 #listing {
@@ -22,8 +20,6 @@
     top: 50px;
     cursor: pointer;
     /* border-right: 1px solid lightgrey; */
-    /* Overlay Google Maps z-index in fullscreen and display on the map */
-    z-index: 2147483647;
 }
 
 #controls {

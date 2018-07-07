@@ -9,14 +9,12 @@
 </head>
 
 <body>
-    <!-- <h1>Postal Address auto-suggest</h1> -->
-
+    <!-- "map_canvas" at beginning of HTML otherwise "wrapper" content won't display on the map unless set z-index: -2147483647; -->
     <div id="map_canvas"></div>
 
     <div class="wrapper">
         <div class="left">
             <div id="app"></div>
-
             <div id="listing" onscroll="reviewsScroll()"><table id="resultsTable"><tbody id="results"></tbody></table></div>
         </div>
 
