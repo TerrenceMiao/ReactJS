@@ -129,7 +129,11 @@ Postal Services show up in Google Maps after address search
 
 - Google Maps JavaScript API - Controls Overview, [https://developers.google.com/maps/documentation/javascript/controls](https://developers.google.com/maps/documentation/javascript/controls)
 - Google Maps JavaScript API - Controls Zoom and Pan, [https://developers.google.com/maps/documentation/javascript/interaction](https://developers.google.com/maps/documentation/javascript/interaction)
+- Autocomplete for Addresses and Search Terms, [https://developers.google.com/maps/documentation/javascript/places-autocomplete](https://developers.google.com/maps/documentation/javascript/places-autocomplete)
+- Google Maps JavaScript API V3 Reference, [https://developers.google.com/maps/documentation/javascript/reference/3.exp/](https://developers.google.com/maps/documentation/javascript/reference/3.exp/)
 - Google Maps JavaScript API - Examples, [https://developers.google.com/maps/documentation/javascript/examples/](https://developers.google.com/maps/documentation/javascript/examples/)
+- How to position custom button controls on Google Maps API, [https://gis.stackexchange.com/questions/244006/how-to-position-custom-button-controls-on-google-maps-api](https://gis.stackexchange.com/questions/244006/how-to-position-custom-button-controls-on-google-maps-api)
+- Google Maps API V3 custom controls position, [https://stackoverflow.com/questions/2934269/google-maps-api-v3-custom-controls-position](https://stackoverflow.com/questions/2934269/google-maps-api-v3-custom-controls-position)
 - MDN Fullscreen API, [https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API)
 - Google Maps GPS Coordinates, [http://www.gps-coordinates.net/](http://www.gps-coordinates.net/)
 - Reactive Maps, A real time components library for building reactive UIs, [https://opensource.appbase.io/reactivemaps/](https://opensource.appbase.io/reactivemaps/)
