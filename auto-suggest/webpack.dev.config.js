@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
 
@@ -15,6 +15,8 @@ module.exports = {
         './js/app'
     ],
 
+    mode: "development",
+
     output: {
         path: path.join(__dirname, 'dist'), // Must be an absolute path
         filename: 'compiled.app.js',
@@ -22,7 +24,7 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -33,16 +35,10 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.json$/,
-                loader: 'json-loader'
-            },
-            {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: 'style',
-                    use: 'css?modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss!less'
-                }),
-                exclude: /node_modules/
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader, "css-loader"
+                ]
             },
             {
                 test: /\.jpg$/,
@@ -81,6 +77,9 @@ module.exports = {
             ELASTICSEARCH_URL: JSON.stringify('http://10.0.0.100:9200')
         }),
 
-        new ExtractTextPlugin('base.css')
+        new MiniCssExtractPlugin({
+            filename: "base.css",
+            chunkFilename: "auto-suggest-base.css"
+        })
     ]
 };
