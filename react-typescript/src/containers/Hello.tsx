@@ -7,8 +7,8 @@ import { IStoreState } from '../types/index';
 
 export function mapStateToProps({ enthusiasmLevel, languageName }: IStoreState) {
     return {
-      enthusiasmLevel,
-      name: languageName,
+        enthusiasmLevel,
+        name: languageName,
     }
   }
   
