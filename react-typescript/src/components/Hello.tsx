@@ -26,7 +26,7 @@ function Hello({ name, enthusiasmLevel = 1, onIncrement, onDecrement }: IProps) 
             </div>
         </div>
     );
-  }
+}
 
 export default Hello;
 
