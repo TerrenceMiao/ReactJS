@@ -10,7 +10,7 @@ export function mapStateToProps({ enthusiasmLevel, languageName }: IStoreState) 
         enthusiasmLevel,
         name: languageName,
     }
-  }
+}
   
 export function mapDispatchToProps(dispatch: Dispatch<actions.EnthusiasmAction>) {
     return {
