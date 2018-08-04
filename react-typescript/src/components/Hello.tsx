@@ -9,24 +9,49 @@ export interface IProps {
     onDecrement?: () => void;
 }
 
-function Hello({ name, enthusiasmLevel = 1, onIncrement, onDecrement }: IProps) {
+// function "Hello"
+// function Hello({ name, enthusiasmLevel = 1, onIncrement, onDecrement }: IProps) {
 
-    if (enthusiasmLevel <= 0) {
-        throw new Error('You could be a little more enthusiastic. :D');
-    }
+//     if (enthusiasmLevel <= 0) {
+//         throw new Error('You could be a little more enthusiastic. :D');
+//     }
   
-    return (
-        <div className="hello">
-            <div className="greeting">
-                Hello {name + getExclamationMarks(enthusiasmLevel)}
+//     return (
+//         <div className="hello">
+//             <div className="greeting">
+//                 Hello {name + getExclamationMarks(enthusiasmLevel)}
+//             </div>
+//             <div>
+//                 <button onClick={onDecrement}>-</button>
+//                 <button onClick={onIncrement}>+</button>
+//             </div>
+//         </div>
+//     );
+// }
+
+// class "Hello"
+class Hello extends React.Component<IProps> {
+
+    public render() {
+        const { name, enthusiasmLevel = 1, onIncrement, onDecrement } = this.props;
+    
+        if (enthusiasmLevel <= 0) {
+            throw new Error('You could be a little more enthusiastic. :D');
+        }
+  
+        return (
+            <div className="hello">
+                <div className="greeting">
+                    Hello {name + getExclamationMarks(enthusiasmLevel)}
+                </div>
+                <div>
+                    <button onClick={onDecrement}>-</button>
+                    <button onClick={onIncrement}>+</button>
+                </div>
             </div>
-            <div>
-                <button onClick={onDecrement}>-</button>
-                <button onClick={onIncrement}>+</button>
-            </div>
-        </div>
-    );
-}
+        );
+    }
+}   
 
 export default Hello;
 
