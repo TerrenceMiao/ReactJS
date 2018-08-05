@@ -1,0 +1,123 @@
+Docker build and publish
+========================
+
+Build Docker image:
+
+``` Bash
+terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
+15:30:01 𝜆 docker build -t jtech/react-typescript .
+Sending build context to Docker daemon  205.6MB
+Step 1/6 : FROM node:8-slim
+8-slim: Pulling from library/node
+5bba3ecb4cd6: Pull complete
+196b8e3c919d: Pull complete
+7d083412657b: Pull complete
+36b71377f6d7: Pull complete
+5dd053e625b2: Pull complete
+Digest: sha256:0fc9eb85150ee4d313e6e042fae8f60f7485ffe1f98c61c1a99d88723432d94c
+Status: Downloaded newer image for node:8-slim
+ ---> 1d5555ef5229
+Step 2/6 : WORKDIR /server
+ ---> Running in 07e18cce18e6
+Removing intermediate container 07e18cce18e6
+ ---> 402b4c095dde
+Step 3/6 : COPY . /server
+ ---> cbb8fda58765
+Step 4/6 : RUN npm install
+ ---> Running in 5550972ef00e
+npm WARN ajv-keywords@3.2.0 requires a peer of ajv@^6.0.0 but none is installed. You must install peer dependencies yourself.
+
+up to date in 10.821s
+Removing intermediate container 5550972ef00e
+ ---> 5407299b4660
+Step 5/6 : EXPOSE 3000
+ ---> Running in 4622578008fa
+Removing intermediate container 4622578008fa
+ ---> 776d0ff2001d
+Step 6/6 : CMD [ "npm", "start" ]
+ ---> Running in 25dd23712286
+Removing intermediate container 25dd23712286
+ ---> c54b5604eea0
+Successfully built c54b5604eea0
+Successfully tagged react-typescript:latest
+
+terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
+15:47:25 𝜆 docker images
+REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
+jtech/react-typescript                     latest              c9cd90a8253d        2 minutes ago       366MB
+node                                       8-slim              1d5555ef5229        2 weeks ago         182MB
+docker/kube-compose-controller             v0.3.9              16260a912a7b        7 weeks ago         29.9MB
+docker/kube-compose-api-server             v0.3.9              8757267f7b06        7 weeks ago         42.5MB
+k8s.gcr.io/kube-proxy-amd64                v1.10.3             4261d315109d        2 months ago        97.1MB
+k8s.gcr.io/kube-apiserver-amd64            v1.10.3             e03746fe22c3        2 months ago        225MB
+k8s.gcr.io/kube-controller-manager-amd64   v1.10.3             40c8d10b2d11        2 months ago        148MB
+k8s.gcr.io/kube-scheduler-amd64            v1.10.3             353b8f1d102e        2 months ago        50.4MB
+k8s.gcr.io/etcd-amd64                      3.1.12              52920ad46f5b        4 months ago        193MB
+k8s.gcr.io/kubernetes-dashboard-amd64      v1.8.3              0c60bcf89900        5 months ago        102MB
+k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64     1.14.8              c2ce1ffb51ed        7 months ago        41MB
+k8s.gcr.io/k8s-dns-sidecar-amd64           1.14.8              6f7f2dc7fab5        7 months ago        42.2MB
+k8s.gcr.io/k8s-dns-kube-dns-amd64          1.14.8              80cc5ea4b547        7 months ago        50.5MB
+k8s.gcr.io/pause-amd64                     3.1                 da86e6ba6ca1        7 months ago        742kB
+```
+
+Publish Docker image into https://hub.docker.com:
+
+``` Bash
+terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
+15:46:48 𝜆 docker login --username=terrencemiao
+Password:
+Login Succeeded
+
+terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
+15:49:49 𝜆 docker tag c9cd90a8253d jtech/react-typescript:latest
+
+terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
+15:50:34 𝜆 docker push jtech/react-typescript
+The push refers to repository [docker.io/jtech/react-typescript]
+5e46e194a5e4: Pushed
+e9fabeafe930: Pushed
+4d0b5d9e5535: Pushed
+8b652dbaf692: Mounted from library/node
+35a77da0e900: Mounted from library/node
+7c6ab5fb7059: Mounted from library/node
+ed271eac23e9: Mounted from library/node
+156ff16f37e4: Mounted from library/node
+latest: digest: sha256:e68da4ebaab55e03902a5eb50d6b9dae19f9c7ae6211425260c0fcf4740205ad size: 1995
+```
+
+Run Docker image:
+
+```
+terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
+15:50:34 𝜆 docker pull jtech/react-typescript
+
+terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
+15:33:29 𝜆 docker run -d -p 3000:3000 jtech/react-typescript
+
+> react-typescript@0.1.0 start /server
+> react-scripts-ts start
+
+Starting type checking and linting service...
+Using 1 worker with 2048MB memory limit
+Watching: /server/src
+Starting the development server...
+
+ts-loader: Using typescript@2.9.2 and /server/tsconfig.json
+Compiled successfully!
+
+You can now view react-typescript in the browser.
+
+  Local:            http://localhost:3000/
+  On Your Network:  http://172.17.0.2:3000/
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+```
+
+Visit applicatin at: http://localhost:3000/
+
+
+References
+----------
+
+- Debugging TypeScript in a Docker Container, _https://github.com/Microsoft/vscode-recipes/tree/master/Docker-TypeScript_
