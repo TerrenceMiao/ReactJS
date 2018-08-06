@@ -3,9 +3,10 @@ Docker build and publish
 
 Build Docker image:
 
-``` Bash
+[source,bash]
+----
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
-15:30:01 𝜆 docker build -t jtech/react-typescript .
+𝜆 docker build -t jtech/react-typescript .
 Sending build context to Docker daemon  205.6MB
 Step 1/6 : FROM node:8-slim
 8-slim: Pulling from library/node
@@ -42,7 +43,7 @@ Successfully built c54b5604eea0
 Successfully tagged react-typescript:latest
 
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
-15:47:25 𝜆 docker images
+𝜆 docker images
 REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
 jtech/react-typescript                     latest              c9cd90a8253d        2 minutes ago       366MB
 node                                       8-slim              1d5555ef5229        2 weeks ago         182MB
@@ -58,21 +59,22 @@ k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64     1.14.8              c2ce1ffb51ed     
 k8s.gcr.io/k8s-dns-sidecar-amd64           1.14.8              6f7f2dc7fab5        7 months ago        42.2MB
 k8s.gcr.io/k8s-dns-kube-dns-amd64          1.14.8              80cc5ea4b547        7 months ago        50.5MB
 k8s.gcr.io/pause-amd64                     3.1                 da86e6ba6ca1        7 months ago        742kB
-```
+----
 
 Publish Docker image into https://hub.docker.com:
 
-``` Bash
+[source,bash]
+----
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
-15:46:48 𝜆 docker login --username=terrencemiao
+𝜆 docker login --username=terrencemiao
 Password:
 Login Succeeded
 
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
-15:49:49 𝜆 docker tag c9cd90a8253d jtech/react-typescript:latest
+𝜆 docker tag c9cd90a8253d jtech/react-typescript:latest
 
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
-15:50:34 𝜆 docker push jtech/react-typescript
+𝜆 docker push jtech/react-typescript
 The push refers to repository [docker.io/jtech/react-typescript]
 5e46e194a5e4: Pushed
 e9fabeafe930: Pushed
@@ -83,16 +85,17 @@ e9fabeafe930: Pushed
 ed271eac23e9: Mounted from library/node
 156ff16f37e4: Mounted from library/node
 latest: digest: sha256:e68da4ebaab55e03902a5eb50d6b9dae19f9c7ae6211425260c0fcf4740205ad size: 1995
-```
+----
 
 Run Docker image:
 
-```
+[source,bash]
+----
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
-15:50:34 𝜆 docker pull jtech/react-typescript
+𝜆 docker pull jtech/react-typescript
 
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
-15:33:29 𝜆 docker run -d -p 3000:3000 jtech/react-typescript
+𝜆 docker run -d -p 3000:3000 jtech/react-typescript
 
 > react-typescript@0.1.0 start /server
 > react-scripts-ts start
@@ -112,7 +115,7 @@ You can now view react-typescript in the browser.
 
 Note that the development build is not optimized.
 To create a production build, use npm run build.
-```
+----
 
 Visit applicatin at: http://localhost:3000/
 
