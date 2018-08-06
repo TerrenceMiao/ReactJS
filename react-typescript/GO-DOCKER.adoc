@@ -3,7 +3,7 @@ Docker build, publish and run
 
 Build Docker image:
 
-[source,bash]
+[source.console]
 ----
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
 𝜆 docker build -t jtech/react-typescript .
@@ -63,7 +63,7 @@ k8s.gcr.io/pause-amd64                     3.1                 da86e6ba6ca1     
 
 Publish Docker image into https://hub.docker.com:
 
-[source,bash]
+[source.console]
 ----
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
 𝜆 docker login --username=terrencemiao
@@ -89,7 +89,7 @@ latest: digest: sha256:e68da4ebaab55e03902a5eb50d6b9dae19f9c7ae6211425260c0fcf47
 
 Run Docker image:
 
-[source,bash]
+[source.console]
 ----
 terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
 𝜆 docker pull jtech/react-typescript
