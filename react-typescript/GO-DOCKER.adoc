@@ -1,5 +1,5 @@
-Docker build and publish
-========================
+Docker build, publish and run
+=============================
 
 Build Docker image:
 
