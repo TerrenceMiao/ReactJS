@@ -1,3 +1,3 @@
 {
-    "elasticSearchUrl": "http://10.101.36.82:9200"
+    "elasticSearchUrl": "http://10.0.0.100:9200"
 }
