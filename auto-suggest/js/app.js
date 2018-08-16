@@ -8,7 +8,7 @@ import parse from 'autosuggest-highlight/parse';
 import streetTypes from '../data/streetTypes.json';
 import localities from '../data/localities.json';
 
-import settings from '../settings.json';
+import settings from '../config/settings.json';
 
 const states = [
     { name: 'VIC'},

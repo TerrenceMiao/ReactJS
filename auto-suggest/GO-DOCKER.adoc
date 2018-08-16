@@ -1,0 +1,128 @@
+Docker build, publish and run
+=============================
+
+Build Docker image for ReactJS application at first:
+
+[source.console]
+----
+terrence@igloo ~/Projects/ReactJS/auto-suggest (master ⚡↩=)
+𝜆 docker build -t jtech/auto-suggest .
+Sending build context to Docker daemon    200MB
+Step 1/6 : FROM node:8-slim
+ ---> 1d5555ef5229
+Step 2/6 : WORKDIR /server
+ ---> Running in a69c99876999
+Removing intermediate container a69c99876999
+ ---> 58a3f2fac0fb
+Step 3/6 : COPY . /server
+ ---> 71e82855b5fb
+Step 4/6 : RUN npm install
+ ---> Running in 0c702a1e57d0
+up to date in 10.673s
+Removing intermediate container 0c702a1e57d0
+ ---> ec54ec844588
+Step 5/6 : EXPOSE 3000
+ ---> Running in 917f57f40a97
+Removing intermediate container 917f57f40a97
+ ---> d289eaf5e42a
+Step 6/6 : CMD [ "npm", "start" ]
+ ---> Running in 24de58111047
+Removing intermediate container 24de58111047
+ ---> 571394cdf8cb
+Successfully built 571394cdf8cb
+Successfully tagged jtech/auto-suggest:latest
+----
+
+Docker images created:
+
+[source.console]
+----
+terrence@igloo ~/Projects/ReactJS/auto-suggest (master ⚡↩☡=)
+𝜆 docker images
+REPOSITORY                                      TAG                 IMAGE ID            CREATED              SIZE
+jtech/auto-suggest                              latest              78ee96554b30        26 seconds ago      351MB
+node                                            8-slim              1d5555ef5229        4 weeks ago         182MB
+----
+
+Publish Docker image into https://hub.docker.com:
+
+[source.console]
+----
+terrence@igloo ~/Projects/ReactJS/auto-suggest (master ⚡↩☡=)
+𝜆 docker login --username=terrencemiao
+Password:
+Login Succeeded
+
+terrence@igloo ~/Projects/ReactJS/auto-suggest (master ⚡↩☡=)
+𝜆 docker tag 78ee96554b30 jtech/auto-suggest:latest
+
+terrence@igloo ~/Projects/ReactJS/auto-suggest (master ⚡↩☡=)
+𝜆 docker push jtech/auto-suggest
+The push refers to repository [docker.io/jtech/auto-suggest]
+95cdd868a3b0: Pushed
+d03bf152d2fb: Pushed
+63ecc4837a03: Pushed
+8b652dbaf692: Mounted from jtech/react-typescript
+35a77da0e900: Mounted from jtech/react-typescript
+7c6ab5fb7059: Mounted from jtech/react-typescript
+ed271eac23e9: Mounted from jtech/react-typescript
+156ff16f37e4: Mounted from jtech/react-typescript
+latest: digest: sha256:63a5179a2c0602e83d04f754d71e8a081de4a77d05fe4edc20a73a735ff71130 size: 1995
+----
+
+Run Docker image, with the correct ElasticSearch URL:
+
+[source.console]
+----
+terrence@igloo ~/auto-suggest
+𝜆 cat config/settings.json
+{
+    "elasticSearchUrl": "http://10.101.36.85:9200"
+}
+
+terrence@igloo ~/auto-suggest (master ⚡↩☡=)
+𝜆 docker run -v "$PWD/config":/server/config -p 3000:3000 --name auto-suggest jtech/auto-suggest
+
+> Postal-Address-auto-suggest@0.0.1 start /server
+> npm run watch & node server
+
+
+> Postal-Address-auto-suggest@0.0.1 watch /server
+> watchify ./js/app.js -v -t babelify -o compiled.app.js
+
+==> 🌎 Listening on port 3000. Open up http://0.0.0.0:3000/index.html in your browser.
+2331716 bytes written to compiled.app.js (3.02 seconds) at 00:36:54
+ℹ ｢wdm｣: Hash: 953994e073145524e20f
+Version: webpack 4.16.1
+Time: 2727ms
+Built at: 2018-08-16 00:36:56
+              Asset      Size  Chunks             Chunk Names
+    compiled.app.js  1.74 MiB    main  [emitted]  main
+compiled.app.js.map   944 KiB    main  [emitted]  main
+Entrypoint main = compiled.app.js compiled.app.js.map
+[./config/settings.json] 55 bytes {main} [built]
+[./data/localities.json] 1.35 MiB {main} [built]
+[./data/streetTypes.json] 5.67 KiB {main} [built]
+[./js/app.js] 15.7 KiB {main} [built]
+[./node_modules/autosuggest-highlight/match/index.js] 1.43 KiB {main} [built]
+[./node_modules/autosuggest-highlight/parse/index.js] 893 bytes {main} [built]
+[./node_modules/diacritic/diacritics.js] 9.91 KiB {main} [built]
+[./node_modules/fbjs/lib/containsNode.js] 923 bytes {main} [built]
+[./node_modules/react-autosuggest/dist/Autosuggest.js] 26.6 KiB {main} [built]
+[./node_modules/react-autosuggest/dist/index.js] 65 bytes {main} [built]
+[./node_modules/react-dom/cjs/react-dom.development.js] 594 KiB {main} [built]
+[./node_modules/react-dom/index.js] 1.33 KiB {main} [built]
+[0] multi ./js/app 28 bytes {main} [built]
+[./node_modules/react/cjs/react.development.js] 45.9 KiB {main} [built]
+[./node_modules/react/index.js] 190 bytes {main} [built]
+    + 29 hidden modules
+ℹ ｢wdm｣: Compiled successfully.
+----
+
+Visit applicatin at: http://localhost:3000/
+
+
+References
+----------
+
+- Debugging TypeScript in a Docker Container, _https://github.com/Microsoft/vscode-recipes/tree/master/Docker-TypeScript_

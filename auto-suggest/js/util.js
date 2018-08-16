@@ -1,7 +1,7 @@
 // Get application settings
 function getAppSettings(callback)  {
 
-   var url = "/settings.json";
+   var url = "/config/settings.json";
 
    var headers = new Headers();
 
