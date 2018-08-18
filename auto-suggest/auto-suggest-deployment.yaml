@@ -14,6 +14,7 @@ spec:
       containers:
       - name: auto-suggest
         image: jtech/auto-suggest:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
           name: http
@@ -25,4 +26,4 @@ spec:
       - name: configuration
         hostPath:
           path: /Users/terrence/Projects/ReactJS/auto-suggest/config
-          type: Directory            
+          type: Directory
