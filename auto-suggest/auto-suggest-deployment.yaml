@@ -1,0 +1,28 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: auto-suggest
+spec:
+  selector:
+    matchLabels:
+      run: auto-suggest
+  template:
+    metadata:
+      labels:
+        run: auto-suggest
+    spec:
+      containers:
+      - name: auto-suggest
+        image: jtech/auto-suggest:latest
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - name: configuration
+          mountPath: /server/config               
+      volumes:
+      - name: configuration
+        hostPath:
+          path: /Users/terrence/Projects/ReactJS/auto-suggest/config
+          type: Directory            
