@@ -74,7 +74,7 @@ module.exports = {
 
         // Global environment configuration
         new webpack.DefinePlugin({
-            ELASTICSEARCH_URL: JSON.stringify('http://10.0.0.100:9200')
+            ELASTICSEARCH_URL: JSON.stringify('http://0.0.0.0:9200')
         }),
 
         new MiniCssExtractPlugin({
