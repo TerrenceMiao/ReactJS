@@ -140,11 +140,11 @@ ul {
 
 /* Enforce autosuggest input and listing customised position when Google Maps in fullscreen view */
 div.gm-style #app { 
-    top: 49px !important; 
+    top: 59px !important; 
     left: 10px !important; 
 }
 
 div.gm-style #listing { 
-    top: 49px !important; 
+    top: 59px !important; 
     right: 100px !important; 
 }
