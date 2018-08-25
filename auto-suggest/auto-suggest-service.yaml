@@ -12,7 +12,7 @@ spec:
   - name: http
     port: 3000
     targetPort: 3000
-    nodePort: 30080
+    nodePort: 30300
     protocol: TCP
   externalIPs:
   - 10.0.0.100        
