@@ -74,13 +74,13 @@ Run Docker image, with the correct ElasticSearch URL, for example:
 
 [source.console]
 ----
-terrence@igloo ~/auto-suggest
+terrence@igloo ~/Projects/ReactJS/auto-suggest
 𝜆 cat config/settings.json
 {
     "elasticSearchUrl": "http://10.0.0.100:9200"
 }
 
-terrence@igloo ~/auto-suggest (master ⚡↩☡=)
+terrence@igloo ~/Projects/ReactJS/auto-suggest (master ⚡↩☡=)
 𝜆 docker run -v "$PWD/config/settings.json":/server/config/settings.json -p 3000:3000 --name auto-suggest jtech/auto-suggest
 
 > Postal-Address-auto-suggest@0.0.1 start /server
