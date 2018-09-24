@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+[![Codefresh build status]( https://g.codefresh.io/api/badges/pipeline/terrencemiao/TerrenceMiao%2FReactJS%2Freact-typescript?branch=master&type=cf-2)]( https://g.codefresh.io/repositories/TerrenceMiao/ReactJS/builds?filter=trigger:build;branch:master;service:5ba81ea6b35f251a26df1f1d~react-typescript)
+
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
