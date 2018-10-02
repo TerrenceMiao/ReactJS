@@ -1,0 +1,10 @@
+ReactJS, Typescript and Webpack
+===============================
+
+A simple example how to wire up TypeScript with ReactJS and Webpack.
+
+
+References
+----------
+
+- React & Webpack, _http://www.typescriptlang.org/docs/handbook/react-&-webpack.html_
