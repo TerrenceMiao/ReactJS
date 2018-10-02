@@ -47,6 +47,17 @@ module.exports = {
             {
                 test: /\.svg$/,
                 loader: 'url?limit=8192!svgo' // 8kb
+            },
+            {
+                // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'
+                test: /\.tsx?$/,
+                loader: "awesome-typescript-loader" 
+            },
+            { 
+                // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'
+                enforce: "pre", 
+                test: /\.js$/, 
+                loader: "source-map-loader" 
             }
         ]
     },
@@ -55,10 +66,20 @@ module.exports = {
         modules: [
             'node_modules',
             'js'
-        ]
+        ],
+
+        // Add '.ts' and '.tsx' as resolvable extensions.
+        extensions: [".ts", ".tsx", ".js", ".json"]
     },
 
+    // Enable sourcemaps for debugging webpack's output
     devtool: 'source-map',
+
+    // Prevent bundling of certain imported packages and instead retrieve these external dependencies at runtime. For 
+    // example, to include libraries from a CDN instead of bundling it:
+    externals: {
+
+    },
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
