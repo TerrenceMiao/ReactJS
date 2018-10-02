@@ -1,6 +1,6 @@
 {
     "name": "Postal-Address-auto-suggest",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "Postal Address Auto Suggest example of using React",
     "private": true,
     "main": "index.js",
@@ -21,7 +21,11 @@
         "standalone": "npm run copy-static-files && npm run compile && cross-env BABEL_ENV=development webpack --config webpack.dev.config.js"
     },
     "dependencies": {
-        "prop-types": "^15.6.0"
+        "@types/react": "^16.4.7",
+        "@types/react-dom": "^16.0.6",
+        "prop-types": "^15.6.0",
+        "react": "^16.4.2",
+        "react-dom": "^16.4.2"
     },
     "peerDependencies": {
         "react": ">=0.14.7"
@@ -30,6 +34,7 @@
         "async": "^2.0.1",
         "autoprefixer": "^6.7.7",
         "autosuggest-highlight": "^3.1.0",
+        "awesome-typescript-loader": "^5.2.0",
         "axios": "^0.13.1",
         "babelify": "^7.3.0",
         "babel-cli": "^6.24.1",
@@ -67,20 +72,22 @@
         "openurl": "^1.1.1",
         "postcss-loader": "^1.3.3",
         "prettier": "^1.5.3",
-        "react": "^16.0.0",
         "react-autosuggest": "^9.3.2",
         "react-autowhatever": "^10.1.0",
-        "react-dom": "^16.0.0",
         "react-transform-hmr": "^1.0.4",
         "shallow-equal": "^1.0.0",
         "sinon": "^1.17.7",
         "sinon-chai": "^2.11.0",
+        "source-map-loader": "^0.2.3",
         "style-loader": "^0.18.2",
         "svgo": "^0.7.2",
         "svgo-loader": "^1.2.1",
+        "typescript": "^3.0.1",
         "url-loader": "^0.5.9",
         "watchify": "^3.7.0",
-        "webpack": "^4.16.1",
+        "webpack": "^4.16.4",
+        "webpack-cli": "^3.1.0",
+        "webpack-command": "^0.4.1",
         "webpack-dev-server": "^3.1.4"
     },
     "files": [],
@@ -113,7 +120,7 @@
     "keywords": [
         "Postal Address",
         "Address auto-suggest",
-        "React applciation"
+        "React application"
     ],
     "nyc": {
         "statements": 95,
