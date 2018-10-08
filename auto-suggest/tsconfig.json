@@ -2,9 +2,15 @@
     "compilerOptions": {
         "outDir": "./dist/",
         "sourceMap": true,
-        "noImplicitAny": true,
+        // TS7016: Could not find a declaration file for module, implicitly has an 'any' type
+        "noImplicitAny": false,
+        // TS2732: Cannot find module ... Consider using'--resolveJsonModule' to import module with '.json' extension
+        "resolveJsonModule": true,
+        // TS1192: Module ... has no default export
+        "allowSyntheticDefaultImports": true,
         "module": "commonjs",
-        "target": "es5",
+        // TS2339: Property ... does not exist on type 'string'
+        "target": "es6",
         "jsx": "react"
     },
     "include": [

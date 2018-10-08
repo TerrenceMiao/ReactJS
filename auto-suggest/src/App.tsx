@@ -1,9 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+
 import Autosuggest from 'react-autosuggest';
 
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
+
+import * as Maps from '../js/maps';
+
+// refer to doQuery functiion in maps.js
+declare var doQuery: any;
 
 import streetTypes from '../data/streetTypes.json';
 import localities from '../data/localities.json';
@@ -171,7 +177,7 @@ function buildQuery(escapedValue) {
     });
 
     if (lastIndexOfStreetType != -1) {
-       return {
+        return {
             "query": {
                 "bool": {
                     "must": [{
@@ -248,24 +254,32 @@ const renderSuggestion = (suggestion, query) => {
     );
 };
 
-class App extends React.Component { // eslint-disable-line no-undef
+export interface IProps {
+    value: string;
+    suggestions: string[],
+    isLoading: boolean;
+}
 
-    constructor() {
-        super();
+export class App extends React.Component<IProps> { // eslint-disable-line no-undef
 
-        this.state = {
-            value: '',
-            suggestions: [],
-            isLoading: false
-        };
+    // constructor() {
+        // TS2554: Expected 1-2 arguments, but got 0
+        // super({});
 
-        this.lastRequestId = null;
-    }
+        // this.state = {
+        //     value: '',
+        //     suggestions: [],
+        //     isLoading: false
+        // };
+
+        // TS2339: Property 'lastRequestId' does not exist on type 'App'
+        // this.lastRequestId = null;
+    // }
 
     loadSuggestions(value) {
         this.setState({
             isLoading: true
-          });
+        });
 
         console.log("## Getting matching Postal Addresses action");
 
@@ -287,24 +301,24 @@ class App extends React.Component { // eslint-disable-line no-undef
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json, text/plain, */*');
 
-        var init = {
+        var request = new Request(settings.elasticSearchUrl + '/postaladdress/_search', {
             method: 'POST',
             headers: headers,
             mode: 'cors',
             body: JSON.stringify(requestBody),
             redirect: 'follow',
             cache: 'default'
-        }
+        });
 
-        var request = new Request(settings.elasticSearchUrl + '/postaladdress/_search', init);
-
-        const thisRequest = this.latestRequest = fetch(request)
+        // TS2339: Property 'latestRequest' does not exist on type 'App'
+        // const thisRequest = this.latestRequest = fetch(request)
+        const thisRequest = fetch(request)
             .then(response => response.json())
             .then(data => {
                 // If this is true there's a newer request happening, stop everything
-                if (thisRequest !== this.latestRequest) {
-                    return;
-                }
+                // if (thisRequest !== this.latestRequest) {
+                //     return;
+                // }
 
                 // If this is executed then it's the latest request
                 // console.log("** Query result: " + JSON.stringify(data));
@@ -334,13 +348,13 @@ class App extends React.Component { // eslint-disable-line no-undef
 
     onSuggestionSelected = (event, { suggestionValue }) => {
         // Get selected Postal Address from input field
-        document.getElementById('autocomplete').value = suggestionValue;
+        (document.getElementById('autocomplete') as HTMLInputElement).value = suggestionValue;
         // Pin selected Postal address on Google Maps
         doQuery();
     };
 
     render() {
-        const { value, suggestions, isLoading } = this.state;
+        const { value, suggestions, isLoading } = this.props;
 
         const inputProps = {
             id: "autosuggest",
@@ -367,5 +381,3 @@ class App extends React.Component { // eslint-disable-line no-undef
         );
     }
 }
-
-ReactDOM.render(<App />, document.getElementById('app'));

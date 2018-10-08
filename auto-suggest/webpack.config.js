@@ -12,7 +12,7 @@ module.exports = {
     },
 
     entry: [
-        './src/app'
+        './src/index.tsx'
     ],
 
     mode: "development",
