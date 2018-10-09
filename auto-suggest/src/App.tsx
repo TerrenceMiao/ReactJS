@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import Autosuggest from 'react-autosuggest';
+import * as Autosuggest from 'react-autosuggest';
 
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
@@ -11,10 +11,10 @@ import * as Maps from '../js/maps';
 // refer to doQuery functiion in maps.js
 declare var doQuery: any;
 
-import streetTypes from '../data/streetTypes.json';
-import localities from '../data/localities.json';
+import * as streetTypes from '../data/streetTypes.json';
+import * as localities from '../data/localities.json';
 
-import settings from '../config/settings.json';
+import * as settings from '../config/settings.json';
 
 const states = [
     { name: 'VIC'},
@@ -259,6 +259,8 @@ export interface IProps {
     suggestions: string[],
     isLoading: boolean;
 }
+
+const PostalAddressAutosuggest = Autosuggest as { new (): Autosuggest<IProps> }
 
 export class App extends React.Component<IProps> { // eslint-disable-line no-undef
 
