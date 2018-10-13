@@ -12,14 +12,14 @@ module.exports = {
     },
 
     entry: [
-        './js/app'
+        './src/index.tsx'
     ],
 
     mode: "development",
 
     output: {
         path: path.join(__dirname, 'dist'), // Must be an absolute path
-        filename: 'compiled.app.js',
+        filename: 'bundle.js',
         publicPath: '/'
     },
 

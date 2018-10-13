@@ -1,14 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Autosuggest from 'react-autosuggest';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
+import * as Autosuggest from 'react-autosuggest';
 
-import streetTypes from '../data/streetTypes.json';
-import localities from '../data/localities.json';
+import * as match from 'autosuggest-highlight/match';
+import * as parse from 'autosuggest-highlight/parse';
 
-import settings from '../config/settings.json';
+import * as Maps from '../js/maps';
+
+// refer to doQuery functiion in maps.js
+declare var doQuery: any;
+
+import * as streetTypes from '../data/streetTypes.json';
+import * as localities from '../data/localities.json';
+
+import * as settings from '../config/settings.json';
 
 const states = [
     { name: 'VIC'},
@@ -171,7 +177,7 @@ function buildQuery(escapedValue) {
     });
 
     if (lastIndexOfStreetType != -1) {
-       return {
+        return {
             "query": {
                 "bool": {
                     "must": [{
@@ -248,24 +254,32 @@ const renderSuggestion = (suggestion, query) => {
     );
 };
 
-class App extends React.Component { // eslint-disable-line no-undef
+export class App extends React.Component<any, any> { // eslint-disable-line no-undef
 
-    constructor() {
-        super();
+    // constructor() {
+        // TS2554: Expected 1-2 arguments, but got 0
+        // super({});
 
-        this.state = {
-            value: '',
-            suggestions: [],
-            isLoading: false
-        };
+        // this.state = {
+        //     value: '',
+        //     suggestions: [],
+        //     isLoading: false
+        // };
 
-        this.lastRequestId = null;
-    }
+        // TS2339: Property 'lastRequestId' does not exist on type 'App'
+        // this.lastRequestId = null;
+    // }
+
+    state = {
+        value: '',
+        suggestions: [],
+        isLoading: false
+    };
 
     loadSuggestions(value) {
         this.setState({
             isLoading: true
-          });
+        });
 
         console.log("## Getting matching Postal Addresses action");
 
@@ -287,24 +301,24 @@ class App extends React.Component { // eslint-disable-line no-undef
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json, text/plain, */*');
 
-        var init = {
+        var request = new Request(settings.elasticSearchUrl + '/postaladdress/_search', {
             method: 'POST',
             headers: headers,
             mode: 'cors',
             body: JSON.stringify(requestBody),
             redirect: 'follow',
             cache: 'default'
-        }
+        });
 
-        var request = new Request(settings.elasticSearchUrl + '/postaladdress/_search', init);
-
-        const thisRequest = this.latestRequest = fetch(request)
+        // TS2339: Property 'latestRequest' does not exist on type 'App'
+        // const thisRequest = this.latestRequest = fetch(request)
+        const thisRequest = fetch(request)
             .then(response => response.json())
             .then(data => {
                 // If this is true there's a newer request happening, stop everything
-                if (thisRequest !== this.latestRequest) {
-                    return;
-                }
+                // if (thisRequest !== this.latestRequest) {
+                //     return;
+                // }
 
                 // If this is executed then it's the latest request
                 // console.log("** Query result: " + JSON.stringify(data));
@@ -334,7 +348,7 @@ class App extends React.Component { // eslint-disable-line no-undef
 
     onSuggestionSelected = (event, { suggestionValue }) => {
         // Get selected Postal Address from input field
-        document.getElementById('autocomplete').value = suggestionValue;
+        (document.getElementById('autocomplete') as HTMLInputElement).value = suggestionValue;
         // Pin selected Postal address on Google Maps
         doQuery();
     };
@@ -367,5 +381,3 @@ class App extends React.Component { // eslint-disable-line no-undef
         );
     }
 }
-
-ReactDOM.render(<App />, document.getElementById('app'));
