@@ -1,12 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { IProps, App } from "./App";
-
-let initValue: string = '';
-let initSuggestions: string[] = [];
-let initIsLoading: boolean = false;
+import { App } from "./App";
 
 ReactDOM.render(
-    <App value={initValue} suggestions={initSuggestions} isLoading={initIsLoading} />, document.getElementById('app')
+    <App />, document.getElementById('app')
 );

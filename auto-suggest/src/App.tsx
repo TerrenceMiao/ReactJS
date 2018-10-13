@@ -3,8 +3,8 @@ import * as ReactDOM from 'react-dom';
 
 import * as Autosuggest from 'react-autosuggest';
 
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
+import * as match from 'autosuggest-highlight/match';
+import * as parse from 'autosuggest-highlight/parse';
 
 import * as Maps from '../js/maps';
 
@@ -254,15 +254,7 @@ const renderSuggestion = (suggestion, query) => {
     );
 };
 
-export interface IProps {
-    value: string;
-    suggestions: string[],
-    isLoading: boolean;
-}
-
-const PostalAddressAutosuggest = Autosuggest as { new (): Autosuggest<IProps> }
-
-export class App extends React.Component<IProps> { // eslint-disable-line no-undef
+export class App extends React.Component<any, any> { // eslint-disable-line no-undef
 
     // constructor() {
         // TS2554: Expected 1-2 arguments, but got 0
@@ -277,6 +269,12 @@ export class App extends React.Component<IProps> { // eslint-disable-line no-und
         // TS2339: Property 'lastRequestId' does not exist on type 'App'
         // this.lastRequestId = null;
     // }
+
+    state = {
+        value: '',
+        suggestions: [],
+        isLoading: false
+    };
 
     loadSuggestions(value) {
         this.setState({
@@ -356,7 +354,7 @@ export class App extends React.Component<IProps> { // eslint-disable-line no-und
     };
 
     render() {
-        const { value, suggestions, isLoading } = this.props;
+        const { value, suggestions, isLoading } = this.state;
 
         const inputProps = {
             id: "autosuggest",
