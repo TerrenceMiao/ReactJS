@@ -9,16 +9,16 @@
         "url": "https://github.com/TerrenceMiao/ReactJS.git"
     },
     "scripts": {
-        "lint": "eslint js/app.js js/google-maps.js",
+        "lint": "eslint js/google-maps.js",
         "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
         "test:watch": "npm test -- --watch",
         "prebuild": "npm run lint && npm test",
-        "build": "browserify ./js/app.js -t babelify -o compiled.app.js",
+        "build": "webpack",
         "watch": "webpack --watch",
         "start": "npm run watch & node server",
         "copy-static-files": "rm -rf dist && mkdir dist && cp -a index.html css data images dist",
         "compile": "babel js -d dist/js",
-        "standalone": "npm run copy-static-files && npm run compile && cross-env BABEL_ENV=development webpack --config webpack.dev.config.js"
+        "standalone": "npm run copy-static-files && npm run compile && cross-env BABEL_ENV=development webpack --config webpack.config.js"
     },
     "dependencies": {
         "@types/react": "^16.4.15",
@@ -48,7 +48,6 @@
         "babel-preset-react-hmre": "^1.1.1",
         "babel-preset-stage-0": "^6.24.1",
         "babel-register": "^6.24.1",
-        "browserify": "^13.1.0",
         "chai": "^3.5.0",
         "cross-env": "^3.1.4",
         "css-loader": "^0.28.4",
