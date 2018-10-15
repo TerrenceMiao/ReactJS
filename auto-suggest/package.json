@@ -14,7 +14,7 @@
         "test:watch": "npm test -- --watch",
         "prebuild": "npm run lint && npm test",
         "build": "browserify ./js/app.js -t babelify -o compiled.app.js",
-        "watch": "watchify ./js/app.js -v -t babelify -o compiled.app.js",
+        "watch": "webpack --watch",
         "start": "npm run watch & node server",
         "copy-static-files": "rm -rf dist && mkdir dist && cp -a index.html css data images dist",
         "compile": "babel js -d dist/js",

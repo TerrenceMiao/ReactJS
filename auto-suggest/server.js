@@ -3,7 +3,7 @@ var WebpackDevServer = require('webpack-dev-server');
 
 var openUrl = require('openurl');
 
-var config = require('./webpack.dev.config')
+var config = require('./webpack.config')
 
 var host = process.env.NODE_HOST || '0.0.0.0';
 var port = process.env.NODE_PORT || 3000;
