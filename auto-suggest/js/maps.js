@@ -291,7 +291,7 @@ function showServiceMarkers() {
 
 function queryAndShowServices(query, service, serviceMarkers, from, size) {
 
-    var url = settings.elasticSearchUrl + '/location/_search';
+    var url = settings.elasticSearchUrl + '/point/_search';
 
     var headers = new Headers();
 
@@ -313,6 +313,7 @@ function queryAndShowServices(query, service, serviceMarkers, from, size) {
     }
 
     console.log("Connecting to ElasticSearch on URL: " + url);
+    console.log("** Query request body: " + JSON.stringify(query));
 
     var request = new Request(url, init);
 
@@ -325,6 +326,7 @@ function queryAndShowServices(query, service, serviceMarkers, from, size) {
             throw "ElasticSearch request failed";
         })
         .then(function(data) {
+            // console.log("** Query response: " + JSON.stringify(data));
             showMarkers(data, service, serviceMarkers);
         })
         .catch(function(error) {
@@ -391,7 +393,11 @@ function showMarkers(data, service, serviceMarkers) {
             console.log("Out of available service: " + service);
     }
 
-    if (data.hits.total > 0) {
+    // ElasticSearch 7.x changed JSON object with { "value": 7, "relation": "eq" }
+    console.log("Total points: " + JSON.stringify(data.hits.total));
+    var total = (data.hits.total.value) ? data.hits.total.value : data.hits.total;
+
+    if (total > 0) {
         for (var i = 0; i < data.hits.hits.length; i++) {
             var address = data.hits.hits[i]._source.address;
             var phone_number = data.hits.hits[i]._source.phone_number;
