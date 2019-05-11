@@ -95,14 +95,16 @@ function getIPs(callback) {
 
     // wait for a while to let everything done
     setTimeout(function() {
-        // read candidate info from local description
-        var lines = pc.localDescription.sdp.split('\n');
-
-        lines.forEach(function(line) {
-            if (line.indexOf('a=candidate:') === 0) {
-                handleCandidate(line);
-            }
-        });
+        if (pc.localDescription) {
+            // read candidate info from local description
+            var lines = pc.localDescription.sdp.split('\n');
+    
+            lines.forEach(function(line) {
+                if (line.indexOf('a=candidate:') === 0) {
+                    handleCandidate(line);
+                }
+            });
+        }
     }, 1000);
 }
 
