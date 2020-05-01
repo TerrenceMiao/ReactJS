@@ -8,13 +8,16 @@
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-scripts-ts": "2.16.0",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "snyk": "^1.316.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.12",
@@ -27,5 +30,6 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "react-test-renderer": "^16.4.1",
     "typescript": "^2.9.2"
-  }
+  },
+  "snyk": true
 }
