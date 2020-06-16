@@ -209,7 +209,7 @@ module.exports = {
 
 Create `.prettierignore` file with:
 
-``` javascript
+```
 package.json
 package-lock.json
 
