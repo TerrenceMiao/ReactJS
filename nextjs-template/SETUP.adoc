@@ -248,7 +248,7 @@ husky > Done
 added 81 packages from 43 contributors in 19.561s
 ----
 
-In `package.json` under "lint-staged", change "*.js" to "*.{js,ts,tsx,scss}":
+In `package.json` under "lint-staged", change `*.js` to `*.{js,ts,tsx,scss}`:
 
 [source,javascript]
 ----
