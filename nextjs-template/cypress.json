@@ -1,0 +1,5 @@
+{
+  "integrationFolder": "cypress/tests",
+  "fixturesFolder": "false",
+  "video": false
+}
