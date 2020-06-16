@@ -420,7 +420,7 @@ Add Commitizen config to `package.json`:
 }
 ----
 
-**NOTE:** error raised when commit code, so "**commit-msg**" hook in `package.json` is omitted:
+NOTE: error raised when commit code, so "**commit-msg**" hook in `package.json` is omitted:
 
 [source,console]
 ----
