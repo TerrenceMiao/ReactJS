@@ -336,9 +336,10 @@ Add Cypress scripts to `package.json`:
 }
 ----
 
-#Add Commitzen
---------------
+Add Commitzen
+-------------
 
+[source,console]
 ----
 𝜆 npm i cz-customizable cz-customizable-ghooks -D
 + cz-customizable@6.2.0
