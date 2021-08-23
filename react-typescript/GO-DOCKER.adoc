@@ -47,18 +47,6 @@ terrence@igloo ~/Projects/ReactJS/react-typescript (master ⚡↩☡=)
 REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
 jtech/react-typescript                     latest              c9cd90a8253d        2 minutes ago       366MB
 node                                       8-slim              1d5555ef5229        2 weeks ago         182MB
-docker/kube-compose-controller             v0.3.9              16260a912a7b        7 weeks ago         29.9MB
-docker/kube-compose-api-server             v0.3.9              8757267f7b06        7 weeks ago         42.5MB
-k8s.gcr.io/kube-proxy-amd64                v1.10.3             4261d315109d        2 months ago        97.1MB
-k8s.gcr.io/kube-apiserver-amd64            v1.10.3             e03746fe22c3        2 months ago        225MB
-k8s.gcr.io/kube-controller-manager-amd64   v1.10.3             40c8d10b2d11        2 months ago        148MB
-k8s.gcr.io/kube-scheduler-amd64            v1.10.3             353b8f1d102e        2 months ago        50.4MB
-k8s.gcr.io/etcd-amd64                      3.1.12              52920ad46f5b        4 months ago        193MB
-k8s.gcr.io/kubernetes-dashboard-amd64      v1.8.3              0c60bcf89900        5 months ago        102MB
-k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64     1.14.8              c2ce1ffb51ed        7 months ago        41MB
-k8s.gcr.io/k8s-dns-sidecar-amd64           1.14.8              6f7f2dc7fab5        7 months ago        42.2MB
-k8s.gcr.io/k8s-dns-kube-dns-amd64          1.14.8              80cc5ea4b547        7 months ago        50.5MB
-k8s.gcr.io/pause-amd64                     3.1                 da86e6ba6ca1        7 months ago        742kB
 ----
 
 Publish Docker image into https://hub.docker.com:
