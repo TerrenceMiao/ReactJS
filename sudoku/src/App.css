@@ -1,0 +1,137 @@
+.App {
+  text-align: center;
+}
+
+/* Sudoku styles */
+
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Lato", sans-serif;
+  background-color: #4D394B;
+}
+
+.sudoku-container {
+  border: 4px solid #1f171f;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 2px;
+}
+.sudoku-container::before, .sudoku-container::after {
+  position: absolute;
+  border-style: solid;
+  pointer-events: none;
+  content: "";
+}
+.sudoku-container::before {
+  width: 156px;
+  border-width: 0 4px;
+  border-color: transparent #1f171f transparent #1f171f;
+  top: 4px;
+  left: 160px;
+  bottom: 4px;
+}
+.sudoku-container::after {
+  height: 156px;
+  border-width: 4px 0;
+  border-color: #1f171f transparent #1f171f transparent;
+  left: 4px;
+  top: 160px;
+  right: 4px;
+}
+
+tr:nth-child(1) td:nth-child(3) input,
+tr:nth-child(1) td:nth-child(6) input {
+  margin: 0 10px 0 0;
+}
+
+tr:nth-child(3) input,
+tr:nth-child(6) input {
+  margin: 0 0 10px 0;
+}
+
+.sudoku-container input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
+  padding: 0;
+  border: 3px #2E222D solid;
+  background-color: #2E222D;
+  color: #eee;
+}
+.sudoku-container input:focus {
+  border-color: #4C9689;
+}
+.sudoku-container input.highlight {
+  background-color: #29B6F6;
+  border-color: #29B6F6;
+}
+.sudoku-container input.disabled {
+  cursor: not-allowed;
+  background-color: #4C9689;
+  border-color: #4C9689;
+}
+.sudoku-container input.disabled.highlight {
+  background-color: #29B6F6;
+  border-color: #29B6F6;
+}
+
+.sudoku-container .invalid {
+  border-color: #e74c3c;
+}
+.sudoku-container .invalid:focus {
+  border-color: #e74c3c;
+}
+
+.sudoku-container.valid-matrix {
+  border-color: #4C9689;
+}
+
+#controls {
+  margin: 20px 0;
+}
+
+.btn.primary {
+  background-color: #4C9689;
+  box-shadow: inset 0 -3px #3b746a;
+}
