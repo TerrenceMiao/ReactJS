@@ -306,7 +306,7 @@ Game.prototype = {
 	 * @returns {Boolean} Valid or invalid matrix
 	 */
 	validateMatrix: function() {
-		var isValid, val, $element, hasError = false;
+		var isValid, val, hasError = false;
 
 		// Go over entire board, and compare to the cached
 		// validation arrays
@@ -337,8 +337,7 @@ Game.prototype = {
 			legalValues,
 			sectRow,
 			sectCol,
-			secIndex,
-			gameResult;
+			secIndex;
 
 		nextSquare = this.findClosestEmptySquare(row, col);
 		if (!nextSquare) {
@@ -396,12 +395,11 @@ Game.prototype = {
 	 *  square
 	 */
 	findClosestEmptySquare: function(row, col) {
-		var walkingRow, walkingCol, found = false;
+		var walkingRow, walkingCol;
 		for (var i = col + 9 * row; i < 81; i++) {
 			walkingRow = Math.floor(i / 9);
 			walkingCol = i % 9;
 			if (this.matrix.row[walkingRow][walkingCol] === "") {
-				found = true;
 				return this.cellMatrix[walkingRow][walkingCol];
 			}
 		}
@@ -417,7 +415,6 @@ Game.prototype = {
 	 */
 	findLegalValuesForSquare: function(row, col) {
 		var temp,
-			legalVals,
 			legalNums,
 			val,
 			i,
@@ -509,14 +506,16 @@ function getUnique(array, count) {
 }
 
 function triggerEvent(el, type) {
+	var e;
+
 	if ('createEvent' in document) {
 		// modern browsers, IE9+
-		var e = document.createEvent('HTMLEvents');
+		e = document.createEvent('HTMLEvents');
 		e.initEvent(type, false, true);
 		el.dispatchEvent(e);
 	} else {
 		// IE 8
-		var e = document.createEventObject();
+		e = document.createEventObject();
 		e.eventType = type;
 		el.fireEvent('on' + e.eventType, e);
 	}
