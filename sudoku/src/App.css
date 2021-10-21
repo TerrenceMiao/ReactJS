@@ -1,40 +1,114 @@
-.App {
-  text-align: center;
+/**
+ * Import Google Fonts.
+ */
+ @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+.btn, .bttn {
+  border: none;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  background: #95a5a6;
+  color: #fff;
+  box-shadow: inset 0 -3px #798d8f;
+  border-radius: 3px;
+}
+.btn.icon, .bttn.icon {
+  padding-left: 35px;
+}
+.btn .mdi, .bttn .mdi {
+  font-size: 21px;
+  font-size: 21px;
+  display: inline-block;
+  position: relative;
+}
+.btn .mdi:before, .bttn .mdi:before {
+  position: absolute;
+  left: -25px;
+  top: -17px;
 }
 
-/* Sudoku styles */
+.btn.primary, .bttn.primary {
+  background-color: #3498db;
+  box-shadow: inset 0 -3px #217dbb;
+}
 
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+.btn.danger, .bttn.danger {
+  background-color: #c0392b;
+  box-shadow: inset 0 -3px #962d22;
 }
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/lato/v20/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+
+.btn.success, .bttn.success {
+  background-color: #27ae60;
+  box-shadow: inset 0 -3px #1e8449;
 }
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
+
+.btn.orange, .bttn.orange {
+  background-color: #e67e22;
+  box-shadow: inset 0 -3px #bf6516;
+}
+
+.btn.dark, .bttn.dark {
+  background-color: #34495e;
+  box-shadow: inset 0 -3px #22303d;
+}
+
+textarea, select, input[type=text] {
+  font-family: "Lato", sans-serif;
+  border: 2px solid #95a5a6;
+  border-radius: 3px;
+  padding: 6px 12px;
+  line-height: 18px;
+}
+textarea::-moz-placeholder, select::-moz-placeholder, input[type=text]::-moz-placeholder {
+  color: #95a5a6;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  background: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  opacity: 0.8;
 }
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
+textarea:-ms-input-placeholder, select:-ms-input-placeholder, input[type=text]:-ms-input-placeholder {
+  color: #95a5a6;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  background: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   font-weight: 700;
-  src: url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  opacity: 0.8;
+}
+textarea::placeholder, select::placeholder, input[type=text]::placeholder {
+  color: #95a5a6;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  background: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.success textarea, .success select, .success input[type=text] {
+  border-color: #27ae60;
+}
+
+.error textarea, .error select, .error input[type=text] {
+  border-color: #c0392b;
 }
 
 body {
@@ -129,9 +203,11 @@ tr:nth-child(6) input {
 
 #controls {
   margin: 20px 0;
+  text-align: center;
 }
 
 .btn.primary {
   background-color: #4C9689;
   box-shadow: inset 0 -3px #3b746a;
+  margin: 0 2px;
 }
