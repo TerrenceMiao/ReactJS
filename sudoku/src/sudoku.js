@@ -45,7 +45,7 @@ var defaultConfig = {
 	// Set the difficult of the game.
 	// This governs the amount of visible numbers
 	// when starting a new game.
-	difficulty: "normal"
+	difficulty: "hard"
 };
 
 /**
