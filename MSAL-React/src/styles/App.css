@@ -70,8 +70,8 @@ footer {
   color: red;
 }
 
-.card-title {
-  text-align: center;
+.user {
+  padding: 0 1rem;
 }
 
 .signInButton {

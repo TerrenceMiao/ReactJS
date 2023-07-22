@@ -4,9 +4,12 @@ import {
   useMsal,
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
-import { Container } from "react-bootstrap";
+
 import { PageLayout } from "./components/PageLayout";
 import { IdTokenData } from "./components/DataDisplay";
+
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 import "./styles/App.css";
 
@@ -34,9 +37,9 @@ const MainContent = () => {
         ) : null}
       </AuthenticatedTemplate>
       <UnauthenticatedTemplate>
-        <h5 className="card-title">
+        <Typography variant="h5">
           Please sign-in to see your profile information.
-        </h5>
+        </Typography>
       </UnauthenticatedTemplate>
     </div>
   );

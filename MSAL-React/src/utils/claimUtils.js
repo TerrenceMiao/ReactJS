@@ -166,7 +166,27 @@ export const createClaimsTable = (claims) => {
         populateClaim(
           key,
           claims[key],
-          "Version of the token issued by the Microsoft identity platform",
+          "Version of the token issued by the Microsoft identity platform.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
+      case "aio":
+        populateClaim(
+          key,
+          " ... ",
+          "An internal claim that's used to record data for token reuse. Should be ignored.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
+      case "idp":
+        populateClaim(
+          key,
+          claims[key],
+          "Records the identity provider that authenticated the subject of the token.",
           index,
           claimsObj
         );
@@ -206,7 +226,7 @@ const populateClaim = (claim, value, description, index, claimsObject) => {
 
 /**
  * Transforms Unix timestamp to date and returns a string value of that date
- * 
+ *
  * @param {String} date Unix timestamp
  * @returns
  */
