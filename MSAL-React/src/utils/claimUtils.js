@@ -10,6 +10,7 @@ export const createClaimsTable = (claims) => {
   Object.keys(claims).forEach((key) => {
     if (typeof claims[key] !== "string" && typeof claims[key] !== "number")
       return;
+
     switch (key) {
       case "aud":
         populateClaim(
@@ -188,6 +189,7 @@ export const createClaimsTable = (claims) => {
 
 /**
  * Populates claim, description, and value into an claimsObject
+ *
  * @param {String} claim
  * @param {String} value
  * @param {String} description
@@ -204,6 +206,7 @@ const populateClaim = (claim, value, description, index, claimsObject) => {
 
 /**
  * Transforms Unix timestamp to date and returns a string value of that date
+ * 
  * @param {String} date Unix timestamp
  * @returns
  */
