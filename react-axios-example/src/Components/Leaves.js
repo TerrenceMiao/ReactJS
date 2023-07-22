@@ -7,12 +7,16 @@ function Leaves() {
   useEffect(() => {
     axios
       .request({
-        url: "https://commando.local:8443/digitalworkspace/sap/v1/employee/leave-balances?leave-type=RECREATIONAL",
+        url: "https://api.paradise.net/digitalworkspace/sap/v1/employee/leave-balances?leave-type=RECREATIONAL",
         method: "GET",
-        proxy: {
-          host: "localhost",
-          port: 9090,
-        },
+        headers: {
+          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOi ... n2Lz1O55NJA",
+          "X-ID-TOKEN": "eyJ0eXAiOiJKV1Qi ... LepGikyXnw",
+        }
+        // proxy: {
+        //   host: "localhost",
+        //   port: 9090,
+        // },
       })
       .then((data) => {
         console.log(data);
