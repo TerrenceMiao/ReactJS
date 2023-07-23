@@ -7,18 +7,18 @@ import {
 } from "@azure/msal-react";
 import { loginRequest } from "../authConfig";
 
-import Typography from "@mui/material/Typography";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import AppBar from "@mui/material/AppBar";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
 import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 
 export const NavigationBar = () => {
   const { instance } = useMsal();
@@ -65,7 +65,7 @@ export const NavigationBar = () => {
   const signOutOptions = ["Sign out using Popup", "Sign out using Redirect"];
 
   const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleSignInClick = () => {
@@ -98,7 +98,12 @@ export const NavigationBar = () => {
     }
   };
 
-  const handleMenuItemClick = (event, index) => {
+  const handleMenuItemClick = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    index: number
+  ) => {
+    console.info(`handleMenuItemClick event: ${event}`);
+
     setSelectedIndex(index);
     setOpen(false);
   };
@@ -107,8 +112,13 @@ export const NavigationBar = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+  const handleClose = (event: Event) => {
+    console.info(`handleClose event: ${event}`);
+
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
       return;
     }
 
@@ -121,7 +131,7 @@ export const NavigationBar = () => {
    * only render their children if a user is authenticated or unauthenticated, respectively.
    */
   return (
-    <div sx={{ flexGrow: 1 }}>
+    <div>
       <AppBar>
         <Toolbar>
           <Typography
@@ -176,7 +186,7 @@ export const NavigationBar = () => {
                     <Paper>
                       <ClickAwayListener onClickAway={handleClose}>
                         <MenuList id="split-button-menu" autoFocusItem>
-                          {signInOptions.map((option, index) => (
+                          {signOutOptions.map((option, index) => (
                             <MenuItem
                               key={option}
                               selected={index === selectedIndex}

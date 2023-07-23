@@ -1,16 +1,16 @@
 import * as React from "react";
 
-import { styled } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
 
 import { createClaimsTable } from "../utils/claimUtils";
 
@@ -44,24 +44,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function addRow(claim, value, description) {
+type Claim = {
+  claim: string;
+  value: string;
+  description: string;
+};
+
+function addRow(claim: string, value: string, description: string): Claim {
   return { claim, value, description };
 }
 
-export const IdTokenData = (props) => {
+export const IdTokenData = (props: any) => {
   console.log("Id Token: " + JSON.stringify(props.idToken));
   console.log("Id Token Claims: " + JSON.stringify(props.idTokenClaims));
 
   const tokenClaims = createClaimsTable(props.idTokenClaims);
 
-  const rows = [];
+  let rows: Claim[] = [];
 
-  Object.keys(tokenClaims).map((key, index) => {
-    let row = [];
-    tokenClaims[key].map((claimItem) => row.push(claimItem));
-    rows.push(addRow(row[0], row[1], row[2]));
-    return null;
-  });
+  tokenClaims.forEach((row) => rows.push(addRow(row[0], row[1], row[2])));
 
   return (
     <>
@@ -114,7 +115,7 @@ export const IdTokenData = (props) => {
   );
 };
 
-export const AccessTokenData = (props) => {
+export const AccessTokenData = (props: any) => {
   console.log("Access Token: " + JSON.stringify(props.accessToken));
   console.log(
     "Access Token Claims: " + JSON.stringify(props.accessTokenClaims)
@@ -122,14 +123,9 @@ export const AccessTokenData = (props) => {
 
   const tokenClaims = createClaimsTable(props.accessTokenClaims);
 
-  const rows = [];
+  const rows: Claim[] = [];
 
-  Object.keys(tokenClaims).map((key, index) => {
-    let row = [];
-    tokenClaims[key].map((claimItem) => row.push(claimItem));
-    rows.push(addRow(row[0], row[1], row[2]));
-    return null;
-  });
+  tokenClaims.forEach((row) => rows.push(addRow(row[0], row[1], row[2])));
 
   return (
     <>

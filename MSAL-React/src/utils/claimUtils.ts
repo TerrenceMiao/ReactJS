@@ -3,8 +3,10 @@
  * @param {Object} claims ID token claims
  * @returns claimsObject
  */
-export const createClaimsTable = (claims) => {
-  let claimsObj = {};
+export const createClaimsTable = (claims: {
+  [key: string]: string | number;
+}): [string[]] => {
+  let claimsObj: [string[]] = [[]];
   let index = 0;
 
   Object.keys(claims).forEach((key) => {
@@ -35,7 +37,7 @@ export const createClaimsTable = (claims) => {
       case "iat":
         populateClaim(
           key,
-          changeDateFormat(claims[key]),
+          changeDateFormat(claims[key] as number),
           "Issued At indicates when the authentication for this token occurred.",
           index,
           claimsObj
@@ -45,7 +47,7 @@ export const createClaimsTable = (claims) => {
       case "nbf":
         populateClaim(
           key,
-          changeDateFormat(claims[key]),
+          changeDateFormat(claims[key] as number),
           "The nbf (not before) claim identifies the time (as UNIX timestamp) before which the JWT must not be accepted for processing.",
           index,
           claimsObj
@@ -55,7 +57,7 @@ export const createClaimsTable = (claims) => {
       case "exp":
         populateClaim(
           key,
-          changeDateFormat(claims[key]),
+          changeDateFormat(claims[key] as number),
           "The exp (expiration time) claim identifies the expiration time (as UNIX timestamp) on or after which the JWT must not be accepted for processing. It's important to note that in certain circumstances, a resource may reject the token before this time. For example, if a change in authentication is required or a token revocation has been detected.",
           index,
           claimsObj
@@ -286,10 +288,16 @@ export const createClaimsTable = (claims) => {
  * @param {Number} index
  * @param {Object} claimsObject
  */
-const populateClaim = (claim, value, description, index, claimsObject) => {
-  let claimsArray = [];
+const populateClaim = (
+  claim: string,
+  value: string | number,
+  description: string,
+  index: number,
+  claimsObject: [string[]]
+) => {
+  let claimsArray: string[] = [];
   claimsArray[0] = claim;
-  claimsArray[1] = value;
+  claimsArray[1] = typeof value === "number" ? value.toString() : value;
   claimsArray[2] = description;
   claimsObject[index] = claimsArray;
 };
@@ -297,10 +305,10 @@ const populateClaim = (claim, value, description, index, claimsObject) => {
 /**
  * Transforms Unix timestamp to date and returns a string value of that date
  *
- * @param {String} date Unix timestamp
+ * @param {Number} date Unix timestamp
  * @returns
  */
-const changeDateFormat = (date) => {
+const changeDateFormat = (date: number) => {
   let dateObj = new Date(date * 1000);
   return `${date} - [${dateObj.toString()}]`;
 };

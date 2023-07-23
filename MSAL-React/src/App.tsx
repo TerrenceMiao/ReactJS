@@ -1,27 +1,30 @@
 import {
-  MsalProvider,
-  AuthenticatedTemplate,
-  useMsal,
-  UnauthenticatedTemplate,
-} from "@azure/msal-react";
-import {
+  AuthenticationResult,
+  IPublicClientApplication,
   InteractionRequiredAuthError,
   InteractionStatus,
 } from "@azure/msal-browser";
+import {
+  AuthenticatedTemplate,
+  MsalProvider,
+  UnauthenticatedTemplate,
+  useMsal,
+} from "@azure/msal-react";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
+import { AccessTokenData, IdTokenData } from "./components/DataDisplay";
 import { PageLayout } from "./components/PageLayout";
-import { IdTokenData, AccessTokenData } from "./components/DataDisplay";
 
 import { Buffer } from "buffer";
 
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
+import React from "react";
 import "./styles/App.css";
 
-function parseJWT(token) {
+function parseJWT(token: string): unknown {
   return token
     ? JSON.parse(Buffer.from(token.split(".")[1], "base64").toString())
     : null;
@@ -36,7 +39,8 @@ const MainContent = () => {
   const activeAccount = instance.getActiveAccount();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [accessTokenResponse, setAccessTokenResponse] = useState({});
+  const [accessTokenResponse, setAccessTokenResponse] =
+    useState<AuthenticationResult>();
 
   useEffect(() => {
     if (activeAccount && isLoading && inProgress === InteractionStatus.None) {
@@ -51,18 +55,23 @@ const MainContent = () => {
           setAccessTokenResponse(accessTokenResponse);
           setIsLoading(false);
         })
-        .catch((error) => {
-          if (error instanceof InteractionRequiredAuthError) {
+        .catch((acquireTokenSilentError) => {
+          if (acquireTokenSilentError instanceof InteractionRequiredAuthError) {
             instance
               .acquireTokenRedirect(accessTokenRequest)
-              .then((accessTokenResponse) => {
-                setAccessTokenResponse(accessTokenResponse);
-              })
-              .catch((error) => {
-                console.error(`Acquire token redirect failure: ${error}`);
+              .then()
+              .catch((acquireTokenDirectError) => {
+                console.error(
+                  "Acquire token direct failure: " +
+                    JSON.stringify(acquireTokenDirectError)
+                );
               });
           }
-          console.error(`Acquire token silent failure: ${error}`);
+
+          console.error(
+            "Acquire token silent failure: " +
+              JSON.stringify(acquireTokenSilentError)
+          );
           setIsLoading(false);
         });
     }
@@ -77,7 +86,9 @@ const MainContent = () => {
   return (
     <div className="App">
       <AuthenticatedTemplate>
-        {activeAccount && activeAccount.idToken ? (
+        {activeAccount &&
+        activeAccount.idToken &&
+        accessTokenResponse?.accessToken ? (
           <Container>
             <IdTokenData
               idToken={activeAccount.idToken}
@@ -110,7 +121,12 @@ const MainContent = () => {
  * PublicClientApplication instance via context as well as all hooks and components provided by msal-react. For more, visit:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/getting-started.md
  */
-const App = ({ instance }) => {
+
+type AppProps = {
+  instance: IPublicClientApplication;
+};
+
+function App({ instance }: AppProps) {
   return (
     <MsalProvider instance={instance}>
       <PageLayout>
@@ -118,6 +134,6 @@ const App = ({ instance }) => {
       </PageLayout>
     </MsalProvider>
   );
-};
+}
 
 export default App;
