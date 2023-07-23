@@ -192,6 +192,76 @@ export const createClaimsTable = (claims) => {
         );
         index++;
         break;
+      case "acr":
+        populateClaim(
+          key,
+          claims[key],
+          "A value of 0 for the 'Authentication context class' claim indicates the end-user authentication didn't meet the requirements of ISO/IEC 29115.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
+      case "appid":
+        populateClaim(
+          key,
+          claims[key],
+          "The application ID of the client using the token. The application can act as itself or on behalf of a user. The application ID typically represents an application object, but it can also represent a service principal object in Azure AD.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
+      case "appidacr":
+        populateClaim(
+          key,
+          claims[key],
+          "Indicates authentication method of the client. For a public client, the value is 0. When you use the client ID and client secret, the value is 1. When you use a client certificate for authentication, the value is 2.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
+      case "family_name":
+        populateClaim(
+          key,
+          claims[key],
+          "Provides the last name, surname, or family name of the user as defined on the user object.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
+      case "given_name":
+        populateClaim(
+          key,
+          claims[key],
+          "Provides the first or given name of the user, as set on the user object.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
+      case "ipaddr":
+        populateClaim(
+          key,
+          claims[key],
+          "The IP address the user authenticated from.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
+      case "unique_name":
+        populateClaim(
+          key,
+          claims[key],
+          "Provides a human readable value that identifies the subject of the token.",
+          index,
+          claimsObj
+        );
+        index++;
+        break;
       case "uti":
       case "rh":
         index++;

@@ -78,3 +78,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## References
 
 - Tutorial: React Single Page application to Sign In users and invoke APs on Microsoft Identity Platform, _https://github.com/Azure-Samples/ms-identity-javascript-react-tutorial_
+- ID token claims reference, _https://learn.microsoft.com/en-us/azure/active-directory/develop/id-token-claims-reference_
+- Access token claims reference, _https://learn.microsoft.com/en-us/azure/active-directory/develop/access-token-claims-reference_
