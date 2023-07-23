@@ -1,7 +1,6 @@
 import {
   AuthenticationResult,
   IPublicClientApplication,
-  InteractionRequiredAuthError,
   InteractionStatus,
 } from "@azure/msal-browser";
 import {
@@ -21,7 +20,6 @@ import { Buffer } from "buffer";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-import React from "react";
 import "./styles/App.css";
 
 function parseJWT(token: string): unknown {
@@ -39,41 +37,24 @@ const MainContent = () => {
   const activeAccount = instance.getActiveAccount();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [accessTokenResponse, setAccessTokenResponse] =
-    useState<AuthenticationResult>();
+  const [response, setResponse] = useState<AuthenticationResult>();
 
   useEffect(() => {
     if (activeAccount && isLoading && inProgress === InteractionStatus.None) {
-      const accessTokenRequest = {
-        scopes: ["user.read"],
-        account: activeAccount,
-      };
-
       instance
-        .acquireTokenSilent(accessTokenRequest)
-        .then((accessTokenResponse) => {
-          setAccessTokenResponse(accessTokenResponse);
-          setIsLoading(false);
+        .acquireTokenSilent({
+          scopes: ["user.read"],
+          account: activeAccount,
         })
-        .catch((acquireTokenSilentError) => {
-          if (acquireTokenSilentError instanceof InteractionRequiredAuthError) {
-            instance
-              .acquireTokenRedirect(accessTokenRequest)
-              .then()
-              .catch((acquireTokenDirectError) => {
-                console.error(
-                  "Acquire token direct failure: " +
-                    JSON.stringify(acquireTokenDirectError)
-                );
-              });
-          }
-
+        .then((response) => {
+          setResponse(response);
+        })
+        .catch((error) => {
           console.error(
-            "Acquire token silent failure: " +
-              JSON.stringify(acquireTokenSilentError)
+            "Acquire token silent failure: " + JSON.stringify(error)
           );
-          setIsLoading(false);
         });
+      setIsLoading(false);
     }
   }, [instance, inProgress, activeAccount, isLoading]);
 
@@ -86,9 +67,7 @@ const MainContent = () => {
   return (
     <div className="App">
       <AuthenticatedTemplate>
-        {activeAccount &&
-        activeAccount.idToken &&
-        accessTokenResponse?.accessToken ? (
+        {activeAccount && activeAccount.idToken && response?.accessToken ? (
           <Container>
             <IdTokenData
               idToken={activeAccount.idToken}
@@ -99,8 +78,8 @@ const MainContent = () => {
             <br />
             <br />
             <AccessTokenData
-              accessToken={accessTokenResponse.accessToken}
-              accessTokenClaims={parseJWT(accessTokenResponse.accessToken)}
+              accessToken={response.accessToken}
+              accessTokenClaims={parseJWT(response.accessToken)}
             />
           </Container>
         ) : null}

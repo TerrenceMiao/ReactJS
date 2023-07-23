@@ -28,7 +28,7 @@ export const msalConfig = {
         if (containsPii) {
           return;
         }
-        
+
         switch (level) {
           case LogLevel.Error:
             console.error(message);

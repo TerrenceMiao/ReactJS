@@ -1,5 +1,6 @@
 /**
  * Populate claims table with appropriate description
+ *
  * @param {Object} claims ID token claims
  * @returns claimsObject
  */

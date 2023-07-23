@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";

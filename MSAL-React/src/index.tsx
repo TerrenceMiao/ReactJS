@@ -7,7 +7,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { msalConfig } from "./authConfig";
 
-import React from "react";
 import "./styles/index.css";
 
 /**

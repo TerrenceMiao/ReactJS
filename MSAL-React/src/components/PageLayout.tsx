@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
 import { NavigationBar } from "./NavigationBar";
-import React from "react";
 
 export const PageLayout = (props: any) => {
   /**

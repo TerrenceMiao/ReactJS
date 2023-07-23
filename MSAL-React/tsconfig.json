@@ -1,27 +1,24 @@
 {
   "include": ["src"],
-  "exclude": ["node_modules"],
-  "compileOnSave": false,
-  "buildOnSave": false,
   "compilerOptions": {
     "module": "esnext",
     "target": "es2020",
-    "lib": ["dom", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "importHelpers": true,
     "declaration": true,
     "sourceMap": true,
-    "rootDir": "./",
-    "outDir": "./dist",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
     "moduleResolution": "node",
-    "baseUrl": "./",
-    "jsx": "react",
-    "esModuleInterop": true,
-    "types": ["node", "jest", "react"]
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true
   }
 }
