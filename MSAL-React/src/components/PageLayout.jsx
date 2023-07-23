@@ -26,6 +26,9 @@ export const PageLayout = (props) => {
       <br />
       <AuthenticatedTemplate>
         <center>
+          <br />
+          <br />
+          <br />
           <Typography align="center" variant="h5">
             How did we do?
           </Typography>

@@ -4,22 +4,69 @@ import {
   useMsal,
   UnauthenticatedTemplate,
 } from "@azure/msal-react";
+import {
+  InteractionRequiredAuthError,
+  InteractionStatus,
+} from "@azure/msal-browser";
+
+import { useState, useEffect } from "react";
 
 import { PageLayout } from "./components/PageLayout";
-import { IdTokenData } from "./components/DataDisplay";
+import { IdTokenData, AccessTokenData } from "./components/DataDisplay";
+
+import { Buffer } from "buffer";
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import "./styles/App.css";
 
+function parseJWT(token) {
+  return token
+    ? JSON.parse(Buffer.from(token.split(".")[1], "base64").toString())
+    : null;
+}
+
 const MainContent = () => {
   /**
    * useMsal is a hook that returns the PublicClientApplication instance.
    * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-react/docs/hooks.md
    */
-  const { instance } = useMsal();
+  const { instance, inProgress } = useMsal();
   const activeAccount = instance.getActiveAccount();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [accessTokenResponse, setAccessTokenResponse] = useState({});
+
+  useEffect(() => {
+    if (activeAccount && isLoading && inProgress === InteractionStatus.None) {
+      const accessTokenRequest = {
+        scopes: ["user.read"],
+        account: activeAccount,
+      };
+
+      instance
+        .acquireTokenSilent(accessTokenRequest)
+        .then((accessTokenResponse) => {
+          setAccessTokenResponse(accessTokenResponse);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          if (error instanceof InteractionRequiredAuthError) {
+            instance
+              .acquireTokenRedirect(accessTokenRequest)
+              .then((accessTokenResponse) => {
+                setAccessTokenResponse(accessTokenResponse);
+              })
+              .catch((error) => {
+                console.error(`Acquire token redirect failure: ${error}`);
+              });
+          }
+          console.error(`Acquire token silent failure: ${error}`);
+          setIsLoading(false);
+        });
+    }
+  }, [instance, inProgress, activeAccount, isLoading]);
 
   /**
    * Most applications will need to conditionally render certain components based on whether a user is signed in or not.
@@ -30,9 +77,20 @@ const MainContent = () => {
   return (
     <div className="App">
       <AuthenticatedTemplate>
-        {activeAccount ? (
+        {activeAccount && activeAccount.idToken ? (
           <Container>
-            <IdTokenData idTokenClaims={activeAccount.idTokenClaims} />
+            <IdTokenData
+              idToken={activeAccount.idToken}
+              idTokenClaims={activeAccount.idTokenClaims}
+            />
+            <br />
+            <br />
+            <br />
+            <br />
+            <AccessTokenData
+              accessToken={accessTokenResponse.accessToken}
+              accessTokenClaims={parseJWT(accessTokenResponse.accessToken)}
+            />
           </Container>
         ) : null}
       </AuthenticatedTemplate>

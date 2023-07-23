@@ -77,3 +77,10 @@ footer {
 .signInButton {
   margin: 1rem;
 }
+
+.fixedSpan {
+  width: 1140px;
+  word-wrap: break-word;
+  display: inline-block;
+  font-family: monospace;
+}
