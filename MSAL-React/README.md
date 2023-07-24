@@ -69,10 +69,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
+### Register a new application in Azure Directory
 
 ![MSAL React Overview](Overview.png "MSAL React Overview")
 
 ![MSAL React Authentication](Authentication.png "MSAL React Authentication")
+
+### Login and Logout
+
+![MSAL React Login](Login.png "MSAL React Login")
+
+![MSAL React Logout](Logout.png "MSAL React Logout")
 
 
 ## References
