@@ -1,13 +1,12 @@
 import { waitFor } from "@testing-library/react";
 
 import { PublicClientApplication } from "@azure/msal-browser";
-
-let msalConfig: any;
+import { render } from "react-dom";
+import App from "./App";
+import { msalConfig } from "../src/authConfig";
 
 describe("Sanitize configuration object", () => {
-  beforeAll(() => {
-    msalConfig = require("./authConfig.ts").msalConfig;
-  });
+  beforeAll(() => {});
 
   it("should define the config object", () => {
     expect(msalConfig).toBeDefined();
@@ -44,7 +43,6 @@ describe("Ensure that the app starts", () => {
 
   beforeEach(() => {
     global.crypto = require("crypto");
-    msalConfig = require("./authConfig.ts").msalConfig;
     instance = new PublicClientApplication(msalConfig);
     handleRedirectSpy = jest.spyOn(instance, "handleRedirectPromise");
   });
@@ -54,18 +52,15 @@ describe("Ensure that the app starts", () => {
     expect(instance).toBeInstanceOf(PublicClientApplication);
   });
 
-  xit("should render the app without crashing", async () => {
+  it("should render the app without crashing", async () => {
     const div = document.createElement("div");
 
-    // TODO: Error
-    //  'App' refers to a value, but is being used as a type here. Did you mean 'typeof App'?ts(2749)
-    //  Parsing error: '>' expected.eslint
-    // render(<App instance={instance} />, div);
+    render(<App instance={instance} />, div);
 
     await waitFor(() => expect(handleRedirectSpy).toHaveBeenCalledTimes(1));
 
     expect(div.textContent).toContain(
-      "Welcome to the Microsoft Authentication Library For React Tutorial"
+      "Welcome to the Microsoft Authentication Library For React Demo"
     );
   });
 });
